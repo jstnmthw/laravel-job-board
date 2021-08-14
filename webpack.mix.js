@@ -21,4 +21,11 @@ if (mix.inProduction()) {
     mix.version();
 }
 
+mix.options({
+    hmrOptions: {
+        host: 'web',
+        port: '8080',
+    }
+});
+
 mix.webpackConfig(require('./webpack.config'));
