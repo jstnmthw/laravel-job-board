@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-const path = require('path');
 
 /*
  |--------------------------------------------------------------------------
@@ -18,25 +17,8 @@ mix.js('resources/js/app.js', 'public/js')
         require("tailwindcss"),
     ])
 
-mix.options({
-    hmrOptions: {
-    host: 'localhost',
-        port: 8080,
-    }
-});
-
 if (mix.inProduction()) {
     mix.version();
 }
 
-mix.webpackConfig({
-    resolve: {
-        alias: {
-            '@': path.resolve('resources/js'),
-        },
-    },
-    devServer: {
-        host: '0.0.0.0',
-        port: 8080,
-    }
-});
+mix.webpackConfig(require('./webpack.config'));
