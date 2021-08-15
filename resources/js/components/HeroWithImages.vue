@@ -11,7 +11,7 @@
                     </p>
                     <slot name="link"></slot>
                 </div>
-                <img alt="" src="/images/hero-image-th.jpg" class="absolute -bottom-1/2 right-0 max-w-3xl z-0 mx-auto">
+                <slot name="image"></slot>
             </div>
         </div>
     </div>

@@ -13,6 +13,9 @@
                 Search jobs
             </a>
         </template>
+        <template v-slot:image>
+            <img alt="" src="/images/hero-image-th.jpg" class="absolute -bottom-1/2 right-0 max-w-3xl z-0 mx-auto">
+        </template>
     </hero-with-images>
 </template>
 
