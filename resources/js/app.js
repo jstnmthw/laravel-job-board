@@ -1,7 +1,4 @@
-// Laravel bootstrap
-require('./bootstrap')
-
-// Libraries
+ // Libraries
 import axios from 'axios'
 import { createApp } from 'vue'
 import router from './router'
@@ -10,7 +7,6 @@ import store from './store'
 // Axios settings
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 axios.defaults.withCredentials = true
-
 
 // Axios cancel token request interceptor
 axios.interceptors.request.use(
@@ -33,7 +29,7 @@ axios.interceptors.request.use(
 
 const app = createApp({
     router,
-    store
+    store,
 })
 
 // !! Development mode !!

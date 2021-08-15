@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+/**
+ * Protected API
+ */
+Route::group(['middleware' => ['auth:sanctum', 'throttle:60,1']], function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+});
+
+/**
+ * Unprotected API
+ */
+Route::post('/login', function (Request $request) {
+    $credentials = $request->only('email', 'password');
+    Auth::attempt($credentials)
+        ? response()->json('Successfully Authenticated')
+        : response()->json('Failed Authenticating', 401);
+});
+Route::post('/logout', function(Request $request) {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return response()->json('Logged out');
 });

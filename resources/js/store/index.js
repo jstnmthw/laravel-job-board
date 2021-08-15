@@ -10,13 +10,21 @@ const store = createStore({
         api: api
     },
     state: {
-        user: [],
+        isAuthenticated: false,
+        user : {}
+    },
+    getters: {
+        isAuthenticated: (state) => {
+            return state.isAuthenticated
+        }
     },
     mutations: {
         ADD_USER_INFO(state, payload) {
             state.user = payload
         },
+        SET_AUTHENTICATED(state, payload) {
+            state.isAuthenticated = payload
+        }
     },
 })
 export default store
-

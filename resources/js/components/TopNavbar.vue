@@ -46,15 +46,23 @@
                     </div>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center text-sm pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <button class="p-1 rounded-full text-orange hover:text-orange-dark font-bold transition-colors mr-3 md:mr-4">
+                    <button v-if="!isAuthenticated" @click="login" class="p-1 rounded-full text-orange hover:text-orange-dark font-bold transition-colors mr-3 md:mr-4">
                         <svg class="w-5 h-5 inline-block relative align-middle bottom-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         Sign in
                     </button>
-                    <button class="mr-3 inline-block py-2 px-4 pr-6 rounded-full font-bold text-white bg-orange hover:bg-orange-dark hover:shadow-lg transition-all">
+                    <button v-if="isAuthenticated" class="p-1 rounded-full text-gray-400 hover:text-orange-dark font-bold transition-colors mr-2">
+                        <span class="sr-only">Notifications</span>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    </button>
+                    <button v-if="isAuthenticated" @click="logout" class="w-9 h-9 bg-gray-200 text-center rounded-full focus:ring-2 focus:ring-orange-light transition-all mr-3 md:mr-4">
+                        <span class="sr-only">Profile Dropdown Menu</span>
+                        <span class="relative bottom-0.5 text-gray-500 font-bold align-middle" aria-hidden="true">J</span>
+                    </button>
+                    <button v-if="!isAuthenticated" class="mr-3 inline-block py-2 px-4 pr-6 rounded-full font-bold text-white bg-orange hover:bg-orange-dark hover:shadow-lg transition-all">
                         <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                         Post Resume
                     </button>
-                    <button class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <button v-if="!isAuthenticated" class="text-gray-400 hover:text-gray-600 transition-colors">
                         <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
                         <span class="sr-only">Choose language</span>
                     </button>
@@ -75,8 +83,48 @@
 </template>
 
 <script>
+import store from "@/store";
+import axios from "axios";
+import { mapGetters } from 'vuex'
+
 export default {
-    name: "TopNavbar"
+    name: "TopNavbar",
+    computed: {
+        ...mapGetters(['isAuthenticated'])
+    },
+    mounted() {
+        const auth = localStorage.getItem('Authenticated') === 'true';
+        if (auth) {
+            axios.get('/api/user').then((res) => {
+                store.commit('ADD_USER_INFO', res.data)
+                store.commit('SET_AUTHENTICATED', true)
+            })
+        }
+    },
+    methods: {
+        async login() {
+            await axios.get('/sanctum/csrf-cookie').then(() => {
+                axios
+                    .post('/api/login', {
+                        email: 'stefan32@example.com',
+                        password: 'password'
+                    })
+                    .then(() => {
+                        axios.get('/api/user').then((res) => {
+                            localStorage.setItem('Authenticated', 'true')
+                            store.commit('ADD_USER_INFO', res.data)
+                            store.commit('SET_AUTHENTICATED', true)
+                        })
+                    })
+            })
+        },
+        async logout() {
+            await axios.post('/api/logout')
+            localStorage.removeItem('Authenticated')
+            store.commit('ADD_USER_INFO', {})
+            store.commit('SET_AUTHENTICATED', false)
+        }
+    }
 }
 </script>
 
