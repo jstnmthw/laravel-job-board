@@ -1,6 +1,7 @@
 import RequestToken from '@/store/modules/request-token'
 import api from '@/store/modules/api'
 import { createStore } from 'vuex'
+import axios from "axios";
 
 // Create a new store instance.
 const store = createStore({
@@ -11,11 +12,18 @@ const store = createStore({
     },
     state: {
         isAuthenticated: false,
-        user : {}
+        authLoading: false,
+        user : {},
     },
     getters: {
         isAuthenticated: (state) => {
             return state.isAuthenticated
+        },
+        authLoading: (state) => {
+            return state.authLoading
+        },
+        user: (state) => {
+            return state.user
         }
     },
     mutations: {
@@ -24,7 +32,37 @@ const store = createStore({
         },
         SET_AUTHENTICATED(state, payload) {
             state.isAuthenticated = payload
-        }
+        },
+        AUTH_LOADING(state, payload) {
+            state.authLoading = payload
+        },
     },
+    actions: {
+        login({ commit, state }, credentials) {
+            return new Promise((resolve, reject) => {
+                commit('AUTH_LOADING', true)
+                setTimeout(() => {
+                     axios.get('/sanctum/csrf-cookie').then(() => {
+                        axios
+                            .post('/api/login', credentials)
+                            .then(() => {
+                                axios.get('/api/user').then((res) => {
+                                    commit('ADD_USER_INFO', res.data)
+                                    commit('SET_AUTHENTICATED', true)
+                                    commit('AUTH_LOADING', false)
+                                    localStorage.setItem('Authenticated', 'true')
+                                    resolve()
+                                }).catch((error) => {
+                                    commit('AUTH_LOADING', false)
+                                    reject(error)
+                                })
+                            })
+                    }).catch((error) =>{
+                        reject(error)
+                     })
+                }, 2000)
+            })
+        },
+    }
 })
 export default store

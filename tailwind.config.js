@@ -17,6 +17,7 @@ module.exports = {
           DEFAULT: '#fd5631',
           dark: '#fd390e',
         },
+        peach: '#fc9d8c',
         blue: '#0d6efd',
         indigo: '#6610f2',
         purple: '#6f42c1',
@@ -37,6 +38,7 @@ module.exports = {
         light: '#fff',
         slate: '#454056',
         dark: '#1f1b2d',
+        charcoal: '#666276'
       },
       lineHeight: {
         icon: '1.45rem',
@@ -48,6 +50,12 @@ module.exports = {
       },
       maxWidth: {
         '8xl' : '90rem'
+      },
+      boxShadow: {
+        'input' : 'inset 0 1px 2px transparent, 0 0 0 .125rem rgba(253,86,49,.25)'
+      },
+      fontSize: {
+        'sm-alt' : '0.813rem'
       }
     },
   },

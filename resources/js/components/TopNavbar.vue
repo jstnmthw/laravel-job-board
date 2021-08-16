@@ -45,40 +45,66 @@
                         </div>
                     </div>
                 </div>
-                <div class="absolute inset-y-0 right-0 flex items-center text-sm pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <button v-if="!isAuthenticated" @click="login" class="p-1 rounded-full text-orange hover:text-orange-dark font-bold transition-colors mr-3 md:mr-4">
-                        <svg class="w-5 h-5 inline-block relative align-middle bottom-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                        Sign in
-                    </button>
-                    <button v-if="isAuthenticated" class="p-1 rounded-full text-gray-400 hover:text-orange-dark font-bold transition-colors mr-2">
+                <div v-if="isAuthenticated" class="absolute inset-y-0 right-0 flex items-center text-sm pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <button class="p-1 rounded-full text-gray-400 hover:text-gray-500 font-bold transition-colors mr-2">
                         <span class="sr-only">Notifications</span>
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
                     </button>
-                    <button v-if="isAuthenticated" @click="logout" class="w-9 h-9 bg-gray-200 text-center rounded-full focus:ring-2 focus:ring-orange-light transition-all mr-3 md:mr-4">
-                        <span class="sr-only">Profile Dropdown Menu</span>
-                        <span class="relative bottom-0.5 text-gray-500 font-bold align-middle" aria-hidden="true">J</span>
+                    <div class="relative" v-on-clickaway="closeAccountDropdown">
+                        <button @click="showAccountDropdown = !showAccountDropdown" class="relative w-9 h-9 bg-gray-200 text-center rounded-full focus:ring-2 focus:ring-peach transition-all">
+                            <span class="sr-only">Profile Dropdown Menu</span>
+                            <span class="relative bottom-0.5 text-gray-500 font-bold align-middle" aria-hidden="true">{{ user.name.charAt(0) }}</span>
+                        </button>
+                        <div v-if="showAccountDropdown" class="absolute z-50 bg-white w-48 top-full right-0 mt-3 shadow-md rounded-xl">
+                            <a href="#" class="block text-sm-alt whitespace-nowrap px-5 py-2.5 font-bold text-slate border-b border-gray-100">
+                                <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                Account
+                            </a>
+                            <button @click="logout" class="block text-sm-alt w-full text-left whitespace-nowrap px-5 py-2.5 font-bold text-slate">
+                                <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                Sign out
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div v-else class="absolute inset-y-0 right-0 flex items-center text-sm pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <button @click="showSignInModal = !showSignInModal" class="p-1 rounded-full text-orange hover:text-orange-dark font-bold transition-colors mr-3 md:mr-4">
+                        <svg class="w-5 h-5 inline-block relative align-middle bottom-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        Sign in
                     </button>
-                    <button v-if="!isAuthenticated" class="mr-3 inline-block py-2 px-4 pr-6 rounded-full font-bold text-white bg-orange hover:bg-orange-dark hover:shadow-lg transition-all">
+                    <button class="mr-3 inline-block py-2 px-4 pr-6 rounded-full font-bold text-white bg-orange hover:bg-orange-dark hover:shadow-lg transition-all">
                         <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                         Post Resume
                     </button>
-                    <button v-if="!isAuthenticated" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <button class="text-gray-400 hover:text-gray-600 transition-colors">
                         <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
                         <span class="sr-only">Choose language</span>
                     </button>
                 </div>
             </div>
         </div>
+
         <!-- Mobile menu, show/hide based on menu state. -->
         <div class="sm:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>
                 <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
                 <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
                 <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
             </div>
         </div>
+
+        <!-- Sign in modal -->
+        <transition
+            enter-from-class="duration-500 opacity-0"
+            enter-to-class="opacity-1"
+            enter-active-class="transition-all"
+            leave-active-class="duration-300"
+            leave-from-class="opacity-1"
+            leave-to-class="opacity-0"
+        >
+            <sign-in-modal v-if="showSignInModal" :show-modal="showSignInModal" @close="showSignInModal = false" class="transform transition-all" />
+        </transition>
     </nav>
 </template>
 
@@ -86,11 +112,22 @@
 import store from "@/store";
 import axios from "axios";
 import { mapGetters } from 'vuex'
+import { mixin as clickaway } from 'vue-clickaway';
+import Modal from "@/components/modal/Modal";
+import SignInModal from "@/layout/SignInModal";
 
 export default {
     name: "TopNavbar",
+    components: {SignInModal, Modal},
+    mixins: [ clickaway ],
     computed: {
-        ...mapGetters(['isAuthenticated'])
+        ...mapGetters(['isAuthenticated', 'user'])
+    },
+    data() {
+      return {
+          showSignInModal: false,
+          showAccountDropdown: false,
+      }
     },
     mounted() {
         const auth = localStorage.getItem('Authenticated') === 'true';
@@ -102,27 +139,14 @@ export default {
         }
     },
     methods: {
-        async login() {
-            await axios.get('/sanctum/csrf-cookie').then(() => {
-                axios
-                    .post('/api/login', {
-                        email: 'stefan32@example.com',
-                        password: 'password'
-                    })
-                    .then(() => {
-                        axios.get('/api/user').then((res) => {
-                            localStorage.setItem('Authenticated', 'true')
-                            store.commit('ADD_USER_INFO', res.data)
-                            store.commit('SET_AUTHENTICATED', true)
-                        })
-                    })
-            })
-        },
         async logout() {
             await axios.post('/api/logout')
             localStorage.removeItem('Authenticated')
             store.commit('ADD_USER_INFO', {})
             store.commit('SET_AUTHENTICATED', false)
+        },
+        closeAccountDropdown() {
+            return this.showAccountDropdown = false;
         }
     }
 }
