@@ -39,11 +39,6 @@ class TestCommands extends Command
      */
     public function handle(): int
     {
-//        $job = Job::query()->inRandomOrder()->with(['createdBy', 'categories', 'company'])->firstOrFail()->toArray();
-//        dd($job);
-
-        $user = User::query()->with(['resumes', 'experience', 'education'])->inRandomOrder()->firstOrFail()->toArray();
-        dd($user);
         return 0;
     }
 }
