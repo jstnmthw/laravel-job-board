@@ -38,10 +38,10 @@
                     </div>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">
-                            <a href="#" class="text-orange px-3 py-2 rounded-md text-sm font-bold text-sm" aria-current="page">Dashboard</a>
-                            <a href="#" class="text-slate hover:text-orange transition-colors px-3 py-2 rounded-md text-sm font-bold text-sm">Team</a>
-                            <a href="#" class="text-slate hover:text-orange transition-colors px-3 py-2 rounded-md text-sm font-bold text-sm">Projects</a>
-                            <a href="#" class="text-slate hover:text-orange transition-colors px-3 py-2 rounded-md text-sm font-bold text-sm">Calendar</a>
+                            <a href="#" class="text-orange-600 px-3 py-2 rounded-md text-sm font-bold text-sm" aria-current="page">Dashboard</a>
+                            <a href="#" class="text-slate hover:text-orange-600 transition-colors px-3 py-2 rounded-md text-sm font-bold text-sm">Team</a>
+                            <a href="#" class="text-slate hover:text-orange-600 transition-colors px-3 py-2 rounded-md text-sm font-bold text-sm">Projects</a>
+                            <a href="#" class="text-slate hover:text-orange-600 transition-colors px-3 py-2 rounded-md text-sm font-bold text-sm">Calendar</a>
                         </div>
                     </div>
                 </div>
@@ -68,11 +68,11 @@
                     </div>
                 </div>
                 <div v-else class="absolute inset-y-0 right-0 flex items-center text-sm pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <button @click="showSignInModal = !showSignInModal" class="p-1 rounded-full text-orange hover:text-orange-dark font-bold transition-colors mr-3 md:mr-4">
+                    <button @click="showSignInModal = !showSignInModal" class="p-1 rounded-full text-orange-600 hover:text-orange-700 font-bold transition-colors mr-3 md:mr-4">
                         <svg class="w-5 h-5 inline-block relative align-middle bottom-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         Sign in
                     </button>
-                    <button class="mr-3 inline-block py-2 px-4 pr-6 rounded-full font-bold text-white bg-orange hover:bg-orange-dark hover:shadow-lg transition-all">
+                    <button class="mr-3 inline-block py-2 px-4 pr-6 rounded-full font-bold text-white bg-orange-600 hover:bg-orange-700 hover:shadow-lg transition-all">
                         <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                         Post Resume
                     </button>

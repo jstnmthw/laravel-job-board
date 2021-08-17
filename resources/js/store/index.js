@@ -41,6 +41,7 @@ const store = createStore({
         login({ commit, state }, credentials) {
             return new Promise((resolve, reject) => {
                 commit('AUTH_LOADING', true)
+                // TODO: Remove setTimeout() after tests
                 setTimeout(() => {
                      axios.get('/sanctum/csrf-cookie').then(() => {
                         axios
@@ -60,7 +61,7 @@ const store = createStore({
                     }).catch((error) =>{
                         reject(error)
                      })
-                }, 2000)
+                }, 1000)
             })
         },
     }

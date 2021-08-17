@@ -12,22 +12,15 @@ module.exports = {
     extend: {
       colors: {
         orange: {
-          light: '#f16c51',
-          DEFAULT: '#fd5631',
-          dark: '#fd390e',
+          100: '#ffefe7',
+          200: '#ffbb9c',
+          300: '#fca082',
+          400: '#ff8c63',
+          500: '#ff7747',
+          600: '#fd5631',
+          700: '#fd390e',
         },
         peach: '#fc9d8c',
-        blue: '#0d6efd',
-        indigo: '#6610f2',
-        purple: '#6f42c1',
-        pink: '#d63384',
-        red: '#dc3545',
-        yellow: '#ffc107',
-        green: '#198754',
-        teal: '#20c997',
-        cyan: '#0dcaf0',
-        white: '#fff',
-        primary: '#fd5631',
         accent: '#5d3cf2',
         secondary: '#f5f4f8',
         success: '#07c98b',
@@ -58,8 +51,8 @@ module.exports = {
       }
     },
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
+  variants: {},
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

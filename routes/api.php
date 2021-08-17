@@ -29,7 +29,8 @@ Route::group(['middleware' => ['auth:sanctum', 'throttle:60,1']], function () {
  */
 Route::post('/login', function (Request $request) {
     $credentials = $request->only('email', 'password');
-    Auth::attempt($credentials)
+    $remember = $request->input('remember');
+    Auth::attempt($credentials, $remember)
         ? response()->json('Successfully Authenticated')
         : response()->json('Failed Authenticating', 401);
 });
