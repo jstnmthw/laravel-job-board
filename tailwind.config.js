@@ -1,8 +1,7 @@
 module.exports = {
+  mode: 'jit',
   purge: [
-    './resources/**/*.blade.php',
-    './resources/**/*.js',
-    './resources/**/*.vue',
+    './resources/**/*.{blade.php,js,vue}',
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -55,7 +54,7 @@ module.exports = {
         'input' : 'inset 0 1px 2px transparent, 0 0 0 .125rem rgba(253,86,49,.25)'
       },
       fontSize: {
-        'sm-alt' : '0.813rem'
+        'sm-alt' : '0.813rem',
       }
     },
   },
