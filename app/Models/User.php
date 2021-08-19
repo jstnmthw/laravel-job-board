@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasRoles, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -43,7 +43,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Education instance(s)
+     * Education model relationship
      */
     public function education(): HasMany
     {
@@ -51,7 +51,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Experience instance(s)
+     * Experience model relationship
      */
     public function experience(): HasMany
     {
@@ -59,7 +59,7 @@ class User extends Authenticatable
     }
 
     /**
-     * User resume instance(s)
+     * Resume model relationship
      */
     public function resumes(): HasMany
     {
@@ -67,7 +67,7 @@ class User extends Authenticatable
     }
 
     /**
-     * User job application instance(s)
+     * Job applications model relationship
      */
     public function applications(): HasMany
     {
