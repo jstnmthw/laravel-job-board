@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,21 +23,10 @@ Route::group(['middleware' => ['auth:sanctum', 'throttle:60,1']], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::post('/logout', [LoginController::class, 'logout']);
 });
 
 /**
  * Unprotected API
  */
-Route::post('/login', function (Request $request) {
-    $credentials = $request->only('email', 'password');
-    $remember = $request->input('remember');
-    Auth::attempt($credentials, $remember)
-        ? response()->json('Successfully Authenticated')
-        : response()->json('Failed Authenticating', 401);
-});
-Route::post('/logout', function(Request $request) {
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-    return response()->json('Logged out');
-});
+Route::post('/login', [LoginController::class, 'login']);
