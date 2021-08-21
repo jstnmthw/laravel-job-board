@@ -6,11 +6,12 @@ const routes = [
         name: 'Homepage',
         component: Homepage
     },
-    // {
-    //     path: '/about',
-    //     name: 'About',
-    //     component: () => import(/* webpackChunkName: "about" */ '@/views/About')
-    // }
+    {
+        path: '/my/account',
+        name: 'UserAccount',
+        component: () => import(/* webpackChunkName: "account" */ '@/views/account/Index'),
+        meta: { requiresAuth: true }
+    }
 ]
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),

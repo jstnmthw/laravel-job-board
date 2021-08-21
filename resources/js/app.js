@@ -42,13 +42,30 @@ app.mount('#app')
 // Before creation callback
 router.beforeEach((to, from, next) => {
     store.dispatch('requestToken/CANCEL_PENDING_REQUESTS').then(function() {
+        // We let axios finish canceling previous route requests before checking auth
         const auth = localStorage.getItem('Authenticated') === 'true';
         if (auth) {
             axios.get('/api/user').then((res) => {
-                store.commit('ADD_USER_INFO', res.data)
+                store.commit('ADD_USER_INFO', res.data.data)
                 store.commit('SET_AUTHENTICATED', true)
             })
         }
-        next();
+
+        // Check if route requires authentication
+        if (to.matched.some(record => record.meta.requiresAuth)) {
+            // this route requires auth, check if logged in
+            // if not, redirect to login page.
+            if (!store.state.isAuthenticated) {
+                console.log('User is not authenticated')
+                next({
+                    path: '/',
+                    query: { login: true }
+                })
+            } else {
+                next()
+            }
+        } else {
+            next() // make sure to always call next()!
+        }
     })
 })

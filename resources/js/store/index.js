@@ -2,6 +2,7 @@ import RequestToken from '@/store/modules/request-token'
 import api from '@/store/modules/api'
 import { createStore } from 'vuex'
 import axios from "axios";
+import router from "@/router";
 
 // Create a new store instance.
 const store = createStore({
@@ -48,17 +49,19 @@ const store = createStore({
                             .post('/api/login', credentials)
                             .then(() => {
                                 axios.get('/api/user').then((res) => {
-                                    commit('ADD_USER_INFO', res.data)
+                                    commit('ADD_USER_INFO', res.data.data)
                                     commit('SET_AUTHENTICATED', true)
                                     commit('AUTH_LOADING', false)
                                     localStorage.setItem('Authenticated', 'true')
                                     resolve()
+                                    router.push({ path: '/my/account' }).then()
                                 }).catch((error) => {
                                     commit('AUTH_LOADING', false)
                                     reject(error)
                                 })
                             })
                     }).catch((error) =>{
+                        commit('AUTH_LOADING', false)
                         reject(error)
                      })
                 }, 1000)
@@ -67,8 +70,9 @@ const store = createStore({
         logout() {
             axios.post('/api/logout').then(function() {
                 localStorage.removeItem('Authenticated')
-                store.commit('ADD_USER_INFO', {})
                 store.commit('SET_AUTHENTICATED', false)
+                router.push('/').then()
+                store.commit('ADD_USER_INFO', {})
             }).catch((e) => {
                 console.log(e);
             })
