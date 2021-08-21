@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        Geo::query()->truncate();
-//        Artisan::call('geo:seed TH --append');
+        Geo::query()->truncate();
+        Artisan::call('geo:seed TH --append');
 
         Category::query()->truncate();
         $this->call([CategorySeeder::class]);
