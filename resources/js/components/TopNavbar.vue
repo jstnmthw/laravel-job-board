@@ -42,10 +42,10 @@
                     </div>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">
-                            <a href="#" class="text-orange-600 dark:text-white px-3 py-2 rounded-md text-sm font-bold text-sm" aria-current="page">Dashboard</a>
-                            <a href="#" class="text-slate dark:text-white dark:text-orange-100 dark:hover:text-white hover:text-orange-600 transition-colors px-3 py-2 rounded-md text-sm font-bold text-sm">Team</a>
-                            <a href="#" class="text-slate dark:text-white dark:text-orange-100 dark:hover:text-white hover:text-orange-600 transition-colors px-3 py-2 rounded-md text-sm font-bold text-sm">Projects</a>
-                            <a href="#" class="text-slate dark:text-white dark:text-orange-100 dark:hover:text-white hover:text-orange-600 transition-colors px-3 py-2 rounded-md text-sm font-bold text-sm">Calendar</a>
+                            <a href="#" class="text-orange-600 dark:text-white px-3 py-2 rounded-md text-sm font-semibold text-sm" aria-current="page">Dashboard</a>
+                            <a href="#" class="text-slate dark:text-white dark:text-orange-100 dark:hover:text-white hover:text-orange-600 transition-colors px-3 py-2 rounded-md text-sm font-semibold text-sm">Team</a>
+                            <a href="#" class="text-slate dark:text-white dark:text-orange-100 dark:hover:text-white hover:text-orange-600 transition-colors px-3 py-2 rounded-md text-sm font-semibold text-sm">Projects</a>
+                            <a href="#" class="text-slate dark:text-white dark:text-orange-100 dark:hover:text-white hover:text-orange-600 transition-colors px-3 py-2 rounded-md text-sm font-semibold text-sm">Calendar</a>
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,8 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     fontFamily: {
-      sans: ['Noto Sans', 'sans-serif'],
+      // sans: ['Noto Sans', 'sans-serif'],
+      sans: ['Inter', 'sans-serif'],
       serif: ['Times New Roman', 'serif'],
     },
     extend: {
@@ -49,6 +50,9 @@ module.exports = {
       },
       fontSize: {
         'sm-alt' : '0.813rem',
+      },
+      letterSpacing: {
+        'submenu' : '.25rem'
       }
     },
   },
