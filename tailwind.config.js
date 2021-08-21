@@ -3,7 +3,7 @@ module.exports = {
   purge: [
     './resources/**/*.{blade.php,js,vue}',
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     fontFamily: {
       sans: ['Noto Sans', 'sans-serif'],
@@ -12,7 +12,8 @@ module.exports = {
     extend: {
       colors: {
         orange: {
-          100: '#ffefe7',
+          50: '#ffefe7',
+          100: '#ffd6bf',
           200: '#ffbb9c',
           300: '#fca082',
           400: '#ff8c63',
