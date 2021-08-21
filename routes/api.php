@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +23,7 @@ use App\Http\Controllers\api\auth\LoginController;
  */
 Route::group(['middleware' => ['auth:sanctum', 'throttle:60,1']], function () {
     Route::get('/user', function (Request $request) {
-        return $request->user();
+        return new UserResource(Auth::user());
     });
     Route::post('/logout', [LoginController::class, 'logout']);
 });
