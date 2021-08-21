@@ -70,9 +70,10 @@ const store = createStore({
         logout() {
             axios.post('/api/logout').then(function() {
                 localStorage.removeItem('Authenticated')
-                store.commit('SET_AUTHENTICATED', false)
-                router.push('/').then()
-                store.commit('ADD_USER_INFO', {})
+                router.push('/').then(() => {
+                    store.commit('ADD_USER_INFO', {})
+                    store.commit('SET_AUTHENTICATED', false)
+                })
             }).catch((e) => {
                 console.log(e);
             })
