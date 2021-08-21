@@ -64,6 +64,15 @@ const store = createStore({
                 }, 1000)
             })
         },
+        logout() {
+            axios.post('/api/logout').then(function() {
+                localStorage.removeItem('Authenticated')
+                store.commit('ADD_USER_INFO', {})
+                store.commit('SET_AUTHENTICATED', false)
+            }).catch((e) => {
+                console.log(e);
+            })
+        },
     }
 })
 export default store

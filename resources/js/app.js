@@ -41,5 +41,14 @@ app.mount('#app')
 
 // Before creation callback
 router.beforeEach((to, from, next) => {
-    store.dispatch('requestToken/CANCEL_PENDING_REQUESTS').then(() => next())
+    store.dispatch('requestToken/CANCEL_PENDING_REQUESTS').then(function() {
+        const auth = localStorage.getItem('Authenticated') === 'true';
+        if (auth) {
+            axios.get('/api/user').then((res) => {
+                store.commit('ADD_USER_INFO', res.data)
+                store.commit('SET_AUTHENTICATED', true)
+            })
+        }
+        next();
+    })
 })
