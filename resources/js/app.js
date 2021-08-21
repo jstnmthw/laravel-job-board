@@ -48,24 +48,36 @@ router.beforeEach((to, from, next) => {
             axios.get('/api/user').then((res) => {
                 store.commit('ADD_USER_INFO', res.data.data)
                 store.commit('SET_AUTHENTICATED', true)
-            })
+                authCheck(to)
+            }).catch((error) => {
+                if (error.response.status === 401) {
+                    localStorage.removeItem('Authenticated')
+                    router.push('/').then()
+                }
+            });
+        } else {
+            authCheck(to)
         }
 
-        // Check if route requires authentication
-        if (to.matched.some(record => record.meta.requiresAuth)) {
-            // this route requires auth, check if logged in
-            // if not, redirect to login page.
-            if (!store.state.isAuthenticated) {
-                console.log('User is not authenticated')
-                next({
-                    path: '/',
-                    query: { login: true }
-                })
+        function authCheck(to)
+        {
+            // Check if route requires authentication
+            if (to.matched.some(record => record.meta.requiresAuth)) {
+                // this route requires auth, check if logged in
+                // if not, redirect to login page.
+                if (!store.state.isAuthenticated) {
+                    console.log('User is not authenticated')
+                    next({
+                        path: '/',
+                        query: { login: true }
+                    })
+                } else {
+                    next()
+                }
             } else {
-                next()
+                next() // make sure to always call next()!
             }
-        } else {
-            next() // make sure to always call next()!
         }
+
     })
 })

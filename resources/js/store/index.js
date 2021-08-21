@@ -14,7 +14,7 @@ const store = createStore({
     state: {
         isAuthenticated: false,
         authLoading: false,
-        user : {},
+        user : false,
     },
     getters: {
         isAuthenticated: (state) => {
