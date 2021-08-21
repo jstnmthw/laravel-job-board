@@ -21,35 +21,73 @@
             <li class="inline-block mr-3 text-gray-300 dark:text-orange-400">
                 <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
             </li>
-            <li class="inline-block text-gray-400 dark:text-orange-200">
+            <li class="inline-block text-gray-400 dark:text-orange-200 font">
                 Settings
             </li>
         </ul>
     </div>
-    <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8 mb-24">
         <div class="md:grid md:grid-cols-4 md:gap-8">
-            <div class="md:col-span-1 shadow-lg rounded-2xl bg-white text-center">
-                <div class="bg-gray-100 text-gray-300 rounded-full w-32 h-32 mx-auto mt-14 mb-3 text-center text-5xl font-bold leading-[114px]">
+            <div class="md:col-span-1 shadow-md rounded-2xl bg-white text-center">
+                <div class="bg-gray-100 text-gray-300 rounded-full w-32 h-32 mx-auto mt-14 mb-3 text-center text-5xl font-bold leading-[134px]">
                     {{ user.name.charAt(0) }}
                 </div>
-                <div class="text-dark font-bold">
+                <div class="text-dark font-semibold">
                     {{ user.name }}
                 </div>
                 <div class="text-gray-400 mb-12">
                     {{ userData.email }}
                 </div>
                 <div class="flex flex-col text-left">
-                    <span class="text-sm font-bold text-gray-400 py-2 px-6 bg-gray-100">
+                    <span class="text-sm font-medium text-gray-400 py-2 px-6 bg-gray-100">
+                        Dashboard
+                    </span>
+                    <router-link to="/" class="text-gray-500 hover:text-orange-600 transition-colors font-medium py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
+                        <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+                        Resumes
+                    </router-link>
+                    <router-link to="/" class="text-gray-500 hover:text-orange-600 transition-colors font-medium py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
+                        <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        Job Applications
+                    </router-link>
+                    <router-link to="/" class="text-gray-500 hover:text-orange-600 transition-colors font-medium py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
+                        <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                        Saved Jobs
+                    </router-link>
+                    <router-link to="/" class="text-gray-500 hover:text-orange-600 transition-colors font-medium py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
+                        <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path></svg>
+                        Saved Companies
+                    </router-link>
+                    <router-link to="/" class="text-gray-500 hover:text-orange-600 transition-colors font-medium py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
+                        <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                        Premium
+                    </router-link>
+                    <span class="text-sm font-medium text-gray-400 py-2 px-6 bg-gray-100">
                         Settings
                     </span>
-                    <router-link to="/" class="text-blue-500 py-3 px-6">
-                        <svg class="w-6 h-6 inline-block mr-3 text-blue-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
-                        Some link
+                    <router-link to="/" class="text-gray-500 hover:text-orange-600 transition-colors font-medium py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
+                        Personal Info
+                    </router-link>
+                    <router-link to="/" class="text-gray-500 hover:text-orange-600 transition-colors font-medium py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
+                        Notifications
+                    </router-link>
+                    <router-link to="/" class="text-gray-500 hover:text-orange-600 transition-colors font-medium py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
+                        Password
+                    </router-link>
+                    <router-link to="/" class="text-gray-500 hover:text-orange-600 transition-colors font-medium py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
+                        <svg class="w-5 h-5 inline-block mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        Sign out
                     </router-link>
                 </div>
             </div>
-            <div class="mt-5 md:mt-0 md:col-span-3 shadow-lg rounded-2xl bg-white p-6">
-                Content
+            <div class="mt-5 md:mt-0 md:col-span-3 shadow-md rounded-2xl bg-white p-6">
+                <div class="md:grid md:grid-cols-5 md:gap-12">
+                    <div class="md:col-span-2">
+                        <h2 class="text-lg">Personal Info</h2>
+                        <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                    <div class="md:col-span-3">sd</div>
+                </div>
             </div>
         </div>
     </div>
