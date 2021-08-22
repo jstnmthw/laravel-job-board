@@ -23,16 +23,22 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        // Randomize Country, Province and City ID's (relational)
         $geo = Geo::getCountry('TH');
-        $cities = $geo->cities()->get()->toArray();
+        $provinces = $geo->children()->get();
+        $province = $provinces[$this->faker->numberBetween(0, count($provinces) - 1)]['id'];
+        $cities = Geo::query()->find($province)->children()->get();
+        $city = $cities[$this->faker->numberBetween(0, count($cities) - 1)];
+
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'dob' => $this->faker->dateTimeBetween('-60 years', '-18 years'),
-            'city_id' => $cities[$this->faker->numberBetween(0, count($cities) - 1)]['id'],
-            'country_id' => $geo->id,
+            'country_id' => $geo,
+            'province_id' => $province,
+            'city_id' => $city,
             'address' => $this->faker->address(),
             'zipcode' => $this->faker->postcode(),
             'remember_token' => Str::random(10),

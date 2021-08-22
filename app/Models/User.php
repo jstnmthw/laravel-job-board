@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -20,6 +22,13 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'dob',
+        'address',
+        'country_id',
+        'province_id',
+        'city_id',
+        'zipcode',
+        'position',
         'password',
     ];
 
@@ -72,6 +81,21 @@ class User extends Authenticatable
     public function applications(): HasMany
     {
         return $this->hasMany(JobApplication::class);
+    }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Geo::class, 'country_id', 'id');
+    }
+
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Geo::class, 'province_id', 'id');
+    }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(Geo::class, 'city_id', 'id');
     }
 
 }
