@@ -1,0 +1,299 @@
+[
+  {
+    "id": 1605651,
+    "name": "Thailand"
+  },
+  {
+    "id": 1153668,
+    "name": "Chiang Rai"
+  },
+  {
+    "id": 1153555,
+    "name": "Chumphon"
+  },
+  {
+    "id": 1153089,
+    "parent_id": 1605651,
+    "name": "Kamphaeng Phet"
+  },
+  {
+    "id": 1153080,
+    "parent_id": 1605651,
+    "name": "Kanchanaburi"
+  },
+  {
+    "id": 1152631,
+    "parent_id": 1605651,
+    "name": "Krabi"
+  },
+  {
+    "id": 1152472,
+    "parent_id": 1605651,
+    "name": "Lampang"
+  },
+  {
+    "id": 1152467,
+    "parent_id": 1605651,
+    "name": "Lamphun"
+  },
+  {
+    "id": 1609031,
+    "parent_id": 1605651,
+    "name": "Lop Buri"
+  },
+  {
+    "id": 1152221,
+    "parent_id": 1605651,
+    "name": "Mae Hong Son"
+  },
+  {
+    "id": 1608899,
+    "parent_id": 1605651,
+    "name": "Maha Sarakham"
+  },
+  {
+    "id": 1608595,
+    "parent_id": 1605651,
+    "name": "Mukdahan"
+  },
+  {
+    "id": 1608538,
+    "parent_id": 1605651,
+    "name": "Nakhon Nayok"
+  },
+  {
+    "id": 1608533,
+    "parent_id": 1605651,
+    "name": "Nakhon Pathom"
+  },
+  {
+    "id": 1608530,
+    "parent_id": 1605651,
+    "name": "Nakhon Phanom"
+  },
+  {
+    "id": 1608528,
+    "parent_id": 1605651,
+    "name": "Nakhon Ratchasima"
+  },
+  {
+    "id": 1608526,
+    "parent_id": 1605651,
+    "name": "Nakhon Sawan"
+  },
+  {
+    "id": 1608525,
+    "parent_id": 1605651,
+    "name": "Nakhon Si Thammarat"
+  },
+  {
+    "id": 1608451,
+    "parent_id": 1605651,
+    "name": "Nan"
+  },
+  {
+    "id": 1608408,
+    "parent_id": 1605651,
+    "name": "Narathiwat"
+  },
+  {
+    "id": 1608231,
+    "parent_id": 1605651,
+    "name": "Nong Khai"
+  },
+  {
+    "id": 1608132,
+    "parent_id": 1605651,
+    "name": "Nonthaburi"
+  },
+  {
+    "id": 1607982,
+    "parent_id": 1605651,
+    "name": "Pathum Thani"
+  },
+  {
+    "id": 1607976,
+    "parent_id": 1605651,
+    "name": "Pattani"
+  },
+  {
+    "id": 1151462,
+    "parent_id": 1605651,
+    "name": "Phangnga"
+  },
+  {
+    "id": 1607778,
+    "parent_id": 1605651,
+    "name": "Phatthalung"
+  },
+  {
+    "id": 1607758,
+    "parent_id": 1605651,
+    "name": "Phayao"
+  },
+  {
+    "id": 1607736,
+    "parent_id": 1605651,
+    "name": "Phetchabun"
+  },
+  {
+    "id": 1151416,
+    "parent_id": 1605651,
+    "name": "Phetchaburi"
+  },
+  {
+    "id": 1607724,
+    "parent_id": 1605651,
+    "name": "Phichit"
+  },
+  {
+    "id": 1607707,
+    "parent_id": 1605651,
+    "name": "Phitsanulok"
+  },
+  {
+    "id": 1607551,
+    "parent_id": 1605651,
+    "name": "Phrae"
+  },
+  {
+    "id": 1151073,
+    "parent_id": 1605651,
+    "name": "Prachuap Khiri Khan"
+  },
+  {
+    "id": 1150964,
+    "parent_id": 1605651,
+    "name": "Ranong"
+  },
+  {
+    "id": 1150953,
+    "parent_id": 1605651,
+    "name": "Ratchaburi"
+  },
+  {
+    "id": 1607016,
+    "parent_id": 1605651,
+    "name": "Rayong"
+  },
+  {
+    "id": 1607000,
+    "parent_id": 1605651,
+    "name": "Roi Et"
+  },
+  {
+    "id": 1606789,
+    "parent_id": 1605651,
+    "name": "Sakon Nakhon"
+  },
+  {
+    "id": 1606589,
+    "parent_id": 1605651,
+    "name": "Samut Prakan"
+  },
+  {
+    "id": 1606587,
+    "parent_id": 1605651,
+    "name": "Samut Sakhon"
+  },
+  {
+    "id": 1606585,
+    "parent_id": 1605651,
+    "name": "Samut Songkhram"
+  },
+  {
+    "id": 1606417,
+    "parent_id": 1605651,
+    "name": "Saraburi"
+  },
+  {
+    "id": 1606375,
+    "parent_id": 1605651,
+    "name": "Satun"
+  },
+  {
+    "id": 1606238,
+    "parent_id": 1605651,
+    "name": "Si Sa Ket"
+  },
+  {
+    "id": 1606269,
+    "parent_id": 1605651,
+    "name": "Sing Buri"
+  },
+  {
+    "id": 1606146,
+    "parent_id": 1605651,
+    "name": "Songkhla"
+  },
+  {
+    "id": 1150532,
+    "parent_id": 1605651,
+    "name": "Sukhothai"
+  },
+  {
+    "id": 1606032,
+    "parent_id": 1605651,
+    "name": "Suphan Buri"
+  },
+  {
+    "id": 1150514,
+    "parent_id": 1605651,
+    "name": "Surat Thani"
+  },
+  {
+    "id": 1606029,
+    "parent_id": 1605651,
+    "name": "Surin"
+  },
+  {
+    "id": 1150489,
+    "parent_id": 1605651,
+    "name": "Tak"
+  },
+  {
+    "id": 1150006,
+    "parent_id": 1605651,
+    "name": "Trang"
+  },
+  {
+    "id": 1605277,
+    "parent_id": 1605651,
+    "name": "Trat"
+  },
+  {
+    "id": 1149965,
+    "parent_id": 1605651,
+    "name": "Uthai Thani"
+  },
+  {
+    "id": 1605214,
+    "parent_id": 1605651,
+    "name": "Uttaradit"
+  },
+  {
+    "id": 1604869,
+    "parent_id": 1605651,
+    "name": "Yala"
+  },
+  {
+    "id": 1604767,
+    "parent_id": 1605651,
+    "name": "Yasothon"
+  },
+  {
+    "id": 1153670,
+    "parent_id": 1605651,
+    "name": "Chiang Mai"
+  },
+  {
+    "id": 1607530,
+    "parent_id": 1605651,
+    "name": "Ayutthaya"
+  },
+  {
+    "id": 1151253,
+    "parent_id": 1605651,
+    "name": "Phuket"
+  }
+]
