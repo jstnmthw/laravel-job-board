@@ -7,3 +7,9 @@
         display: none;
     }
 }
+
+@layer base {
+    option {
+        font-family: Arial, sans-serif;
+    }
+}
