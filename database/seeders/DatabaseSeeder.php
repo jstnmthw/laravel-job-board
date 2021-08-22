@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
     {
         Geo::query()->truncate();
         Artisan::call('geo:seed TH --append');
+        Artisan::call('geo:json Thailand');
 
         Category::query()->truncate();
         $this->call([CategorySeeder::class]);
@@ -65,10 +66,6 @@ class DatabaseSeeder extends Seeder
             ->has(UserResume::factory()->count(3), 'resumes')
             ->has(JobApplication::factory()->count(2), 'applications')
             ->create();
-
-//        UserResume::all()->each(function($resume) use ($employmentTypes) {
-//            $resume->employmentTypes()->attach($employmentTypes->random(rand(1, 3))->pluck('id')->toArray());
-//        });
 
         UserExperience::all()->each(function($experience) use ($categories) {
             $experience->categories()->sync($categories->random(rand(1, 3))->pluck('id')->toArray());
