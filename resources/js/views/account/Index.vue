@@ -1,20 +1,20 @@
 <template>
-    <div class="absolute left-0 right-0 top-0 h-[450px] bg-orange-600 overflow-hidden z-[-1]">
+    <div class="absolute left-0 right-0 top-0 h-[450px] bg-dark overflow-hidden z-[-1]">
         <div class="absolute bottom-0 left-0 right-0 text-gray-100">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 260">
                 <polygon fill="currentColor" points="0,257 0,260 3000,260 3000,0"></polygon>
             </svg>
         </div>
     </div>
-    <top-navbar class="dark"></top-navbar>
-    <div class="dark max-w-8xl mx-auto mb-12 px-2 sm:px-6 lg:px-8">
+    <top-navbar></top-navbar>
+    <div class="max-w-8xl mx-auto mb-12 px-2 sm:px-6 lg:px-8">
         <ul class="m-0 p-0 text-sm">
             <li class="inline-block mr-2">
-                <router-link to="/" class="text-orange-600 dark:text-orange-50 dark:hover:text-white hover:underline">
+                <router-link to="/" class="text-orange-600 dark:hover:text-white hover:underline">
                     Home
                 </router-link>
             </li>
-            <li class="inline-block mr-2 text-gray-300 dark:text-orange-400">
+            <li class="inline-block mr-2 text-slate dark:text-orange-400">
                 <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                 </svg>
@@ -24,18 +24,19 @@
                     Account
                 </router-link>
             </li>
-            <li class="inline-block mr-2 text-gray-300 dark:text-orange-400">
+            <li class="inline-block mr-2 text-slate dark:text-orange-400">
                 <svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                 </svg>
             </li>
-            <li class="inline-block text-gray-400 dark:text-orange-200 font">
+            <li class="inline-block text-gray-600 dark:text-orange-200 font">
                 Settings
             </li>
         </ul>
     </div>
     <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8 mb-24">
         <div class="md:grid md:grid-cols-4 md:gap-8 items-start">
+            <!-- Sidebar -->
             <div class="md:col-span-1 shadow-md rounded-2xl bg-white text-center">
                 <div class="bg-gray-100 text-gray-300 rounded-full w-24 h-24 mx-auto mt-14 mb-3 text-center text-5xl font-bold leading-[100px]">
                     {{ user.name.charAt(0) }}
@@ -50,9 +51,9 @@
                     <span class="text-sm font-medium text-gray-400 py-2 px-6 bg-gray-100">
                         Dashboard
                     </span>
-                    <router-link to="/" class="text-slate hover:text-orange-600 transition-colors font-medium py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
+                    <router-link to="/my/account" class="text-slate hover:text-orange-600 transition-colors font-medium py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
                         <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
-                        Resumes
+                        Profile
                     </router-link>
                     <router-link to="/" class="text-slate hover:text-orange-600 transition-colors font-medium py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
                         <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
@@ -78,9 +79,6 @@
                         Settings
                     </span>
                     <router-link to="/" class="text-gray-500 hover:text-orange-600 transition-colors font-medium text-sm py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
-                        Profile
-                    </router-link>
-                    <router-link to="/" class="text-gray-500 hover:text-orange-600 transition-colors font-medium text-sm py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
                         Notifications
                     </router-link>
                     <router-link to="/" class="text-gray-500 hover:text-orange-600 transition-colors font-medium text-sm py-3 px-0 tracking-tight border-b border-gray-100 mx-5">
@@ -92,10 +90,14 @@
                     </router-link>
                 </div>
             </div>
+            <!-- Main -->
             <div class="md:col-span-3 shadow-md rounded-2xl bg-white mt-5 md:mt-0">
                 <div class="md:grid md:grid-cols-3 md:gap-12">
                     <div class="md:col-span-3">
-                        <div class="mb-8 px-10 pt-10">
+                        <div class="px-10 pt-10 pb-5">
+                            <h2 class="text-2xl font-semibold">Basic Info</h2>
+                        </div>
+                        <div class="mb-8 px-10">
                             <label class="block text-sm font-medium text-gray-700 mb-5">
                                 Photo
                             </label>
