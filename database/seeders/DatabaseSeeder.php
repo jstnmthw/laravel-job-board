@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\EducationLevel;
 use App\Models\EmploymentType;
 use App\Models\Geo;
+use App\Models\Image;
 use App\Models\Job;
 use App\Models\JobApplication;
 use App\Models\Review;
@@ -60,11 +61,13 @@ class DatabaseSeeder extends Seeder
         UserExperience::query()->truncate();
         UserEducation::query()->truncate();
         UserResume::query()->truncate();
+        Image::query()->truncate();
         User::factory(10)
             ->has(UserExperience::factory()->count(2), 'experience')
             ->has(UserEducation::factory()->count(2), 'education')
             ->has(UserResume::factory()->count(3), 'resumes')
             ->has(JobApplication::factory()->count(2), 'applications')
+            ->has(Image::factory()->count(1), 'avatar')
             ->create();
 
         UserExperience::all()->each(function($experience) use ($categories) {
