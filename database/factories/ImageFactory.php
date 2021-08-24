@@ -25,9 +25,7 @@ class ImageFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => Str::random(24) . '.jpg',
             'path' => storage_path('public/images'),
-            'type' => 'jpg',
         ];
 
     }
