@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Company extends Model
 {
@@ -24,4 +25,12 @@ class Company extends Model
         self::SIZE_XL => '500-1000',
         self::SIZE_XXL => '1000+',
     );
+
+    /**
+     * Get the company's images.
+     */
+    public function images(): MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 }

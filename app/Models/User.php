@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -83,19 +84,36 @@ class User extends Authenticatable
         return $this->hasMany(JobApplication::class);
     }
 
+    /**
+     * Get the user's image.
+     */
     public function country(): BelongsTo
     {
         return $this->belongsTo(Geo::class, 'country_id', 'id');
     }
 
+    /**
+     * Get the user's image.
+     */
     public function province(): BelongsTo
     {
         return $this->belongsTo(Geo::class, 'province_id', 'id');
     }
 
+    /**
+     * Get the user's image.
+     */
     public function city(): BelongsTo
     {
         return $this->belongsTo(Geo::class, 'city_id', 'id');
+    }
+
+    /**
+     * Get the user's avatar.
+     */
+    public function avatar(): MorphOne
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 
 }
