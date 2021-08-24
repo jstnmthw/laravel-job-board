@@ -1,8 +1,8 @@
  // Libraries
 import axios from 'axios'
 import { createApp } from 'vue'
-import router from './router'
-import store from './store'
+import router from '@/router'
+import store from '@/store'
 
 // Axios settings
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
