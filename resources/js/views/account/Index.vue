@@ -107,6 +107,7 @@
                                         <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"></path>
                                     </svg>
                                 </span>
+                                <input type="file" name="avatar" id="avatar" @change="uploadAvatar">
                                 <button type="button" class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-200">
                                     Change
                                 </button>
@@ -181,6 +182,7 @@
 
 <script>
 import axios from 'axios';
+import store from '@/store'
 import { mapGetters } from 'vuex';
 import TopNavbar from '@/components/TopNavbar'
 
@@ -227,8 +229,26 @@ export default {
         async submitForm() {
             await axios.put('/api/users/' + this.user.id, this.userData)
                 .then((res) => {
-                    console.log(res);
+                    //..
                 })
+        },
+        async uploadAvatar(e) {
+            const url = '/api/user/upload/avatar/' + this.user.id
+            const formData = new FormData();
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+            formData.append('avatar', e.target.files[0])
+            await axios.post(url, formData, config).then((res) => {
+                const avatar = {
+                    user: {
+                        avatar: res.data
+                    }
+                }
+                // store.commit('ADD_USER_INFO', avatar)
+            });
         },
         onCountryChange(event) {
             this.getProvinces(event.target.value)
@@ -241,7 +261,6 @@ export default {
     watch: {
         // whenever country_id changes
         'userData.country_id': function (val, oldVal) {
-            console.log(val);
             this.getProvinces(val)
         },
         // whenever province_id select changes

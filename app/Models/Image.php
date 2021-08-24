@@ -11,6 +11,15 @@ class Image extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'path',
+    ];
+
+    /**
      * Get the parent imageable model (user or post).
      */
     public function imageable(): MorphTo

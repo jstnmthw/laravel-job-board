@@ -22,7 +22,7 @@ use App\Http\Controllers\api\auth\LoginController;
  * Protected API
  */
 Route::group(['middleware' => ['auth:sanctum', 'throttle:60,1']], function () {
-    // User
+    /** User */
     Route::prefix('user')->group(function () {
         Route::get('/', function () {
             return new UserResource(Auth::user());
@@ -30,10 +30,11 @@ Route::group(['middleware' => ['auth:sanctum', 'throttle:60,1']], function () {
         Route::get('data', function () {
             return new UserDataResource(Auth::user());
         })->name('user.data');
+        Route::post('/upload/avatar/{id}', [UserController::class, 'uploadAvatar']);
     });
     Route::apiResource('users', UserController::class);
 
-    // Authentication
+    /** Authentication */
     Route::post('/logout', [LoginController::class, 'logout']);
 });
 

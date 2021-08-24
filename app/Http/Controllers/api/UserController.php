@@ -7,7 +7,8 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Ramsey\Uuid\Type\Integer;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -68,5 +69,24 @@ class UserController extends Controller
     public function destroy($id): Response
     {
         //
+    }
+
+    /**
+     * Upload the user's avatar image.
+     */
+    public function uploadAvatar(Request $request, $id): JsonResponse
+    {
+        if ($request->user()->id !== (int) $id) {
+            return response()->json(['error' => 'You can only change your own avatar'], 403);
+        }
+        $path = $request->file('avatar')->store('avatars');
+        $oldAvatar = Auth::user()->avatar();
+        $oldPath = $oldAvatar->first()->path;
+        Storage::delete($oldPath);
+        $oldAvatar->delete();
+        Auth::user()->avatar()->create([
+            'path' => $path,
+        ]);
+        return response()->json($path);
     }
 }
