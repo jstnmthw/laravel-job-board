@@ -14,7 +14,8 @@ const store = createStore({
     state: {
         isAuthenticated: false,
         authLoading: false,
-        user : false,
+        user: {},
+        errors: false,
     },
     getters: {
         isAuthenticated: (state) => {
@@ -29,7 +30,7 @@ const store = createStore({
     },
     mutations: {
         ADD_USER_INFO(state, payload) {
-            state.user = payload
+            Object.assign(state.user, payload)
         },
         SET_AUTHENTICATED(state, payload) {
             state.isAuthenticated = payload
@@ -37,13 +38,16 @@ const store = createStore({
         AUTH_LOADING(state, payload) {
             state.authLoading = payload
         },
+        SET_ERRORS(state, payload) {
+            state.errors = Object.assign({}, payload)
+        }
     },
     actions: {
         login({ commit, state }, credentials) {
             return new Promise((resolve, reject) => {
                 commit('AUTH_LOADING', true)
                 // TODO: Remove setTimeout() after tests
-                setTimeout(() => {
+                // setTimeout(() => {
                      axios.get('/sanctum/csrf-cookie').then(() => {
                         axios
                             .post('/api/login', credentials)
@@ -57,14 +61,24 @@ const store = createStore({
                                     router.push({ path: '/my/account' }).then()
                                 }).catch((error) => {
                                     commit('AUTH_LOADING', false)
+                                    if (error.response.status <= 400) {
+                                        commit('SET_ERRORS', error.response.errors)
+                                    }
                                     reject(error)
                                 })
                             })
-                    }).catch((error) =>{
+                            .catch((error) => {
+                                commit('AUTH_LOADING', false)
+                                console.log(error.response.status)
+                                if (error.response.status >= 400) {
+                                    commit('SET_ERRORS', error.response.data.errors)
+                                }
+                            });
+                    }).catch((error) => {
                         commit('AUTH_LOADING', false)
                         reject(error)
                      })
-                }, 1000)
+                // }, 1000)
             })
         },
         logout() {
