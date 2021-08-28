@@ -79,14 +79,15 @@ class UserController extends Controller
         if ($request->user()->id !== (int) $id) {
             return response()->json(['error' => 'You can only change your own avatar'], 403);
         }
-        $path = $request->file('avatar')->store('avatars');
-        $oldAvatar = Auth::user()->avatar();
-        $oldPath = $oldAvatar->first()->path;
-        Storage::delete($oldPath);
-        $oldAvatar->delete();
+        $path = Storage::disk('public')->put('avatars', $request->file('avatar'));
+        $oldAvatar = Auth::user()->avatar()->first();
+        if($oldAvatar->exists()) {
+            Storage::disk('public')->delete($oldAvatar->path);
+            $oldAvatar->delete();
+        }
         Auth::user()->avatar()->create([
             'path' => $path,
         ]);
-        return response()->json($path);
+        return response()->json('/storage/'.$path);
     }
 }

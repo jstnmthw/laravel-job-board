@@ -15,7 +15,6 @@ class UserResource extends JsonResource
      */
     public function toArray($request): array
     {
-        // return parent::toArray($request);
         $roles = $this->roles()->with('permissions')->get()->map(function($role) {
            return  [
                'id' => $role->id,
@@ -33,6 +32,7 @@ class UserResource extends JsonResource
 
         return [
             'id' => $this->getKey(),
+            'avatar' => $this->avatar()->exists() ? '/storage/'.$this->avatar()->first()->path : null,
             'name' => $this->name,
             'roles' => $roles,
         ];
