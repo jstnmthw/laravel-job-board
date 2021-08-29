@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -73,21 +75,41 @@ class UserController extends Controller
 
     /**
      * Upload the user's avatar image.
+     *
+     * @param Request $request
+     * @param Integer $id
+     * @return JsonResponse
+     * @throws ValidationException
      */
-    public function uploadAvatar(Request $request, $id): JsonResponse
+    public function uploadAvatar(Request $request, int $id): JsonResponse
     {
-        if ($request->user()->id !== (int) $id) {
+        if ($request->user()->id !== $id) {
             return response()->json(['error' => 'You can only change your own avatar'], 403);
         }
-        $path = Storage::disk('public')->put('avatars', $request->file('avatar'));
+
+        $rules = [
+            'avatar' => 'required|image',
+        ];
+        $this->validate($request, $rules);
+
+        $img = Image::make($request->file('avatar'));
+        $img->fit(300, null, function ($constraint) {
+            $constraint->upsize();
+        })->encode(null, 75);
+
+        $path = 'avatars/' . $request->file('avatar')->hashName();
+        Storage::disk('public')->put($path, $img);
         $oldAvatar = Auth::user()->avatar()->first();
+
         if($oldAvatar->exists()) {
             Storage::disk('public')->delete($oldAvatar->path);
             $oldAvatar->delete();
         }
+
         Auth::user()->avatar()->create([
             'path' => $path,
         ]);
-        return response()->json('/storage/'.$path);
+
+        return response()->json('/storage/' . $path);
     }
 }

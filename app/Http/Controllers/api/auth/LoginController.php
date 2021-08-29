@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -15,10 +16,10 @@ class LoginController extends Controller
      * Login the user.
      *
      * @param Request $request
-     * @return JsonResponse
+     * @return Response
      * @throws ValidationException
      */
-    public function login(Request $request): JsonResponse
+    public function login(Request $request): Response
     {
 
         $credentials = $request->only('email', 'password');
@@ -31,8 +32,8 @@ class LoginController extends Controller
         $this->validate($request, $rules);
 
         return Auth::attempt($credentials, $remember)
-            ? response()->json('Successfully Authenticated')
-            : response()->json(401);
+            ? response(null, 204)
+            : response(null, 401);
     }
 
     /**

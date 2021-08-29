@@ -60,19 +60,18 @@ const store = createStore({
                                     resolve()
                                     router.push({ path: '/my/account' }).then()
                                 }).catch((error) => {
-                                    commit('AUTH_LOADING', false)
-                                    if (error.response.status <= 400) {
+                                    if (error.response.status >= 400) {
                                         commit('SET_ERRORS', error.response.errors)
                                     }
                                     reject(error)
+                                    commit('AUTH_LOADING', false)
                                 })
                             })
                             .catch((error) => {
-                                commit('AUTH_LOADING', false)
-                                console.log(error.response.status)
                                 if (error.response.status >= 400) {
                                     commit('SET_ERRORS', error.response.data.errors)
                                 }
+                                commit('AUTH_LOADING', false)
                             });
                     }).catch((error) => {
                         commit('AUTH_LOADING', false)
