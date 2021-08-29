@@ -101,7 +101,7 @@ class UserController extends Controller
         Storage::disk('public')->put($path, $img);
         $oldAvatar = Auth::user()->avatar()->first();
 
-        if($oldAvatar->exists()) {
+        if($oldAvatar) {
             Storage::disk('public')->delete($oldAvatar->path);
             $oldAvatar->delete();
         }
