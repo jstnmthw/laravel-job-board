@@ -52,16 +52,4 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
         return response()->json('Logged out.');
     }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages(): array
-    {
-        return [
-            'password.current_password' => 'Authentication failed.',
-        ];
-    }
 }
