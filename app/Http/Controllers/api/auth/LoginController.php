@@ -16,10 +16,10 @@ class LoginController extends Controller
      * Login the user.
      *
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      * @throws ValidationException
      */
-    public function login(Request $request): Response
+    public function login(Request $request): JsonResponse
     {
 
         $credentials = $request->only('email', 'password');
@@ -32,8 +32,14 @@ class LoginController extends Controller
         $this->validate($request, $rules);
 
         return Auth::attempt($credentials, $remember)
-            ? response(null, 204)
-            : response(null, 401);
+            ? response()->json(null, 203)
+            : response()->json([
+                'errors' => [
+                    'password' => [
+                        'Password error text'
+                    ]
+                ]
+            ], 401);
     }
 
     /**

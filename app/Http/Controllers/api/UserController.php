@@ -17,12 +17,11 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
      */
-    public function index(): JsonResponse
-    {
-        return response()->json(['success' => 'User account updated']);
-    }
+//    public function index(): JsonResponse
+//    {
+//        //..
+//    }
 
     /**
      * Store a newly created resource in storage.
@@ -30,10 +29,10 @@ class UserController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request): Response
-    {
-        //
-    }
+//    public function store(Request $request): Response
+//    {
+//        //
+//    }
 
     /**
      * Display the specified resource.
@@ -41,10 +40,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id): Response
-    {
-        //
-    }
+//    public function show($id): Response
+//    {
+//        //
+//    }
 
     /**
      * Update the specified resource in storage.
@@ -68,10 +67,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id): Response
-    {
-        //
-    }
+//    public function destroy($id): Response
+//    {
+//        //
+//    }
 
     /**
      * Upload the user's avatar image.
