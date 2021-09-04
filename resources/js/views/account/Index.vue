@@ -37,7 +37,7 @@
     <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8 mb-24">
         <div class="md:grid md:grid-cols-4 md:gap-8 items-start">
             <!-- Sidebar -->
-            <aside class="md:col-span-1 shadow-md rounded-2xl bg-white text-center">
+            <aside class="md:col-span-1 shadow rounded-2xl bg-white text-center">
                 <img v-if="user.avatar" :src="user.avatar" :alt="user.name + '\'s avatar'" class="text-gray-300 rounded-full w-32 h-32 mx-auto mt-14 mb-3 text-center text-5xl font-bold leading-[100px]">
                 <div v-else class="bg-gray-100 text-gray-300 rounded-full w-24 h-24 mx-auto mt-14 mb-3 text-center text-5xl font-bold leading-[100px]">
                     {{ user.name.charAt(0) }}
@@ -93,124 +93,127 @@
             </aside>
 
             <!-- Main -->
-            <main class="md:col-span-3 shadow-md rounded-2xl bg-white mt-5 md:mt-0">
-                <div class="md:grid md:grid-cols-3 md:gap-12">
-                    <div class="md:col-span-3">
-                        <div class="px-10 pt-10 pb-5">
-                            <h2 class="text-2xl font-bold">
-                                <svg class="w-6 h-6 inline-block text-orange-600 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                Basic Info
-                            </h2>
-                        </div>
-                        <div class="mb-8 px-10">
-                            <label class="block text-sm font-medium text-gray-700">
-                                Photo
-                            </label>
-                            <span v-if="errors.avatar" class="text-red-600 text-[11px] font-semibold">
-                                <svg aria-hidden="true" class="inline-block" fill="currentColor" focusable="false" width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>
-                                {{ errors.avatar[0] }}
+            <div class="md:col-span-3 bg-white rounded-2xl shadow">
+                <div class="px-10 pt-10 pb-5">
+                    <h2 class="text-2xl font-bold">
+                        <svg class="w-6 h-6 inline-block text-orange-600 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Basic Info
+                    </h2>
+                </div>
+                <div class="mb-8 px-10">
+                    <label class="block text-sm font-medium text-gray-700">
+                        Photo
+                    </label>
+                    <span v-if="errors.avatar" class="text-red-600 text-[11px] font-semibold">
+                        <svg aria-hidden="true" class="inline-block" fill="currentColor" focusable="false" width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>
+                        {{ errors.avatar[0] }}
+                    </span>
+                    <div class="mt-5 flex items-center">
+                        <input @change="uploadAvatar" type="file" name="avatar" id="avatar" class="sr-only" :disabled="uploadingAvatar === true">
+                        <label for="avatar" class="cursor-pointer flex items-center">
+                            <span class="inline-block h-20 w-20 rounded-full overflow-hidden bg-gray-100">
+                                <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                                </svg>
                             </span>
-                            <div class="mt-5 flex items-center">
-                                <input @change="uploadAvatar" type="file" name="avatar" id="avatar" class="sr-only" :disabled="uploadingAvatar === true">
-                                <label for="avatar" class="cursor-pointer flex items-center">
-                                    <span class="inline-block h-20 w-20 rounded-full overflow-hidden bg-gray-100">
-                                        <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                                        </svg>
-                                    </span>
-                                    <span class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-200">
-                                        Change Photo
-                                        <svg v-if="uploadingAvatar" class="inline-block animate-spin ml-1 h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                        </svg>
-                                    </span>
+                            <span class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-200">
+                                Change Photo
+                                <svg v-if="uploadingAvatar" class="inline-block animate-spin ml-1 h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-6 px-10">
+                    <label for="input-name" class="block text-sm font-medium text-gray-700 mb-2">
+                        Name
+                    </label>
+                    <input id="input-name" v-model="userData.name" type="text" class="w-full p-3 rounded-lg border-gray-300 focus:border-blue-200 focus:ring focus:ring-blue-100  focus:ring-opacity-50">
+                </div>
+                <div class="md:grid md:grid-cols-4 mb-6 px-10">
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Country / Region
+                        </label>
+                        <select id="input-country" v-model="userData.country_id" @change="onCountryChange" class="mt-1 block w-full p-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                            <option disabled value="null">Select country</option>
+                            <option v-for="(country, index) in countries" :value="country.id" :key="index">
+                                {{ country.name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-6 px-10">
+                    <label for="input-address" class="block text-sm font-medium text-gray-700 mb-2">
+                        Street address
+                    </label>
+                    <input id="input-address" v-model="userData.address" type="text" class="w-full p-3 rounded-lg border-gray-300 focus:border-blue-200 focus:ring focus:ring-blue-100  focus:ring-opacity-50">
+                </div>
+                <div class="md:grid md:grid-cols-3 gap-3 md:gap-6 mb-6 px-10">
+                    <div class="md:grid md:col-span-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            State / Province
+                        </label>
+                        <select v-model="userData.province_id" @change="onProvinceChange" id="province" class="mt-1 block w-full p-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                            <option disabled value="null">Select state</option>
+                            <option v-for="province in provinces" :value="province.id">
+                                {{ province.name }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="md:grid md:col-span-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            City
+                        </label>
+                        <select v-model="userData.city_id" class="mt-1 block w-full p-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                            <option disabled value="null">Select city</option>
+                            <option v-for="city in cities" :value="city.id">
+                                {{ city.name }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="md:grid md:col-span-1">
+                        <label for="input-zipcode" class="block text-sm font-medium text-gray-700 mb-2">
+                            ZIP / Postal
+                        </label>
+                        <input id="input-zipcode" v-model="userData.zipcode" type="text" class="w-full p-3 rounded-lg border-gray-300 focus:border-blue-200 focus:ring focus:ring-blue-100 focus:ring-opacity-50">
+                    </div>
+                </div>
+                <div class="grid grid-flow-col grid-cols-3 mb-6 px-10">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Birthdate
+                        </label>
+                        <div class="md:grid md:grid-cols-3 md:gap-5">
+                            <div>
+                                <label for="input-birthdate-day" class="block text-xs font-medium text-gray-400 mb-2">
+                                    Day
                                 </label>
+                                <input id="input-birthdate-day" v-model="birthdate.day" maxlength="2" minlength="2" type="number" placeholder="DD" class="appearance-[-textfield] w-full p-3 rounded-lg border-gray-300 focus:border-blue-200 focus:ring focus:ring-blue-100  focus:ring-opacity-50 placeholder-gray-300">
                             </div>
-                        </div>
-                        <div class="mb-6 px-10">
-                            <label for="input-name" class="block text-sm font-medium text-gray-700 mb-2">
-                                Name
-                            </label>
-                            <input id="input-name" v-model="userData.name" type="text" class="w-full p-3 rounded-lg border-gray-300 focus:border-blue-200 focus:ring focus:ring-blue-100  focus:ring-opacity-50">
-                        </div>
-                        <div class="md:grid md:grid-cols-4 mb-6 px-10">
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    Country / Region
+                            <div>
+                                <label for="input-birthdate-month" class="block text-xs font-medium text-gray-400 mb-2">
+                                    Month
                                 </label>
-                                <select id="input-country" v-model="userData.country_id" @change="onCountryChange" class="mt-1 block w-full p-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                                    <option disabled value="null">Select country</option>
-                                    <option v-for="(country, index) in countries" :value="country.id" :key="index">
-                                        {{ country.name }}
-                                    </option>
-                                </select>
+                                <input id="input-birthdate-month" v-model="birthdate.month" maxlength="2" minlength="2" type="number" placeholder="MM" class="appearance-[-textfield] w-full p-3 rounded-lg border-gray-300 focus:border-blue-200 focus:ring focus:ring-blue-100  focus:ring-opacity-50 placeholder-gray-300">
                             </div>
-                        </div>
-                        <div class="mb-6 px-10">
-                            <label for="input-address" class="block text-sm font-medium text-gray-700 mb-2">
-                                Street address
-                            </label>
-                            <input id="input-address" v-model="userData.address" type="text" class="w-full p-3 rounded-lg border-gray-300 focus:border-blue-200 focus:ring focus:ring-blue-100  focus:ring-opacity-50">
-                        </div>
-                        <div class="md:grid md:grid-cols-3 gap-3 md:gap-6 mb-16 px-10">
-                            <div class="md:grid md:col-span-1">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    State / Province
+                            <div>
+                                <label for="input-birthdate-year" class="block text-xs font-medium text-gray-400 mb-2">
+                                    Year
                                 </label>
-                                <select v-model="userData.province_id" @change="onProvinceChange" id="province" class="mt-1 block w-full p-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                                    <option disabled value="null">Select state</option>
-                                    <option v-for="province in provinces" :value="province.id">
-                                        {{ province.name }}
-                                    </option>
-                                </select>
+                                <input id="input-birthdate-year" v-model="birthdate.year" maxlength="4" minlength="4" type="number" placeholder="YYYY" class="appearance-[-textfield] w-full p-3 rounded-lg border-gray-300 focus:border-blue-200 focus:ring focus:ring-blue-100  focus:ring-opacity-50 placeholder-gray-300">
                             </div>
-                            <div class="md:grid md:col-span-1">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    City
-                                </label>
-                                <select v-model="userData.city_id" class="mt-1 block w-full p-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                                    <option disabled value="null">Select city</option>
-                                    <option v-for="city in cities" :value="city.id">
-                                        {{ city.name }}
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="md:grid md:col-span-1">
-                                <label for="input-zipcode" class="block text-sm font-medium text-gray-700 mb-2">
-                                    ZIP / Postal
-                                </label>
-                                <input id="input-zipcode" v-model="userData.zipcode" type="text" class="w-full p-3 rounded-lg border-gray-300 focus:border-blue-200 focus:ring focus:ring-blue-100 focus:ring-opacity-50">
-                            </div>
-                            <div class="md:grid md:col-span-1">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">
-                                    Birthdate
-                                </label>
-                                <select v-model="userBirthday" class="mt-1 block w-full p-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                                    <option disabled value="null">Select month</option>
-                                    <option value="1">January</option>
-                                    <option value="2">February</option>
-                                    <option value="3">March</option>
-                                    <option value="4">April</option>
-                                    <option value="5">May</option>
-                                    <option value="6">June</option>
-                                    <option value="7">July</option>
-                                    <option value="8">August</option>
-                                    <option value="9">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="text-right py-5 px-8 bg-gray-50 rounded-b-2xl">
-                            <button @click="submitForm" type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
-                                Save Changes
-                            </button>
                         </div>
                     </div>
                 </div>
-            </main>
+                <div class="text-right py-5 px-8 bg-gray-50 rounded-b-2xl">
+                    <button @click="submitForm" type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -231,29 +234,29 @@ export default {
                 province_id: null,
                 city_id: null,
                 zipcode: null,
+                dob: null,
             },
             countries: null,
             cities: null,
             provinces: null,
-            birthday: {
-                month: null,
+            birthdate: {
                 day: null,
+                month: null,
                 year: null,
             },
             uploadingAvatar: false,
         }
     },
     computed: {
-        ...mapState(['user', 'errors']),
-        birthdayMutator() {
-
-            return this.birthday
-        }
+        ...mapState(['user', 'errors'])
     },
     methods: {
         async getUserData() {
             await axios.get('/api/user/data').then((res) => {
                 this.userData = res.data.data
+                this.birthdate.day = res.data.data.dob.split('-')[2]
+                this.birthdate.month = res.data.data.dob.split('-')[1]
+                this.birthdate.year = res.data.data.dob.split('-')[0]
             })
         },
         async getCountries() {
@@ -306,6 +309,9 @@ export default {
             this.userData.city_id = null
             this.getCities(e.target.value)
         },
+        dateObjectToDate(obj) {
+            return obj.year + '-' + obj.month + '-' + obj.day;
+        }
     },
     watch: {
         'userData.country_id': function (val) {
@@ -313,7 +319,16 @@ export default {
         },
         'userData.province_id': function (val) {
             this.getCities(val)
-        }
+        },
+        'birthdate.day' : function(val) {
+            this.userData.dob = this.dateObjectToDate(this.birthdate);
+        },
+        'birthdate.month' : function(val) {
+            this.userData.dob = this.dateObjectToDate(this.birthdate);
+        },
+        'birthdate.year' : function(val) {
+            this.userData.dob = this.dateObjectToDate(this.birthdate);
+        },
     },
     mounted() {
         document.body.classList.add('bg-gray-100')
