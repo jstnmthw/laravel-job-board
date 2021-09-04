@@ -320,13 +320,13 @@ export default {
         'userData.province_id': function (val) {
             this.getCities(val)
         },
-        'birthdate.day' : function(val) {
+        'birthdate.day' : function() {
             this.userData.dob = this.dateObjectToDate(this.birthdate);
         },
-        'birthdate.month' : function(val) {
+        'birthdate.month' : function() {
             this.userData.dob = this.dateObjectToDate(this.birthdate);
         },
-        'birthdate.year' : function(val) {
+        'birthdate.year' : function() {
             this.userData.dob = this.dateObjectToDate(this.birthdate);
         },
     },
