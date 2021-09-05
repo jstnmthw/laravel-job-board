@@ -26,6 +26,9 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
         $user->update($request->all());
+        if ($request->has('checkedCategories')) {
+           $user->categories()->sync($request->input('checkedCategories'));
+        }
     }
 
     /**
