@@ -11,6 +11,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
+/**
+ * @property int id Primary Key
+ * @property string name User's name
+ */
+
 class User extends Authenticatable
 {
     use HasRoles, HasFactory, Notifiable;

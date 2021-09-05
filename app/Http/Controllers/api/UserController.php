@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -15,66 +16,17 @@ use Intervention\Image\Facades\Image;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     */
-//    public function index(): JsonResponse
-//    {
-//        //..
-//    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return Response
-     */
-//    public function store(Request $request): Response
-//    {
-//        //
-//    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-//    public function show($id): Response
-//    {
-//        //
-//    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param int $id
-     * @return JsonResponse
+     * @param User $user
+     * @throws AuthorizationException
      */
-    public function update(Request $request, int $id): JsonResponse
+    public function update(Request $request, User $user)
     {
-        if ($request->user()->id !== $id) {
-            return response()->json(['error' => 'You can only edit your own account'], 403);
-        }
-        $user = User::query()->findOrFail($id);
+        $this->authorize('update', $user);
         $user->update($request->all());
-        if ($request->has('checkedCategories')) {
-            $user->categories()->sync($request->input('checkedCategories'));
-        }
-        return response()->json(['success' => 'User account updated']);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-//    public function destroy($id): Response
-//    {
-//        //
-//    }
 
     /**
      * Upload the user's avatar image.
