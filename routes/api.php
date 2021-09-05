@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\CategoryController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Resources\UserDataResource;
 use App\Http\Resources\UserResource;
@@ -22,7 +23,7 @@ use App\Http\Controllers\api\auth\LoginController;
  * Protected API
  */
 Route::group(['middleware' => ['auth:sanctum', 'throttle:60,1']], function () {
-    /** User */
+    /** User Resource */
     Route::prefix('user')->group(function () {
         Route::get('/', function () {
             return new UserResource(Auth::user());
@@ -30,18 +31,22 @@ Route::group(['middleware' => ['auth:sanctum', 'throttle:60,1']], function () {
         Route::get('data', function () {
             return new UserDataResource(Auth::user());
         })->name('user.data');
-        Route::post('/upload/avatar/{id}', [UserController::class, 'uploadAvatar']);
+        Route::post('upload/avatar/{id}', [UserController::class, 'uploadAvatar']);
     });
     Route::apiResource('users', UserController::class);
 
+
     /** Authentication */
-    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::post('logout', [LoginController::class, 'logout']);
 });
 
 /**
  * Unprotected API
  */
-Route::post('/login', [LoginController::class, 'login']);
+Route::post('login', [LoginController::class, 'login']);
+
+/** Category Resource */
+Route::resource('categories', CategoryController::class);
 
 /** Geo API */
 Route::group(['prefix' => 'geo'], function() {

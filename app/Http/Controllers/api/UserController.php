@@ -57,7 +57,11 @@ class UserController extends Controller
         if ($request->user()->id !== $id) {
             return response()->json(['error' => 'You can only edit your own account'], 403);
         }
-        User::query()->findOrFail($id)->update($request->all());
+        $user = User::query()->findOrFail($id);
+        $user->update($request->all());
+        if ($request->has('checkedCategories')) {
+            $user->categories()->sync($request->input('checkedCategories'));
+        }
         return response()->json(['success' => 'User account updated']);
     }
 

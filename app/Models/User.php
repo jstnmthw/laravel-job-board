@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -53,7 +53,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Education model relationship
+     * Get the user's education.
      */
     public function education(): HasMany
     {
@@ -61,7 +61,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Experience model relationship
+     * Get the user's experience.
      */
     public function experience(): HasMany
     {
@@ -69,7 +69,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Resume model relationship
+     * Get the users' resumes.
      */
     public function resumes(): HasMany
     {
@@ -77,7 +77,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Job applications model relationship
+     * Get the user's job applications.
      */
     public function applications(): HasMany
     {
@@ -85,7 +85,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the user's image.
+     * Get the user's country.
      */
     public function country(): BelongsTo
     {
@@ -93,7 +93,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the user's image.
+     * Get the user's province.
      */
     public function province(): BelongsTo
     {
@@ -101,7 +101,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the user's image.
+     * Get the user's city.
      */
     public function city(): BelongsTo
     {
@@ -114,6 +114,14 @@ class User extends Authenticatable
     public function avatar(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    /**
+     * Get the user's categories
+     */
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class);
     }
 
 }
