@@ -41,6 +41,36 @@ class Geo extends \Igaster\LaravelCities\Geo
     const LEVEL_ZNB     = 'ZNB';      // buffer zone	a zone recognized as a buffer between two nations in which military presence is minimal or absent
 
     /**
+     * Levels array
+     */
+    const LEVELS_ARRAY = [
+        self::LEVEL_ADM1,
+        self::LEVEL_ADM1H,
+        self::LEVEL_ADM2,
+        self::LEVEL_ADM2H,
+        self::LEVEL_ADM3,
+        self::LEVEL_ADM3H,
+        self::LEVEL_ADM4,
+        self::LEVEL_ADM4H,
+        self::LEVEL_ADM5,
+        self::LEVEL_ADM5H,
+        self::LEVEL_ADMD,
+        self::LEVEL_ADMDH,
+        self::LEVEL_LTER,
+        self::LEVEL_PCL,
+        self::LEVEL_PCLD,
+        self::LEVEL_PCLF,
+        self::LEVEL_PCLH,
+        self::LEVEL_PCLI,
+        self::LEVEL_PCLIX,
+        self::LEVEL_PCLS,
+        self::LEVEL_PRSH,
+        self::LEVEL_TERR,
+        self::LEVEL_ZN,
+        self::LEVEL_ZNB,
+    ];
+
+    /**
      * Clean entity name of any redundant titles
      *
      * @param string $value
