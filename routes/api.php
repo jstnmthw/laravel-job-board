@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\CategoryController;
+use App\Http\Controllers\api\JobController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Resources\UserDataResource;
 use App\Http\Resources\UserResource;
@@ -49,6 +50,9 @@ Route::post('login', [LoginController::class, 'login']);
 
 /** Category Resource */
 Route::resource('categories', CategoryController::class);
+
+/** Job Resource */
+Route::apiResource('jobs', JobController::class);
 
 /** Geo API */
 Route::group(['prefix' => 'geo'], function() {
