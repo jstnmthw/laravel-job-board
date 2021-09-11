@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Laravel\Scout\Searchable;
 
 class Job extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     /**
      * The categories that belong to the job.
+     *
+     * @return BelongsToMany
      */
     public function categories(): BelongsToMany
     {
@@ -22,6 +24,8 @@ class Job extends Model
 
     /**
     * The employment types that belong to the job.
+     *
+     * @return BelongsToMany
     */
     public function employmentTypes(): BelongsToMany
     {
@@ -29,7 +33,9 @@ class Job extends Model
     }
 
     /**
-     * Owner of the job
+     * Owner of the job.
+     *
+     * @return BelongsTo
      */
     public function createdBy(): belongsTo
     {
@@ -37,7 +43,9 @@ class Job extends Model
     }
 
     /**
-     * Company associated with the job
+     * Company associated with the job.
+     *
+     * @return BelongsTo
      */
     public function company(): belongsTo
     {
@@ -45,10 +53,22 @@ class Job extends Model
     }
 
     /**
+     * Education level associated with the job.
+     *
      * @return BelongsTo
      */
     public function educationLevel(): BelongsTo
     {
         return $this->belongsTo(EducationLevel::class);
+    }
+
+    /**
+     * Get the index data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray(): array
+    {
+        return $this->toArray();
     }
 }
