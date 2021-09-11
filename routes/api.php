@@ -4,6 +4,7 @@ use App\Http\Controllers\api\CategoryController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Resources\UserDataResource;
 use App\Http\Resources\UserResource;
+use Igaster\LaravelCities\GeoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\auth\LoginController;
@@ -23,7 +24,8 @@ use App\Http\Controllers\api\auth\LoginController;
  * Protected API
  */
 Route::group(['middleware' => ['auth:sanctum', 'throttle:60,1']], function () {
-    /** User Resource */
+
+    /** Return currently logged-in user */
     Route::prefix('user')->group(function () {
         Route::get('/', function () {
             return new UserResource(Auth::user());
@@ -35,9 +37,9 @@ Route::group(['middleware' => ['auth:sanctum', 'throttle:60,1']], function () {
     });
     Route::apiResource('users', UserController::class);
 
-
     /** Authentication */
     Route::post('logout', [LoginController::class, 'logout']);
+
 });
 
 /**
@@ -50,12 +52,6 @@ Route::resource('categories', CategoryController::class);
 
 /** Geo API */
 Route::group(['prefix' => 'geo'], function() {
-//    Route::get('search/{name}/{parent_id?}', 	'\Igaster\LaravelCities\GeoController@search');
-//    Route::get('item/{id}', 		'\Igaster\LaravelCities\GeoController@item');
-    Route::get('children/{id}', 	'\Igaster\LaravelCities\GeoController@children');
-//    Route::get('parent/{id}', 	'\Igaster\LaravelCities\GeoController@parent');
-//    Route::get('country/{code}',	'\Igaster\LaravelCities\GeoController@country');
-    Route::get('countries', 		'\Igaster\LaravelCities\GeoController@countries');
-//    Route::get('ancestors/{id}','\Igaster\LaravelCities\GeoController@ancestors');
-//    Route::get('breadcrumbs/{id}','\Igaster\LaravelCities\GeoController@breadcrumbs');
+    Route::get('countries', [GeoController::class, 'countries']);
+    Route::get('children/{id}', [GeoController::class, 'children']);
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
@@ -15,6 +16,13 @@ use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
+
+    public function show(): UserResource
+    {
+        $user = User::with(['avatar'])->findOrFail(Auth::id());
+        return new UserResource($user);
+    }
+
     /**
      * Update the specified resource in storage.
      *

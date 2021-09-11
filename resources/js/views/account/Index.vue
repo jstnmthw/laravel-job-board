@@ -38,7 +38,7 @@
         <div class="md:grid md:grid-cols-4 md:gap-8 items-start">
             <!-- Sidebar -->
             <aside class="md:col-span-1 shadow rounded-2xl bg-white text-center">
-                <img v-if="user.avatar" :src="user.avatar" :alt="user.name + '\'s avatar'" class="text-gray-300 rounded-full w-32 h-32 mx-auto mt-14 mb-3 text-center text-5xl font-bold leading-[100px]">
+                <img v-if="user.avatar" :src="'/storage/'+user.avatar.path" :alt="user.name + '\'s avatar'" class="text-gray-300 rounded-full w-32 h-32 mx-auto mt-14 mb-3 text-center text-5xl font-bold leading-[100px]">
                 <div v-else class="bg-gray-100 text-gray-300 rounded-full w-24 h-24 mx-auto mt-14 mb-3 text-center text-5xl font-bold leading-[100px]">
                     {{ user.name.charAt(0) }}
                 </div>

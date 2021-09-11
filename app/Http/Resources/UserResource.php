@@ -32,7 +32,7 @@ class UserResource extends JsonResource
 
         return [
             'id' => $this->getKey(),
-            'avatar' => $this->avatar()->exists() ? '/storage/'.$this->avatar()->first()->path : null,
+            'avatar' => $this->whenLoaded('avatar'),
             'name' => $this->name,
             'roles' => $roles,
         ];

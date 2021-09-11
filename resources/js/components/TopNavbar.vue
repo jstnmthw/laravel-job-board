@@ -58,7 +58,7 @@
                     </button>
                     <div class="relative" v-on-clickaway="closeAccountDropdown">
                         <button @click="showAccountDropdown = !showAccountDropdown" :class="{ 'bg-gray-300' : !user.avatar }" class="relative w-9 h-9 text-center rounded-full overflow-hidden focus:ring-2 focus:ring-peach transition-all">
-                            <img v-if="user.avatar" width="36" height="36" :src="user.avatar" :alt="user.name" class="block h-full w-full">
+                            <img v-if="user.avatar" width="36" height="36" :src="'/storage/'+user.avatar.path" :alt="user.name" class="block h-full w-full">
                             <template v-else>
                                 <span class="relative bottom-0.5 text-gray-500 font-bold align-middle" aria-hidden="true">{{ user.name.charAt(0) }}</span>
                             </template>
