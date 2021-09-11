@@ -52,6 +52,7 @@ Route::post('login', [LoginController::class, 'login']);
 Route::resource('categories', CategoryController::class);
 
 /** Job Resource */
+Route::get('jobs/search', [JobController::class, 'search']);
 Route::apiResource('jobs', JobController::class);
 
 /** Geo API */
