@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth:sanctum', 'throttle:60,1']], function () {
     /** Return currently logged-in user */
     Route::prefix('user')->group(function () {
         Route::get('/', function () {
-            return new UserResource(Auth::user());
+            return new UserResource(Auth::user()->load('avatar'));
         })->name('user');
         Route::get('data', function () {
             return new UserDataResource(Auth::user());
