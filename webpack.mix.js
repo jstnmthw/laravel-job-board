@@ -29,3 +29,13 @@ mix.options({
 });
 
 mix.webpackConfig(require('./webpack.config'));
+mix.webpackConfig(webpack => {
+    return {
+        plugins: [
+            new webpack.DefinePlugin({
+                '__VUE_OPTIONS_API__' : false,
+                '__VUE_PROD_DEVTOOLS__' : false,
+            })
+        ]
+    };
+});
