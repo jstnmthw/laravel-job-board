@@ -59,18 +59,27 @@ services:
         volumes:
             - sailelasticsearch:/usr/share/elasticsearch/data
         environment:
+            - bootstrap.memory_lock=true
+            - discovery.type=single-node
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
             - cluster.name=job-board_1
             - node.name=job-node
-            - bootstrap.memory_lock=true
-            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-            - discovery.type=single-node
+            - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
+            - xpack.security.enabled=$ELASTIC_SECURITY
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
         ports:
-            - "${ELASTICSEARCH_HOST_HTTP_PORT}:9200"
-            - "${ELASTICSEARCH_HOST_TRANSPORT_PORT}:9300"
+            - "${ELASTIC_HOST_HTTP_PORT}:9200"
+            - "${ELASTIC_HOST_TRANSPORT_PORT}:9300"
         networks:
             - sail
     kibana:
         image: 'kibana:7.14.1'
+        environment:
+            - ELASTICSEARCH_USERNAME=$ELASTIC_USER
+            - ELASTICSEARCH_PASSWORD=$ELASTIC_PASSWORD
         ports:
             - "${KIBANA_HTTP_PORT}:5601"
         depends_on:
