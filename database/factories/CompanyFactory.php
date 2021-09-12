@@ -24,8 +24,6 @@ class CompanyFactory extends Factory
      */
     public function definition(): array
     {
-        $geo = Geo::getCountry('TH');
-        $cities = $geo->cities()->get()->toArray();
         return [
             'name' => $this->faker->company(),
             'website' => $this->faker->url(),
@@ -34,8 +32,8 @@ class CompanyFactory extends Factory
             'size' => $this->faker->numberBetween(0, count(Company::$sizeLabelMap)),
             'created_by' => User::query()->inRandomOrder()->first(),
             'category_id' => Category::main()->inRandomOrder()->first(),
-            'country_id' => $geo->id,
-            'city_id' => $cities[$this->faker->numberBetween(0, count($cities) - 1)]['id'],
+            'country_id' => $this->faker->randomDigit(),
+            'city_id' => $this->faker->randomDigit(),
         ];
     }
 }
