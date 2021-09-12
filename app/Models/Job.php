@@ -76,7 +76,7 @@ class Job extends Model
     }
 
     /**
-     * ElasticSearch index mapping of model
+     * ElasticSearch mapping of model
      *
      * @return array
      */
@@ -84,9 +84,17 @@ class Job extends Model
         'properties' => [
             'title' => [
                 'type' => 'text',
-            ],
-            'description' => [
-                'type' => 'text',
+                'analyzer' => 'standard',
+                'fields' => [
+                    'raw' => [
+                        'type' => 'keyword'
+                    ],
+                    'edge_ngram' => [
+                        'type' => 'text',
+                        'analyzer' => 'edge_ngram_analyzer',
+                        'search_analyzer' => 'edge_ngram_search_analyzer',
+                    ],
+                ],
             ],
         ]
     ];
