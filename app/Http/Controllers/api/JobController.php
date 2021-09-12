@@ -38,8 +38,8 @@ class JobController extends Controller
                 'query' => [
                     'bool' => [
                         'should' => [
-                            [ 'match' => [ 'title' => $request->input('q', '') ] ],
-                            [ 'match' => [ 'description' => $request->input('q', '') ] ],
+                            [ 'match' => [ 'title' => $request->input('q') ] ],
+                            [ 'match' => [ 'description' => $request->input('q') ] ],
                         ]
                     ]
                 ]

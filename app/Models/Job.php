@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Indexes\JobIndexConfigurator;
+use App\Indices\JobIndex;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,7 +13,7 @@ class Job extends Model
 {
     use HasFactory, Searchable;
 
-    protected string $indexConfigurator = JobIndexConfigurator::class;
+    protected string $indexConfigurator = JobIndex::class;
 
     /**
      * The categories that belong to the job.
@@ -84,25 +84,9 @@ class Job extends Model
         'properties' => [
             'title' => [
                 'type' => 'text',
-                'fields' => [
-                    'raw' => [
-                        'type' => 'keyword',
-                    ]
-                ]
             ],
             'description' => [
                 'type' => 'text',
-                'fields' => [
-                    'raw' => [
-                        'type' => 'keyword',
-                    ]
-                ]
-            ],
-            'salary_from' => [
-                'type' => 'integer',
-            ],
-            'salary_to' => [
-                'type' => 'integer',
             ],
         ]
     ];

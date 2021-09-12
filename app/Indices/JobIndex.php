@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Indexes;
+namespace App\Indices;
 
 use ScoutElastic\IndexConfigurator;
 use ScoutElastic\Migratable;
 
-class JobIndexConfigurator extends IndexConfigurator
+class JobIndex extends IndexConfigurator
 {
     use Migratable;
 
