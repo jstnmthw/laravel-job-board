@@ -29,7 +29,7 @@ class JobFactory extends Factory
         $cities = $geo->cities()->get()->toArray();
         $salary_from = $this->faker->numberBetween(15000, 150000);
         return [
-            'title' => $this->faker->sentence(4),
+            'title' => $this->faker->sentence(1).' '.$this->faker->jobTitle().' '.$this->faker->sentence(4),
             'description' => $this->faker->paragraph(),
             'salary_from' => $salary_from,
             'salary_to' => $this->faker->boolean ? $salary_from + $this->faker->numberBetween(10000, 50000) : null,
