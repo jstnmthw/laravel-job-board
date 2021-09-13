@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Company extends Model
@@ -18,7 +19,7 @@ class Company extends Model
     public const SIZE_XXL = 5;
 
     // Company size map
-    public static $sizeLabelMap = array(
+    public static array $sizeLabelMap = array(
         self::SIZE_SMALL => '25-50',
         self::SIZE_MEDIUM => '50-100',
         self::SIZE_LARGE => '250-500',
@@ -32,5 +33,22 @@ class Company extends Model
     public function images(): MorphMany
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    /**
+     * Get the company's jobs
+     */
+    public function jobs(): HasMany
+    {
+        return $this->hasMany(Job::class, 'company_id');
+    }
+
+    /**
+     * Get the company's employees.
+     * @return HasMany
+     */
+    public function employees(): HasMany
+    {
+        return $this->hasMany(User::class, 'company_id');
     }
 }

@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->date('dob')->comment('Date of birth')->nullable();
             $table->string('position')->nullable()->comment('Title of their position');
+            $table->integer('company_id')->nullable();
             $table->integer('country_id')->nullable();
             $table->integer('province_id')->nullable();
             $table->integer('city_id')->nullable();

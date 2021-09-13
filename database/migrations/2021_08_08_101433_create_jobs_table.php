@@ -22,8 +22,9 @@ class CreateJobsTable extends Migration
             $table->integer('education_level_id');
             $table->integer('created_by');
             $table->integer('company_id');
-            $table->integer('city_id');
             $table->integer('country_id');
+            $table->integer('province_id');
+            $table->integer('city_id');
             $table->softDeletes();
             $table->timestamps();
         });

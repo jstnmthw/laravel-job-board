@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -127,6 +128,22 @@ class User extends Authenticatable
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    /**
+     * Get the user's company
+     */
+    public function company(): hasOne
+    {
+        return $this->hasOne(Company::class, 'created_by');
+    }
+
+    /**
+     * Get the user's reviews
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'created_by');
     }
 
 }

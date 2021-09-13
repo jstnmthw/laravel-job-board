@@ -22,9 +22,9 @@ class CreateCompaniesTable extends Migration
             $table->integer('size');
             $table->integer('created_by');
             $table->integer('category_id');
-            $table->integer('city_id');
-            $table->integer('province_id');
             $table->integer('country_id');
+            $table->integer('province_id');
+            $table->integer('city_id');
             $table->softDeletes();
             $table->timestamps();
         });
