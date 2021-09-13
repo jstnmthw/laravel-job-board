@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             ->has(Review::factory()->count(3), 'reviews')
             ->has(JobApplication::factory()->count(2), 'applications')
             ->has(Image::factory()->count(1), 'avatar')
-            ->count(5)
+            ->count(1500)
             ->create()
             ->pluck('id')
             ->each(function($id) {

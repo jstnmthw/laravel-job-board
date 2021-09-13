@@ -21,7 +21,7 @@ class CompanySeeder extends Seeder
         Job::query()->truncate();
         User::query()->truncate();
         Company::factory()
-            ->count(5)
+            ->count(500)
             ->create()
             ->pluck('id')
             ->each(function($id) {
