@@ -29,60 +29,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Geo::query()->truncate();
         Artisan::call('geo:seed TH --append');
         Artisan::call('geo:json Thailand');
 
-        Category::query()->truncate();
+        $this->call([RolesAndPermissionsSeeder::class]);
         $this->call([CategorySeeder::class]);
-
-        $categories = Category::main()->get();
-
-        EducationLevel::query()->truncate();
         $this->call([EducationLevelSeeder::class]);
-
-        EmploymentType::query()->truncate();
         $this->call([EmploymentTypeSeeder::class]);
+        $this->call([CompanySeeder::class]);
+        $this->call([UserSeeder::class]);
 
+        // Syncing relationships
+        $this->command->comment('Syncing model relationships...');
+        $categories = Category::main()->get();
         $employmentTypes = EmploymentType::all();
-
-        // Employers
-        User::query()->truncate();
-        User::factory(10)->create();
-
-        Company::query()->truncate();
-        Company::factory(10)->create();
-
-        Job::query()->truncate();
-        Job::factory(10)
-            ->create();
-
-        // Job seekers
-        UserExperience::query()->truncate();
-        UserEducation::query()->truncate();
-        UserResume::query()->truncate();
-        Image::query()->truncate();
-        User::factory(10)
-            ->has(UserExperience::factory()->count(2), 'experience')
-            ->has(UserEducation::factory()->count(2), 'education')
-            ->has(UserResume::factory()->count(3), 'resumes')
-            ->has(JobApplication::factory()->count(2), 'applications')
-            ->has(Image::factory()->count(1), 'avatar')
-            ->create();
-
+        User::all()->each(function($user) use ($categories) {
+            $user->categories()->sync($categories->random(rand(1, 3))->pluck('id')->toArray());
+        });
         UserExperience::all()->each(function($experience) use ($categories) {
             $experience->categories()->sync($categories->random(rand(1, 3))->pluck('id')->toArray());
         });
-
-        DB::table('employment_type_job')->truncate();
         Job::all()->each(function ($job) use ($employmentTypes, $categories) {
-            $job->employmentTypes()->attach($employmentTypes->random(rand(1, 3))->pluck('id')->toArray());
             $job->categories()->sync($categories->random(rand(1, 3))->pluck('id')->toArray());
+            $job->employmentTypes()->attach($employmentTypes->random(rand(1, 2))->pluck('id')->toArray());
         });
-
-        Review::query()->truncate();
-        Review::factory(10)
-            ->has(Review::factory()->count(1), 'children')
-            ->create();
+        $this->command->info('Syncing complete.');
     }
 }

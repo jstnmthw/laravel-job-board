@@ -26,8 +26,9 @@ class JobApplicationFactory extends Factory
         return [
             'status' => $this->faker->numberBetween(1, count(JobApplication::$statusLabelMap)),
             'cover_page' => $this->faker->paragraph(),
-            'user_resume_id' => 12,
-            'job_id' => Job::query()->inRandomOrder()->first(),
+            'user_resume_id' => $this->faker->randomDigitNotNull(),
+            'user_id' => $this->faker->randomDigitNotNull(),
+            'job_id' => $this->faker->randomDigitNotNull(),
         ];
     }
 }

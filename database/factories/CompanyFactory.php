@@ -30,9 +30,10 @@ class CompanyFactory extends Factory
             'description' => $this->faker->paragraph(),
             'social' => '{}',
             'size' => $this->faker->numberBetween(0, count(Company::$sizeLabelMap)),
-            'created_by' => User::query()->inRandomOrder()->first(),
+            'created_by' => $this->faker->randomDigitNotNull(),
             'category_id' => Category::main()->inRandomOrder()->first(),
             'country_id' => $this->faker->randomDigit(),
+            'province_id' => $this->faker->randomDigit(),
             'city_id' => $this->faker->randomDigit(),
         ];
     }

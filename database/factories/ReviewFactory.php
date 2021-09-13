@@ -28,8 +28,8 @@ class ReviewFactory extends Factory
             'likes' => $this->faker->numberBetween(1, 5),
             'dislikes' => $this->faker->numberBetween(1, 5),
             'description' => $this->faker->paragraph(),
-            'company_id' => Company::query()->inRandomOrder()->first(),
-            'created_by' => User::query()->inRandomOrder()->firstOrFail(),
+            'company_id' => $this->faker->randomDigitNotNull(),
+            'created_by' => $this->faker->randomDigitNotNull(),
         ];
     }
 }

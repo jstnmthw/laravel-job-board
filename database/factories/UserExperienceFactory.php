@@ -23,8 +23,6 @@ class UserExperienceFactory extends Factory
      */
     public function definition(): array
     {
-        $geo = Geo::getCountry('TH');
-        $cities = $geo->cities()->get()->toArray();
         $bool = $this->faker->boolean();
         return [
             'title' => $this->faker->jobTitle(),
@@ -34,8 +32,8 @@ class UserExperienceFactory extends Factory
             'employed' => $bool,
             'company_id' => $bool ? Company::query()->inRandomOrder()->firstOrFail() : null,
             'company_name' => $bool ? null : $this->faker->company(),
-            'city_id' => $cities[$this->faker->numberBetween(0, count($cities) - 1)]['id'],
-            'country_id' => $geo->id,
+            'city_id' => $this->faker->randomDigitNotNull(),
+            'country_id' => $this->faker->randomDigitNotNull(),
         ];
     }
 }
