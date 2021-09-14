@@ -4,19 +4,8 @@
     "name": "Thailand"
   },
   {
-    "a1code": "40",
-    "country": "TH",
     "id": 1609348,
-    "lat": "13.877190",
     "level": "ADM2",
-    "long": "100.719910",
-    "name": "Bangkok",
-    "parent_id": 1609350,
-    "population": 5104476,
-    "timezone":"Asia/Bangkok"
-  },
-  {
-    "parent_id": 1605651,
     "name": "Bangkok"
   },
   {
