@@ -5,12 +5,12 @@ namespace App\Indices;
 use ScoutElastic\IndexConfigurator;
 use ScoutElastic\Migratable;
 
-class JobIndex extends IndexConfigurator
+class GeoIndex extends IndexConfigurator
 {
     use Migratable;
 
     // Index name
-    protected $name = 'jobs';
+    protected $name = 'geo';
 
     /**
      * @var array
@@ -23,10 +23,10 @@ class JobIndex extends IndexConfigurator
                     'filter' => [
                         'lowercase',
                         'truncate'
-                    ],
+                    ]
                 ],
                 'autocomplete_search' => [
-                    'tokenizer' => 'lowercase',
+                    'tokenizer' => 'lowercase'
                 ]
             ],
             'tokenizer' => [

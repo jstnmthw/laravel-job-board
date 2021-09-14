@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use App\Indices\GeoIndex;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use ScoutElastic\Searchable;
 
 class Geo extends \Igaster\LaravelCities\Geo
 {
-    use HasFactory;
+    use HasFactory, Searchable;
+
+    protected string $indexConfigurator = GeoIndex::class;
 
     /**
      * Extending Laravel Cities to include all feature codes
@@ -101,4 +104,34 @@ class Geo extends \Igaster\LaravelCities\Geo
     {
         return $query->where('level', Geo::LEVEL_ADM1);
     }
+
+    /**
+     * Prepare model data for ElasticSearch indexing
+     *
+     * @return array
+     */
+    public function toSearchableArray(): array
+    {
+        return $this->toArray();
+    }
+
+    /**
+     * ElasticSearch mapping of model
+     *
+     * @return array
+     */
+    protected array $mapping = [
+        'properties' => [
+            'title' => [
+                'type' => 'text',
+                'analyzer' => 'autocomplete',
+                'search_analyzer' => 'autocomplete',
+                'fields' => [
+                    'raw' => [
+                        'type' => 'keyword'
+                    ],
+                ],
+            ],
+        ]
+    ];
 }

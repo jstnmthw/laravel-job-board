@@ -84,15 +84,11 @@ class Job extends Model
         'properties' => [
             'title' => [
                 'type' => 'text',
-                'analyzer' => 'standard',
+                'analyzer' => 'autocomplete',
+                'search_analyzer' => 'autocomplete',
                 'fields' => [
                     'raw' => [
                         'type' => 'keyword'
-                    ],
-                    'edge_ngram' => [
-                        'type' => 'text',
-                        'analyzer' => 'edge_ngram_analyzer',
-                        'search_analyzer' => 'edge_ngram_search_analyzer',
                     ],
                 ],
             ],
