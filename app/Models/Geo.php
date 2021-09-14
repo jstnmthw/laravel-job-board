@@ -32,6 +32,7 @@ class Geo extends \Igaster\LaravelCities\Geo
     const LEVEL_ADMDH   = 'ADMDH';    // historical administrative division 	a former administrative division of a political entity, undifferentiated as to administrative level
     const LEVEL_LTER    = 'LTER';     // leased area	a tract of land leased to another country, usually for military installations
     const LEVEL_PCL     = 'PCL';      // political entity
+    const LEVEL_PPLC    = 'PPLC';      // political capitol entity
     const LEVEL_PCLD    = 'PCLD';     // dependent political entity
     const LEVEL_PCLF    = 'PCLF';     // freely associated state
     const LEVEL_PCLH    = 'PCLH';     // historical political entity	a former political entity
@@ -87,6 +88,7 @@ class Geo extends \Igaster\LaravelCities\Geo
             'Phra Nakhon Si',
             'Amphoe Mueang',
             'Amphoe',
+            'Mueang'
         );
         if (Str::of($value)->contains($wordList)) {
             return trim(preg_replace('/'.implode('|', $wordList).'/i', '', $value));
@@ -122,7 +124,7 @@ class Geo extends \Igaster\LaravelCities\Geo
      */
     protected array $mapping = [
         'properties' => [
-            'title' => [
+            'name' => [
                 'type' => 'text',
                 'analyzer' => 'autocomplete',
                 'search_analyzer' => 'autocomplete',

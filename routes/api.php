@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\api\CategoryController;
+use App\Http\Controllers\api\GeoController;
 use App\Http\Controllers\api\JobController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Resources\UserDataResource;
 use App\Http\Resources\UserResource;
-use Igaster\LaravelCities\GeoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\auth\LoginController;
@@ -57,6 +57,8 @@ Route::apiResource('jobs', JobController::class);
 
 /** Geo API */
 Route::group(['prefix' => 'geo'], function() {
+    Route::get('locations', [GeoController::class, 'searchElastic']);
     Route::get('countries', [GeoController::class, 'countries']);
     Route::get('children/{id}', [GeoController::class, 'children']);
+    Route::get('{id}', [GeoController::class, 'item']);
 });
