@@ -42,14 +42,6 @@ class GeoController extends \Igaster\LaravelCities\GeoController
                                     'operator' => 'and'
                                 ]
                             ]
-                        ],
-                        'filter' => [
-                            'terms' => [
-                                'level.keyword' => [
-                                    Geo::LEVEL_ADM1,
-                                    Geo::LEVEL_ADM2
-                                ],
-                            ],
                         ]
                     ]
                 ],
@@ -64,7 +56,7 @@ class GeoController extends \Igaster\LaravelCities\GeoController
                 ]
             ]
         ];
-        $data = $client->search($params)['hits']['hits'];
-        return response()->json($data);
+        $data = $client->search($params)['hits']['hits'] ?? null;
+        return $data ? response()->json($data) : response()->json(null, 404);
     }
 }
