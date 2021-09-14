@@ -41,19 +41,19 @@
                         <label for="input-remember" class="text-gray-500">Remember me</label>
                     </div>
                     <button type="submit" tabindex="6" :class="{ 'pointer-events-none bg-orange-700 cursor-default': authLoading }" class="block p-3 bg-orange-600 hover:bg-orange-700 text-white font-bold w-full rounded-full focus:shadow-lg focus:bg-orange-700 hover:shadow-lg transition-all">
-                            <svg v-if="authLoading"  class="w-6 h-6 text-white fill-current m-auto" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" xml:space="preserve">
-                                <path fill="currentColor" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
-                                    <animateTransform attributeType="xml"
-                                        attributeName="transform"
-                                        type="rotate"
-                                        from="0 25 25"
-                                        to="360 25 25"
-                                        dur="0.6s"
-                                        repeatCount="indefinite"/>
-                                </path>
-                            </svg>
-                            <span v-else>Sign in</span>
-                        </button>
+                        <svg v-if="authLoading"  class="w-6 h-6 text-white fill-current m-auto" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" xml:space="preserve">
+                            <path fill="currentColor" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+                                <animateTransform attributeType="xml"
+                                    attributeName="transform"
+                                    type="rotate"
+                                    from="0 25 25"
+                                    to="360 25 25"
+                                    dur="0.6s"
+                                    repeatCount="indefinite"/>
+                            </path>
+                        </svg>
+                        <span v-else>Sign in</span>
+                    </button>
                 </form>
             </div>
         </div>
