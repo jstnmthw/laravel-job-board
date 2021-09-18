@@ -32,8 +32,8 @@ class GeoIndex extends IndexConfigurator
             'tokenizer' => [
                 'autocomplete' => [
                     'type' => 'edge_ngram',
-                    'min_gram' => 2,
-                    'max_gram' => 12,
+                    'min_gram' => 1,
+                    'max_gram' => 8,
                     'token_chars' => [
                         'letter',
                         'digit'

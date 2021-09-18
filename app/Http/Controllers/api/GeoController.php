@@ -36,11 +36,13 @@ class GeoController extends \Igaster\LaravelCities\GeoController
                 'query' => [
                     'bool' => [
                         'must' => [
-                            'match' => [
-                                'name' => [
-                                    'query' => $query,
-                                    'operator' => 'and'
-                                ]
+                            [
+                                'match' => [
+                                    'name' => [
+                                        'query' => $query,
+                                        'operator' => 'and'
+                                    ]
+                                ],
                             ]
                         ]
                     ]
