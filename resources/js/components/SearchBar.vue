@@ -53,8 +53,8 @@ export default {
                 return
             }
             await axios.get('/api/geo/locations?q='+this.encodedLocation).then((res) => {
-                this.showLocationResults = true;
                 this.locationResults = res.data
+                this.showLocationResults = true;
             }).catch((e) => {
                 this.showLocationResults = false;
                 console.log(e);

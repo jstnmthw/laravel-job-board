@@ -11,6 +11,12 @@ const routes = [
         name: 'UserAccount',
         component: () => import(/* webpackChunkName: "account" */ '@/views/account/Index'),
         meta: { requiresAuth: true }
+    },
+    {
+        path: '/jobs',
+        name: 'JobsIndex',
+        component: () => import(/* webpackChunkName: "account" */ '@/views/jobs/Index'),
+        meta: { requiresAuth: true }
     }
 ]
 const router = createRouter({
