@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Indices;
+namespace App\Indexes;
 
 use ScoutElastic\IndexConfigurator;
 use ScoutElastic\Migratable;
 
-class GeoIndex extends IndexConfigurator
+class JobIndex extends IndexConfigurator
 {
     use Migratable;
 
     // Index name
-    protected $name = 'geo';
+    protected $name = 'jobs';
 
     /**
      * @var array
@@ -23,17 +23,17 @@ class GeoIndex extends IndexConfigurator
                     'filter' => [
                         'lowercase',
                         'truncate'
-                    ]
+                    ],
                 ],
                 'autocomplete_search' => [
-                    'tokenizer' => 'lowercase'
+                    'tokenizer' => 'lowercase',
                 ]
             ],
             'tokenizer' => [
                 'autocomplete' => [
                     'type' => 'edge_ngram',
-                    'min_gram' => 1,
-                    'max_gram' => 8,
+                    'min_gram' => 3,
+                    'max_gram' => 20,
                     'token_chars' => [
                         'letter',
                         'digit'

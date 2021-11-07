@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Indices\GeoIndex;
+use App\Indexes\GeoIndex;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
