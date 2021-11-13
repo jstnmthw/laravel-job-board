@@ -77,16 +77,21 @@ export default {
     },
     components: { Modal },
     computed: {
-        ...mapState(['errors', 'authLoading']),
+        ...mapState('account', [
+            'errors',
+            'authLoading'
+        ]),
     },
     methods: {
-        ...mapActions(['login']),
+        ...mapActions('account', [
+            'login'
+        ]),
         submitLogin(e) {
             e.preventDefault();
             if(this.authLoading) {
                 return;
             }
-            store.dispatch('login', this.form).then(() => {
+            store.dispatch('account/login', this.form).then(() => {
                 this.$emit('close');
             });
         },

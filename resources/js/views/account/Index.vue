@@ -276,7 +276,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(['user', 'errors']),
+        ...mapState('account', ['user', 'errors']),
     },
     methods: {
         async getUserData() {
@@ -333,7 +333,7 @@ export default {
                 })
                 .catch((error) => {
                     if (error.response.status >= 400) {
-                        store.commit('SET_ERRORS', error.response.data.errors)
+                        store.commit('account/SET_ERRORS', error.response.data.errors)
                     }
                 });
             this.uploadingAvatar = false;

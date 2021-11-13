@@ -32,9 +32,6 @@ const app = createApp({
     store,
 })
 
-// !! Development mode !!
-app.config.devtools = true
-
 app.use(router)
 app.use(store)
 app.mount('#app')
@@ -42,31 +39,21 @@ app.mount('#app')
 // Before creation callback
 router.beforeEach((to, from, next) => {
     store.dispatch('requestToken/CANCEL_PENDING_REQUESTS').then(function() {
-        // We let axios finish canceling previous route requests before checking auth
+        // We let axios finish canceling previous route requests before checking auth.
         const auth = localStorage.getItem('Authenticated') === 'true';
+
+        // If authenticated, get user data otherwise continue to gate.
         if (auth) {
-            axios.get('/api/user').then((res) => {
-                store.commit('ADD_USER_INFO', res.data.data)
-                store.commit('SET_AUTHENTICATED', true)
-                authCheck(to)
-            }).catch((error) => {
-                if (error.response.status === 401) {
-                    localStorage.removeItem('Authenticated')
-                    router.push('/').then()
-                }
-            });
+            store.dispatch('account/getUser').then(() => { authCheck(to) })
         } else {
             authCheck(to)
         }
 
-        function authCheck(to)
-        {
-            // Check if route requires authentication
+        // Check if route requires authentication
+        function authCheck(to) {
             if (to.matched.some(record => record.meta.requiresAuth)) {
-                // this route requires auth, check if logged in
-                // if not, redirect to login page.
-                if (!store.state.isAuthenticated) {
-                    console.log('User is not authenticated')
+                // This route requires auth, check if logged in if not, redirect to login page.
+                if (!store.state.account.isAuthenticated) {
                     next({
                         path: '/',
                         query: { login: true }
@@ -75,9 +62,8 @@ router.beforeEach((to, from, next) => {
                     next()
                 }
             } else {
-                next() // make sure to always call next()!
+                next() // Make sure to always call next().
             }
         }
-
     })
 })

@@ -9,9 +9,9 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br> Maecenas at nisi lobortis, consequat purus eget
         </template>
         <template v-slot:link>
-            <a href="#" class="inline-block text-center rounded-full hover:shadow-xl transition-all bg-orange-600 border border-transparent rounded-md py-3 px-6 font-bold text-white hover:bg-orange-700">
+            <router-link to="/jobs?location=Bangkok" class="inline-block text-center rounded-full hover:shadow-xl transition-all bg-orange-600 border border-transparent rounded-md py-3 px-6 font-bold text-white hover:bg-orange-700">
                 Search jobs
-            </a>
+            </router-link>
         </template>
         <template v-slot:image>
             <img alt="" src="/images/hero-image-th.jpg" class="absolute -bottom-1/2 right-0 max-w-3xl z-0 mx-auto">
@@ -27,7 +27,3 @@ export default {
     components: {HeroWithImages, TopNavbar},
 }
 </script>
-
-<style scoped>
-
-</style>

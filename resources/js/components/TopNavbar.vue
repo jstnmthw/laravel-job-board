@@ -129,7 +129,11 @@ export default {
     components: { SearchBar, SignInModal },
     mixins: [ clickaway ],
     computed: {
-        ...mapGetters(['isAuthenticated', 'authLoading', 'user'])
+        ...mapGetters('account', [
+            'isAuthenticated',
+            'authLoading',
+            'user'
+        ])
     },
     data() {
       return {
@@ -138,7 +142,9 @@ export default {
       }
     },
     methods: {
-        ...mapActions(['logout']),
+        ...mapActions('account', [
+            'logout'
+        ]),
         closeAccountDropdown() {
             return this.showAccountDropdown = false;
         }
