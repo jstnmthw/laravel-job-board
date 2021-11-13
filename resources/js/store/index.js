@@ -1,5 +1,6 @@
 import account from "@/store/modules/account";
 import api from '@/store/modules/api'
+import search from '@/store/modules/search'
 import requestToken from '@/store/modules/request-token'
 import { createStore } from 'vuex'
 
@@ -10,6 +11,7 @@ const store = createStore({
         account: account,
         api: api,
         requestToken: requestToken,
+        search: search,
     },
 })
 export default store
