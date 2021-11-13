@@ -68,7 +68,7 @@ import store from "@/store";
 export default {
     data() {
         return {
-            form : {
+            form: {
                 email: '',
                 password: '',
                 remember: false,
@@ -88,10 +88,9 @@ export default {
         ]),
         submitLogin(e) {
             e.preventDefault();
-            if(this.authLoading) {
-                return;
+            if (!this.authLoading) {
+                store.dispatch('account/login', this.form)
             }
-            store.dispatch('account/login', this.form)
         },
     }
 }
