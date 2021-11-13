@@ -91,9 +91,7 @@ export default {
             if(this.authLoading) {
                 return;
             }
-            store.dispatch('account/login', this.form).then(() => {
-                this.$emit('close');
-            });
+            store.dispatch('account/login', this.form)
         },
     }
 }
