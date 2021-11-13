@@ -6,6 +6,7 @@ const state = {
     searchQuery: null,
     locationName: null,
     locationId: null,
+    // TODO: Get process.env.VUE_APP_URL working
     host: 'http://localhost',
 }
 
