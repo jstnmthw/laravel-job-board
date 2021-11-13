@@ -2,25 +2,29 @@
  * Search
  */
 const state = {
-    search: null,
-    searchQuery: null,
-    locationName: null,
-    locationId: null,
-    // TODO: Get process.env.VUE_APP_URL working
-    host: 'http://localhost',
+    search: '',
+    location: {
+        name: '',
+        id: '',
+    },
+    url: process.env.APP_URL + '/jobs',
 }
 
 const getters = {
     searchUrl(state) {
-        const urlObj = new URL(state.host);
-        urlObj.searchParams.append('locationId', state.locationId)
-        urlObj.searchParams.append('location', state.locationName)
-        urlObj.searchParams.append('search', state.search)
+        const urlObj = new URL(state.url);
+        urlObj.searchParams.append('locId', state.location.id);
+        urlObj.searchParams.append('loc', state.location.name);
+        urlObj.searchParams.append('search', state.search);
         return urlObj.href;
     }
 }
 
 const mutations = {
+    SET_SEARCH(state, payload) {
+        state.location = payload.location ?? {};
+        state.search = payload.search ?? null;
+    }
 }
 
 const actions = {
