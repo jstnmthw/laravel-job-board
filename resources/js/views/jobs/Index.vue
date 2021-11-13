@@ -249,13 +249,20 @@
 
 <script>
 import TopNavbar from "@/components/TopNavbar";
-import {mapActions} from "vuex";
+import {mapActions, mapState} from "vuex";
 export default {
     name: "Job Index",
     components: {TopNavbar},
     data() {
         return {
         }
+    },
+    computed: {
+      ...mapState('search', [
+          'search',
+          'locationId',
+          'locationName'
+      ])
     },
     mounted() {
         document.body.classList.add('bg-gray-100', 'overflow-y-hidden')
@@ -268,13 +275,7 @@ export default {
         }
     },
     methods: {
-        searchUrlBuilder(url) {
-            const urlObj = new URL(url);
-            urlObj.searchParams.append('locationId', this.location.id ?? null)
-            urlObj.searchParams.append('location', this.location.name ?? null)
-            urlObj.searchParams.append('search', this.search ?? null)
-            return urlObj.href;
-        },
+        ...mapActions('search', ['searchUrlBuilder']),
     },
 }
 </script>
