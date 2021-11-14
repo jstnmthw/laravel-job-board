@@ -24,10 +24,10 @@ const getters = {
 
 const mutations = {
     SET_SEARCH(state, payload) {
-        state.search = payload.search ;
+        state.search = payload;
     },
     SET_LOCATION(state, payload) {
-        state.location = payload.location;
+        state.location = payload;
     }
 }
 

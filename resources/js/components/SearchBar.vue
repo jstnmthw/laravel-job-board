@@ -41,6 +41,7 @@ export default {
         }
     },
     mounted() {
+        this.setSearch()
     },
     computed: {
         ...mapState('search', [
@@ -55,12 +56,12 @@ export default {
         close() {
             this.showLocationSearchResults = false;
             if (!this.location.id && this.locationSearchResults) {
-                this.$store.commit('search/SET_LOCATION', { location: this.locationSearchResults[0]._source })
+                this.$store.commit('search/SET_LOCATION', this.locationSearchResults[0]._source)
             }
         },
         clearLocation() {
             this.close()
-            this.$store.commit('search/SET_LOCATION', { location: {} })
+            this.$store.commit('search/SET_LOCATION', {})
         },
         onSubmit() {
             this.$router.push('/jobs'+this.searchParams)
@@ -68,8 +69,22 @@ export default {
         searchQuery(e) {
             this.$store.commit('search/SET_SEARCH', { search: e.target.value })
         },
+        setSearch() {
+            const { search, locId, loc } = this.$route.query;
+            console.log(search);
+            this.$store.commit('search/SET_SEARCH', search);
+            this.$store.commit('search/SET_LOCATION', {
+                location: {
+                    id: locId,
+                    name: loc,
+                }
+            });
+        },
         async searchLocation(e) {
-            this.$store.commit('search/SET_LOCATION', { location: { name: e.target.value }});
+            if (e.target.value.length === 0) {
+                return;
+            }
+            this.$store.commit('search/SET_LOCATION', { name: e.target.value });
             await axios.get('/api/geo/locations?q='+encodeURI(this.location.name).toLowerCase()).then((res) => {
                 this.locationSearchResults = res.data
                 this.showLocationSearchResults = true;
