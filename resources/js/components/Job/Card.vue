@@ -22,7 +22,7 @@
                     <span class="inline-block px-1 text-[10px] rounded bg-orange-50 text-orange-500 dark:bg-gray-900 dark:text-orange-700">
                         New
                     </span>
-                    16h
+                    {{  posted_date }}
                 </p>
             </div>
         </div>
@@ -31,12 +31,20 @@
 
 <script>
 import numeral from 'numeral'
+import formatDistanceStrict from 'date-fns/formatDistance'
 export default {
     name: "Card",
     props: ['job'],
     computed: {
         salary_from_formatted() {
             return numeral(this.job.salary_from).format('0a')
+        },
+        posted_date() {
+            return formatDistanceStrict(
+                new Date(this.job.created_at),
+                Date.now(),
+                { addSuffix: true }
+            )
         }
     }
 }
