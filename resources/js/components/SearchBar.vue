@@ -73,7 +73,10 @@ export default {
             const { search, locId, loc } = this.$route.query;
             console.log(search);
             this.$store.commit('search/SET_SEARCH', decodeURI(search));
-            this.$store.commit('search/SET_LOCATION', { id: locId, name: loc});
+            this.$store.commit('search/SET_LOCATION', {
+                id: locId,
+                name: decodeURI(loc)
+            });
         },
         async searchLocation(e) {
             if (e.target.value.length === 0) {
