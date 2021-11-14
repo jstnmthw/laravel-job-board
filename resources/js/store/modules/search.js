@@ -15,7 +15,6 @@ const getters = {
         urlObj.append('search', encodeURI(state.search));
         urlObj.append('locId', state.location.id);
         urlObj.append('loc', encodeURI(state.location.name));
-        console.log(urlObj);
         return '?' + urlObj.toString();
     }
 }
