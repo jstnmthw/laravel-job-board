@@ -18,7 +18,7 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
-<body class="font-sans antialiased h-full dark:bg-gray-800">
+<body class="font-sans antialiased h-full dark:bg-gray-900">
     <div id="app" class="flex flex-col h-full">
         <router-view></router-view>
     </div>
