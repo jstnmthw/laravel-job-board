@@ -67,18 +67,13 @@ export default {
             this.$router.push('/jobs'+this.searchParams)
         },
         searchQuery(e) {
-            this.$store.commit('search/SET_SEARCH', { search: e.target.value })
+            this.$store.commit('search/SET_SEARCH', e.target.value)
         },
         setSearch() {
             const { search, locId, loc } = this.$route.query;
             console.log(search);
-            this.$store.commit('search/SET_SEARCH', search);
-            this.$store.commit('search/SET_LOCATION', {
-                location: {
-                    id: locId,
-                    name: loc,
-                }
-            });
+            this.$store.commit('search/SET_SEARCH', decodeURI(search));
+            this.$store.commit('search/SET_LOCATION', { id: locId, name: loc});
         },
         async searchLocation(e) {
             if (e.target.value.length === 0) {
