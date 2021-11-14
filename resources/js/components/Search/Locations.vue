@@ -8,7 +8,7 @@ export default {
     props: ['data'],
     methods: {
         setLocation() {
-            this.$store.commit('search/SET_SEARCH', { location: this.data._source })
+            this.$store.commit('search/SET_LOCATION', { location: this.data._source })
             this.$emit('close-location-results');
         }
     }

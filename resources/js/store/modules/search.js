@@ -7,23 +7,25 @@ const state = {
         name: '',
         id: '',
     },
-    url: process.env.APP_URL + '/jobs',
 }
 
 const getters = {
     searchUrl(state) {
-        const urlObj = new URL(state.url);
-        urlObj.searchParams.append('locId', state.location.id);
-        urlObj.searchParams.append('loc', state.location.name);
-        urlObj.searchParams.append('search', state.search);
-        return urlObj.href;
+        const urlObj = new URLSearchParams();
+        urlObj.append('search', encodeURI(state.search));
+        urlObj.append('locId', state.location.id);
+        urlObj.append('loc', encodeURI(state.location.name));
+        console.log(urlObj);
+        return '?' + urlObj.toString();
     }
 }
 
 const mutations = {
     SET_SEARCH(state, payload) {
-        state.location = payload.location ?? {};
-        state.search = payload.search ?? null;
+        state.search = payload.search ;
+    },
+    SET_LOCATION(state, payload) {
+        state.location = payload.location;
     }
 }
 
