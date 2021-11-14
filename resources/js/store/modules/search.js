@@ -2,6 +2,9 @@
  * Search
  */
 const state = {
+    // Setting blank strings instead of null results in the
+    // search query being built like: locId=& instead of locId=null&.
+    // Is a shorter url query string better in this case?
     search: '',
     location: {
         name: '',
@@ -10,7 +13,7 @@ const state = {
 }
 
 const getters = {
-    searchUrl(state) {
+    searchParams(state) {
         const urlObj = new URLSearchParams();
         urlObj.append('search', encodeURI(state.search));
         urlObj.append('locId', state.location.id);

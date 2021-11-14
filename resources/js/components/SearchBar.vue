@@ -48,7 +48,7 @@ export default {
             'search',
         ]),
         ...mapGetters('search', [
-            'searchUrl'
+            'searchParams'
         ]),
     },
     methods: {
@@ -63,7 +63,7 @@ export default {
             this.$store.commit('search/SET_LOCATION', { location: {} })
         },
         onSubmit() {
-            this.$router.push('/jobs'+this.searchUrl)
+            this.$router.push('/jobs'+this.searchParams)
         },
         searchQuery(e) {
             this.$store.commit('search/SET_SEARCH', { search: e.target.value })

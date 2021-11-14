@@ -275,7 +275,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions('search', ['searchUrlBuilder']),
+        ...mapActions('search', ['searchParamsBuilder']),
     },
 }
 </script>
