@@ -36,12 +36,6 @@ mix.webpackConfig(webpack => {
                 '__VUE_OPTIONS_API__' : true,
                 '__VUE_PROD_DEVTOOLS__' : false,
             }),
-            new webpack.DefinePlugin({
-                // allow access to process.env from within the vue app
-                'process.env': {
-                    APP_URL: JSON.stringify(process.env.APP_URL)
-                }
-            })
         ]
     };
 });
