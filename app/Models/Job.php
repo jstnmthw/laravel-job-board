@@ -9,6 +9,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use ScoutElastic\Searchable;
 
+/**
+ * @property mixed $title
+ * @property mixed $description
+ * @property mixed $salary_from
+ * @property mixed $salary_to
+ * @property mixed $educationLevel
+ * @property mixed $created_by
+ * @property mixed $country
+ * @property mixed $country_id
+ * @property mixed $company
+ * @property mixed $company_id
+ * @property mixed $province
+ * @property mixed $province_id
+ * @property mixed $city
+ * @property mixed $city_id
+ * @property mixed $deleted_at
+ * @property mixed $created_at
+ * @property mixed $updated_at
+ */
 class Job extends Model
 {
     use HasFactory, Searchable;
@@ -65,6 +84,21 @@ class Job extends Model
         return $this->belongsTo(EducationLevel::class);
     }
 
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Geo::class);
+    }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(Geo::class);
+    }
+
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Geo::class);
+    }
+
     /**
      * Prepare model data for ElasticSearch indexing
      *
@@ -72,7 +106,27 @@ class Job extends Model
      */
     public function toSearchableArray(): array
     {
-        return $this->toArray();
+        return [
+            'title' => $this->title,
+            'description' => $this->description,
+            'salary_from' => $this->salary_from,
+            'salary_to' => $this->salary_to,
+            'education_level' => $this->educationLevel->title,
+
+            'company_id' => $this->company_id,
+            'country_id' => $this->country_id,
+            'province_id' => $this->province_id,
+            'city_id' => $this->city_id,
+
+            'company' => $this->company->name,
+            'country' => $this->country->name,
+            'province' => $this->province->name,
+            'city' => $this->city->name,
+
+            'updated_at' => $this->updated_at->toIso8601String(),
+            'created_at' => $this->created_at->toIso8601String(),
+            'created_by' => $this->created_by,
+        ];
     }
 
     /**
@@ -84,13 +138,88 @@ class Job extends Model
         'properties' => [
             'title' => [
                 'type' => 'text',
-                'analyzer' => 'autocomplete',
-                'search_analyzer' => 'autocomplete',
                 'fields' => [
                     'raw' => [
                         'type' => 'keyword'
                     ],
                 ],
+            ],
+            'description' => [
+                'type' => 'text',
+                'fields' => [
+                    'raw' => [
+                        'type' => 'keyword'
+                    ],
+                ],
+            ],
+            'salary_from' => [
+                'type' => 'scaled_float',
+                'scaling_factor' => 100,
+            ],
+            'salary_to' => [
+                'type' => 'scaled_float',
+                'scaling_factor' => 100,
+            ],
+            'education_level' => [
+                'type' => 'text',
+                'fields' => [
+                    'raw' => [
+                        'type' => 'keyword'
+                    ]
+                ]
+            ],
+            'company_id' => [
+                'type' => 'integer'
+            ],
+            'country_id' => [
+                'type' => 'integer'
+            ],
+            'province_id' => [
+                'type' => 'integer'
+            ],
+            'city_id' => [
+                'type' => 'integer'
+            ],
+            'company' => [
+                'type' => 'text',
+                'fields' => [
+                    'raw' => [
+                        'type' => 'keyword'
+                    ]
+                ]
+            ],
+            'country' => [
+                'type' => 'text',
+                'fields' => [
+                    'raw' => [
+                        'type' => 'keyword'
+                    ]
+                ]
+            ],
+            'province' => [
+                'type' => 'text',
+                'fields' => [
+                    'raw' => [
+                        'type' => 'keyword'
+                    ]
+                ]
+            ],
+            'city' => [
+                'type' => 'text',
+                'fields' => [
+                    'raw' => [
+                        'type' => 'keyword'
+                    ]
+                ]
+            ],
+            'updated_at' => [
+                'type' => 'date',
+            ],
+            'created_at' => [
+                'type' => 'date',
+            ],
+            'created_by' => [
+                'type' => 'integer'
             ],
         ]
     ];
