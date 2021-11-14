@@ -3,10 +3,9 @@ module.exports = {
   purge: [
     './resources/**/*.{blade.php,js,vue}',
   ],
-  darkMode: 'class', // or 'media' or 'class'
+  darkMode: 'class',
   theme: {
     fontFamily: {
-      // sans: ['Noto Sans', 'sans-serif'],
       sans: ['Inter', 'sans-serif'],
       serif: ['Times New Roman', 'serif'],
     },
@@ -21,6 +20,17 @@ module.exports = {
           500: '#ff7747',
           600: '#fd5631',
           700: '#fd390e',
+        },
+        gray: {
+          100: '#f1f1fa',
+          200: '#e7e8f2',
+          300: '#b7b9d0',
+          400: '#8a8ea8',
+          500: '#5d5e6e',
+          600: '#3f4156',
+          700: '#323544',
+          800: '#171923',
+          900: '#12141c',
         },
         peach: '#fc9d8c',
         accent: '#5d3cf2',

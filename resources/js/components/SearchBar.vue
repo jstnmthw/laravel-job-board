@@ -1,7 +1,7 @@
 <template>
     <form class="flex" v-on:submit.prevent="onSubmit()">
         <input tabindex="1" :value="search" @input="searchQuery" type="text" required class="text-[15px] border border-r-0 border-gray-300 bg-gray-100 w-[350px] rounded-tl-lg rounded-bl-lg px-4 placeholder-gray-400 focus:placeholder-gray-300 focus:bg-white focus:border-blue-200 focus:ring focus:ring-blue-100 focus:ring-opacity-50" placeholder="Search for job titles, companies or keywords">
-        <div class="relative focus-within:bg-white focus-within:bg-gray-100 text-gray-400 focus-within:text-gray-300 pl-6 border border-gray-300 border-r-0 bg-gray-100 w-[185px] focus:bg-white focus:border-blue-200 focus:ring focus:ring-blue-100 focus:ring-opacity-50">
+        <div class="relative focus-within:bg-white focus-within:bg-gray-100 text-gray-400 dark:text-gray-600 focus-within:text-gray-300 pl-6 border border-gray-300 border-r-0 bg-gray-100 w-[185px] focus:bg-white focus:border-blue-200 focus:ring focus:ring-blue-100 focus:ring-opacity-50">
             <svg class="absolute block w-7 h-7 top-[5px] left-[5px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 91 91" fill="currentColor"><path d="M66.9 41.8c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4 0 11.3 20.4 32.4 20.4 32.4s20.4-21.1 20.4-32.4zM37 41.4c0-5.2 4.3-9.5 9.5-9.5s9.5 4.2 9.5 9.5c0 5.2-4.2 9.5-9.5 9.5-5.2 0-9.5-4.3-9.5-9.5z"/></svg>
             <input tabindex="2" :value="location.name" @input="searchLocation" type="text" required class="text-[15px] text-gray-800 bg-transparent border-0 w-full focus:border-0 focus:ring-0 placeholder-gray-400 focus:placeholder-gray-300" placeholder="Location">
             <div v-on-clickaway="close" v-if="showLocationSearchResults" class="absolute left-0 shadow bg-white p-4 z-10 rounded-bl-xl rounded-br-xl min-w-full">
@@ -71,12 +71,15 @@ export default {
         },
         setSearch() {
             const { search, locId, loc } = this.$route.query;
-            console.log(search);
-            this.$store.commit('search/SET_SEARCH', decodeURI(search));
-            this.$store.commit('search/SET_LOCATION', {
-                id: locId,
-                name: decodeURI(loc)
-            });
+            if (search) {
+                this.$store.commit('search/SET_SEARCH', decodeURI(search));
+            }
+            if (locId && loc) {
+                this.$store.commit('search/SET_LOCATION', {
+                    id: locId,
+                    name: decodeURI(loc)
+                });
+            }
         },
         async searchLocation(e) {
             if (e.target.value.length === 0) {
