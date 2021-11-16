@@ -26,10 +26,10 @@
                                 </h5>
                                 <ul>
                                     <li>
-                                        <a class="px-3 py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500" href="#">
+                                        <router-link class="px-3 py-2 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500" to="/docs/style-guide/forms">
                                             <span class="rounded-md absolute inset-0 bg-cyan-50 opacity-0"></span>
                                             <span class="relative">Forms</span>
-                                        </a>
+                                        </router-link>
                                     </li>
                                 </ul>
                             </li>

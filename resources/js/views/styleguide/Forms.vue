@@ -9,12 +9,17 @@
             </div>
             <p class="mb-8">Give textual form controls like <span class="px-1 py-0 text-orange-700" style="font-family: Consolas, monospace;">inputs</span> and <span class="px-1 py-0 text-orange-700" style="font-family: Consolas, monospace;">textarea</span> an upgrade with custom styles, sizing, focus states, and more.</p>
             <div class="font-base text-md text-gray-500 leading-7">
-                <h2 class="text-sh mb-3 font-bold text-gray-900 group flex whitespace-pre-wrap" id="development">
+                <h2 class="text-sh mb-4 font-bold text-gray-900 group flex whitespace-pre-wrap" id="development">
                     <a href="#development" class="absolute after:hash opacity-0 group-hover:opacity-100" style="margin-left: -1em; padding-right: 0.5em; box-shadow: none; color: rgb(161, 161, 170);" aria-label="Anchor"></a>
                     <span>Basic example</span>
                 </h2>
+                <div class="p-6 bg-gray-100 rounded-t-lg">
+                    <div>
+                        <input type="text" placeholder="First Name" class="w-full p-3 rounded-lg border-gray-300 focus:border-blue-200 focus:ring focus:ring-blue-100  focus:ring-opacity-50">
+                    </div>
+                </div>
                 <highlightjs
-                    class="p-6 bg-[#282c34] rounded-lg mb-10"
+                    class="p-6 bg-[#282c34] rounded-b-lg mb-10"
                     language="js"
                     code="npm run hot"
                 />

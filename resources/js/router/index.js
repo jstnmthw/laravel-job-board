@@ -19,7 +19,7 @@ const routes = [
         meta: { requiresAuth: true }
     },
     {
-        path: '/docs/styleguide',
+        path: '/docs/style-guide',
         name: 'StyleguideIndex',
         component: () => import(/* webpackChunkName: "styleguide" */ '@/views/styleguide/Index'),
         meta: { requiresAuth: true }
