@@ -64,6 +64,7 @@ module.exports = {
       },
       fontSize: {
         'sm-alt' : '0.813rem',
+        'sh': '1.35rem',
       },
       letterSpacing: {
         'submenu' : '.25rem'
