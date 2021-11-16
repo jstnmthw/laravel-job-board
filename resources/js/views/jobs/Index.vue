@@ -1,21 +1,21 @@
 <template>
     <top-navbar></top-navbar>
-    <div class="border-b dark:border-b-0">
+    <div>
         <div class="max-w-8xl mx-auto py-5">
             <div class="md:grid md:grid-cols-12 gap-3 md:gap-6 px-10">
-                <select id="" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                <select id="" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
                     <option value="1" selected>All Job Types</option>
                 </select>
-                <select id="" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                <select id="" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
                     <option value="1" selected>Posted Any Time</option>
                 </select>
-                <select id="" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                <select id="" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
                     <option value="1" selected>Salary Range</option>
                 </select>
-                <select id="" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                <select id="" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
                     <option value="1" selected>25 miles</option>
                 </select>
-                <select id="" class="text-sm col-span-1 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                <select id="" class="text-sm col-span-1 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
                     <option value="1" selected>More</option>
                 </select>
             </div>
@@ -122,11 +122,11 @@ export default {
         ])
     },
     mounted() {
-        document.body.classList.add('bg-gray-100', 'overflow-y-hidden');
+        document.body.classList.add('bg-gray-50', 'overflow-y-hidden');
         this.preformSearch();
     },
     unmounted() {
-        document.body.classList.remove('bg-gray-100', 'overflow-y-hidden');
+        document.body.classList.remove('bg-gray-50', 'overflow-y-hidden');
     },
     watch: {
         $route() {
