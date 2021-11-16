@@ -20,8 +20,14 @@ const routes = [
     },
     {
         path: '/docs/styleguide',
-        name: 'Styleguide',
+        name: 'StyleguideIndex',
         component: () => import(/* webpackChunkName: "styleguide" */ '@/views/styleguide/Index'),
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/docs/style-guide/forms',
+        name: 'StyleguideForms',
+        component: () => import(/* webpackChunkName: "styleguide-forms" */ '@/views/styleguide/Forms'),
         meta: { requiresAuth: true }
     }
 ]

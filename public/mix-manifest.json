@@ -2,5 +2,8 @@
     "/js/app.js": "/js/app.js",
     "/js/account.js": "/js/account.js",
     "/js/styleguide.js": "/js/styleguide.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/styleguideforms.js": "/js/styleguideforms.js",
+    "/js/styleguide_forms.js": "/js/styleguide_forms.js",
+    "/js/styleguide-forms.js": "/js/styleguide-forms.js"
 }
