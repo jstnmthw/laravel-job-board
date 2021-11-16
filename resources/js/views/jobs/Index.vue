@@ -123,10 +123,12 @@ export default {
     },
     mounted() {
         document.body.classList.add('bg-gray-50', 'overflow-y-hidden');
+        document.getElementById('app').classList.add('flex', 'flex-col', 'h-full');
         this.preformSearch();
     },
     unmounted() {
         document.body.classList.remove('bg-gray-50', 'overflow-y-hidden');
+        document.getElementById('app').classList.remove('flex', 'flex-col', 'h-full');
     },
     watch: {
         $route() {

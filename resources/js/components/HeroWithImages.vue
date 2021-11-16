@@ -1,5 +1,5 @@
 <template>
-    <div class="relative overflow-hidden">
+    <div class="relative">
         <div class="pt-16 pb-80 sm:pt-24 sm:pb-40 lg:pt-40 lg:pb-48">
             <div class="relative max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="relative z-10 sm:max-w-4xl">
