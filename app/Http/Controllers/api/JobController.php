@@ -42,6 +42,11 @@ class JobController extends Controller
      */
     public function search(Request $request): JsonResponse
     {
+
+        if (!$request->input('search')) {
+            return response()->json(null, 400);
+        }
+
         $params = [
             'index' => 'jobs',
             'track_total_hits' => true,
