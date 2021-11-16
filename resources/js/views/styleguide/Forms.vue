@@ -1,5 +1,5 @@
 <template>
-    <styleguide>
+    <styleguide-layout>
         <div class="md:col-span-3 p-3 md:p-6 lg:p-10">
             <div class="pb-10 border-b border-gray-200 mb-10">
                 <h1 class="inline-block text-3xl font-bold text-gray-900 tracking-tight">
@@ -11,9 +11,6 @@
             <div class="font-base text-md text-gray-500 leading-7">
                 <h2 class="text-sh mb-3 font-bold text-gray-900 group flex whitespace-pre-wrap" id="development">
                     <a href="#development" class="absolute after:hash opacity-0 group-hover:opacity-100" style="margin-left: -1em; padding-right: 0.5em; box-shadow: none; color: rgb(161, 161, 170);" aria-label="Anchor"></a>
-                    <div class="p-5">
-
-                    </div>
                     <span>Basic example</span>
                 </h2>
                 <highlightjs
@@ -40,17 +37,17 @@
                 </li>
             </ul>
         </div>
-    </styleguide>
+    </styleguide-layout>
 </template>
 
 <script>
-import Styleguide from "@/components/styleguide/Layout";
+import StyleguideLayout from "@/components/styleguide/Layout";
 import hljs from '~/highlight.js/lib/common';
 import hljsVuePlugin from '~/@highlightjs/vue-plugin';
 export default {
     name: "Forms",
     components: {
-        Styleguide,
+        StyleguideLayout,
         highlightjs: hljsVuePlugin.component
     }
 }
