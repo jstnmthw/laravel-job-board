@@ -7,21 +7,27 @@
                 </h1>
                 <p class="mt-1 text-lg text-gray-500">Base styles for forms</p>
             </div>
-            <p class="mb-8">Give textual form controls like <span class="px-1 py-0 text-orange-700" style="font-family: Consolas, monospace;">inputs</span> and <span class="px-1 py-0 text-orange-700" style="font-family: Consolas, monospace;">textarea</span> an upgrade with custom styles, sizing, focus states, and more.</p>
+            <p class="mb-8">
+                Give textual form controls like <span class="px-1 py-0 text-orange-700" style="font-family: Consolas, monospace;">inputs</span>
+                and <span class="px-1 py-0 text-orange-700" style="font-family: Consolas, monospace;">textarea</span> an upgrade with custom styles,
+                sizing, focus states, and more.
+            </p>
             <div class="font-base text-md text-gray-500 leading-7">
                 <h2 class="text-sh mb-4 font-bold text-gray-900 group flex whitespace-pre-wrap" id="development">
-                    <a href="#development" class="absolute after:hash opacity-0 group-hover:opacity-100" style="margin-left: -1em; padding-right: 0.5em; box-shadow: none; color: rgb(161, 161, 170);" aria-label="Anchor"></a>
                     <span>Basic example</span>
                 </h2>
                 <div class="p-6 bg-gray-100 rounded-t-lg">
-                    <div>
-                        <input type="text" placeholder="First Name" class="w-full p-3 rounded-lg border-gray-300 focus:border-blue-200 focus:ring focus:ring-blue-100  focus:ring-opacity-50">
+                    <div class="md:grid md:grid-cols-2 md:gap-4 mb-4">
+                        <input type="text" placeholder="First Name" class="w-full p-2 rounded-lg transition placeholder-gray-300 border-gray-200 border-2 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring-4 focus:ring-orange-100">
+                        <input type="text" placeholder="Last Name" class="w-full p-2 rounded-lg transition placeholder-gray-300 border-gray-200 border-2 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring-4 focus:ring-orange-100">
                     </div>
+                    <input type="text" placeholder="Email" class="w-full p-2 mb-4 rounded-lg transition placeholder-gray-300 border-gray-200 border-2 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring-4 focus:ring-orange-100">
+                    <textarea class="w-full p-2 rounded-lg transition placeholder-gray-300 border-gray-200 border-2 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring-4 focus:ring-orange-100"></textarea>
                 </div>
                 <highlightjs
-                    class="p-6 bg-[#282c34] rounded-b-lg mb-10"
+                    class="p-6 bg-[#282c34] text-sm rounded-b-lg mb-10 overflow-x-scroll"
                     language="js"
-                    code="npm run hot"
+                    :code="basicExample"
                 />
             </div>
         </div>
@@ -51,6 +57,17 @@ import hljs from '~/highlight.js/lib/common';
 import hljsVuePlugin from '~/@highlightjs/vue-plugin';
 export default {
     name: "Forms",
+    data() {
+      return {
+          basicExample: '<div class="md:grid md:grid-cols-2 md:gap-4 mb-4">\n' +
+              '  <input type="text" placeholder="First Name" class="w-full p-2 rounded-lg transition placeholder-gray-300 border-gray-200 border-2 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring-4 focus:ring-orange-100">\n' +
+              '  <input type="text" placeholder="Last Name" class="w-full p-2 rounded-lg transition placeholder-gray-300 border-gray-200 border-2 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring-4 focus:ring-orange-100">\n' +
+              '</div>\n' +
+              '<input type="text" placeholder="Email" class="w-full p-2 mb-4 rounded-lg transition placeholder-gray-300 border-gray-200 border-2 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring-4 focus:ring-orange-100">\n' +
+              '<textarea class="w-full p-2 rounded-lg transition placeholder-gray-300 border-gray-200 border-2 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring-4 focus:ring-orange-100">\n' +
+              '</textarea>',
+      }
+    },
     components: {
         StyleguideLayout,
         highlightjs: hljsVuePlugin.component
