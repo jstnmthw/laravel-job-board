@@ -102,7 +102,7 @@
 <script>
 import axios from "axios";
 import TopNavbar from "@/components/TopNavbar";
-import JobCard from "@/components/Job/Card";
+import JobCard from "@/components/job/Card";
 import {mapGetters, mapState} from "vuex";
 export default {
     name: "Job Index",

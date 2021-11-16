@@ -47,7 +47,7 @@
 <script>
 import TopNavbar from '@/components/TopNavbar';
 export default {
-    name: "Styleguide Index",
+    name: "StyleguideLayout",
     components: {
         TopNavbar: TopNavbar,
     },

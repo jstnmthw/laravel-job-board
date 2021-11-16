@@ -27,7 +27,7 @@
 import axios from 'axios';
 import {mapGetters, mapState} from "vuex";
 import {mixin as clickaway} from 'vue-clickaway';
-import Locations from "@/components/Search/Locations";
+import Locations from "@/components/search/Locations";
 
 export default {
     name: "SearchBar",
