@@ -46,10 +46,20 @@
                             <p class="mt-1 text-lg text-gray-500">Handled pan fishes taller Boromir brewing</p>
                         </div>
                         <div class="font-base text-md text-gray-500 leading-7">
-                            <p class="mb-5">Westward maps swearing day's stroke parapet upset Captain weapons! Like prove handled pan fishes taller Boromir brewing lifetime. Let the Ring-bearer decide.</p>
-                            <h2 class="text-sh mb-3 font-bold text-gray-900 group flex whitespace-pre-wrap" id="relative-line-heights">
-                                <a href="#relative-line-heights" class="absolute after:hash opacity-0 group-hover:opacity-100" style="margin-left: -1em; padding-right: 0.5em; box-shadow: none; color: rgb(161, 161, 170);" aria-label="Anchor"></a>
+                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lacus ligula, sagittis eu tortor ut, molestie dapibus risus. Curabitur sodales sem lacus, in condimentum ligula varius eu. Quisque scelerisque nisl sed ante pellentesque feugiat. Duis at ex molestie, semper risus consectetur, gravida odio. Nam ut purus ligula. Nam dictum, elit eu ultrices pellentesque, erat turpis varius odio, at imperdiet mauris ex nec nibh. Donec varius venenatis purus, et ultrices nisl rhoncus egestas. Duis et ligula nisl. Sed sit amet leo consectetur, egestas leo non, tempor ante. Proin suscipit quam et egestas mattis. Sed sed fringilla sapien. Pellentesque lacinia lectus odio, sed condimentum ligula fringilla eget.</p>
+                            <h2 class="text-sh mb-3 font-bold text-gray-900 group flex whitespace-pre-wrap" id="development">
+                                <a href="#development" class="absolute after:hash opacity-0 group-hover:opacity-100" style="margin-left: -1em; padding-right: 0.5em; box-shadow: none; color: rgb(161, 161, 170);" aria-label="Anchor"></a>
                                 <span>Development</span>
+                            </h2>
+                            <p class="mb-5">Running hot reload module while developing reloads the files changed and keeps state intact.</p>
+                            <highlightjs
+                                class="p-6 bg-[#282c34] rounded-lg mb-10"
+                                language="js"
+                                code="npm run hot"
+                            />
+                            <h2 class="text-sh mb-3 font-bold text-gray-900 group flex whitespace-pre-wrap" id="production">
+                                <a href="#production" class="absolute after:hash opacity-0 group-hover:opacity-100" style="margin-left: -1em; padding-right: 0.5em; box-shadow: none; color: rgb(161, 161, 170);" aria-label="Anchor"></a>
+                                <span>Production</span>
                             </h2>
                             <p class="mb-5">Running hot reload module while developing reloads the files changed and keeps state intact.</p>
                             <highlightjs
