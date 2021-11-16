@@ -18,14 +18,14 @@
                 </h2>
                 <div class="p-6 bg-gray-100 rounded-t-lg">
                     <div class="md:grid md:grid-cols-2 md:gap-4 mb-4">
-                        <input type="text" placeholder="First Name" class="w-full p-2 rounded-lg transition placeholder-gray-300 border-gray-200 border-2 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring-4 focus:ring-orange-100">
-                        <input type="text" placeholder="Last Name" class="w-full p-2 rounded-lg transition placeholder-gray-300 border-gray-200 border-2 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring-4 focus:ring-orange-100">
+                        <input type="text" placeholder="First Name" class="w-full p-2 rounded-lg transition placeholder-gray-300 border-gray-200 border-1 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring focus:ring-orange-100">
+                        <input type="text" placeholder="Last Name" class="w-full p-2 rounded-lg transition placeholder-gray-300 border-gray-200 border-1 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring focus:ring-orange-100">
                     </div>
-                    <input type="text" placeholder="Email" class="w-full p-2 mb-4 rounded-lg transition placeholder-gray-300 border-gray-200 border-2 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring-4 focus:ring-orange-100">
-                    <textarea class="w-full p-2 rounded-lg transition placeholder-gray-300 border-gray-200 border-2 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring-4 focus:ring-orange-100"></textarea>
+                    <input type="text" placeholder="Email" class="w-full p-2 mb-4 rounded-lg transition placeholder-gray-300 border-gray-200 border-1 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring focus:ring-orange-100">
+                    <textarea class="w-full p-2 rounded-lg transition resize-none placeholder-gray-300 border-gray-200 border-1 focus:border-orange-400 focus:placeholder-gray-400 focus:border-gray-500 focus:ring focus:ring-orange-100"></textarea>
                 </div>
                 <highlightjs
-                    class="p-6 bg-[#282c34] text-sm rounded-b-lg mb-10 overflow-x-scroll"
+                    class="p-6 bg-[#2b303b] text-[12px] leading-5 rounded-b-lg mb-10 overflow-x-scroll"
                     language="js"
                     :code="basicExample"
                 />
@@ -76,5 +76,5 @@ export default {
 </script>
 
 <style>
-@import '/css/highlightjs/atom-one-dark.css';
+@import '/css/highlightjs/ocean.min.css';
 </style>
