@@ -1,9 +1,56 @@
 <template>
     <form class="flex" v-on:submit.prevent="onSubmit()">
-        <input tabindex="1" :value="search" @input="searchQuery" type="text" required class="text-[15px] w-[350px] dark:text-gray-300 border border-r-0 border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 rounded-tl-lg rounded-bl-lg px-4 placeholder-gray-400 focus:placeholder-gray-300 focus:bg-white dark:focus:border-gray-500 focus:ring-0 transition" placeholder="Search for job titles, companies or keywords">
-        <div class="relative text-gray-400 bg-gray-100 dark:bg-gray-800 focus-within:bg-gray-100 focus-within:text-gray-300 pl-6 border border-gray-300 dark:border-gray-700 border-r-0 w-[185px]">
+        <input required tabindex="1" :value="search" @input="searchQuery" type="text" placeholder="Search for job titles, companies or keywords" class="
+                  text-[15px]
+                  w-[350px]
+                  px-4
+                  border
+                  border-r-0
+                  border-gray-300
+                  bg-gray-100
+                  rounded-tl-lg
+                  rounded-bl-lg
+                  placeholder-gray-500
+                  focus:border-r
+                  focus:placeholder-gray-200
+                  focus:bg-white
+                  dark:border-gray-600
+                  dark:bg-gray-900
+                  dark:focus:border-gray-500
+                  dark:placeholder-gray-600
+                  dark:focus:placeholder-gray-500
+                  dark:text-gray-100
+                  dark:focus:ring-gray-500
+                  focus:z-10
+                  focus:ring-2">
+        <div class="
+                pl-6
+                w-[185px]
+                relative
+                border
+                border-gray-300
+                border-r-0
+                text-gray-500
+                bg-gray-100
+                focus-within:border-r
+                focus-within:bg-gray-100
+                focus-within:text-gray-300
+                dark:bg-gray-900
+                dark:border-gray-600
+                dark:focus-within:ring-gray-500
+                focus-within:ring-2">
             <svg class="absolute block w-7 h-7 top-[5px] left-[5px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 91 91" fill="currentColor"><path d="M66.9 41.8c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4 0 11.3 20.4 32.4 20.4 32.4s20.4-21.1 20.4-32.4zM37 41.4c0-5.2 4.3-9.5 9.5-9.5s9.5 4.2 9.5 9.5c0 5.2-4.2 9.5-9.5 9.5-5.2 0-9.5-4.3-9.5-9.5z"/></svg>
-            <input tabindex="2" :value="location.name" @input="searchLocation" type="text" required class="text-[15px] text-gray-800 dark:text-gray-300 bg-transparent border-0 w-full focus:border-0 focus:ring-0 placeholder-gray-400 focus:placeholder-gray-300" placeholder="Location">
+            <input required tabindex="2" :value="location.name" @input="searchLocation" type="text" placeholder="Location" class="
+                        text-[15px]
+                        text-gray-800
+                        dark:text-gray-300
+                        bg-transparent
+                        border-0
+                        w-full
+                        focus-within:ring-0
+                        placeholder-gray-400
+                        dark:placeholder-gray-600
+                        dark:focus:placeholder-gray-500">
             <div v-on-clickaway="close" v-if="showLocationSearchResults" class="absolute left-0 shadow bg-white p-4 z-10 rounded-bl-xl rounded-br-xl min-w-full">
                 <locations
                     tabindex="3"
