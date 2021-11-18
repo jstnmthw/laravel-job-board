@@ -37,7 +37,7 @@
                 focus-within:text-gray-300
                 dark:bg-gray-900
                 dark:border-gray-600
-                dark:focus:border-orange-700
+                dark:focus-within:border-orange-700
                 dark:focus-within:ring-orange-700
                 focus-within:ring-2">
             <svg class="absolute block w-7 h-7 top-[5px] left-[5px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 91 91" fill="currentColor"><path d="M66.9 41.8c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4 0 11.3 20.4 32.4 20.4 32.4s20.4-21.1 20.4-32.4zM37 41.4c0-5.2 4.3-9.5 9.5-9.5s9.5 4.2 9.5 9.5c0 5.2-4.2 9.5-9.5 9.5-5.2 0-9.5-4.3-9.5-9.5z"/></svg>
