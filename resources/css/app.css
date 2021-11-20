@@ -6,6 +6,38 @@
     [v-cloak] {
         display: none;
     }
+    .form-input {
+        @apply
+        p-3
+        rounded-lg
+        border-gray-300
+        focus:border-blue-200
+        focus:ring
+        focus:ring-blue-100
+        focus:ring-opacity-50
+        dark:border-gray-700
+        dark:text-gray-200
+        dark:bg-gray-900
+        dark:ring-orange-600;
+    }
+    .checkbox {
+        @apply
+        mr-2
+        mb-1
+        rounded
+        cursor-pointer
+        text-orange-600
+        border-gray-300
+        focus:ring-orange-200
+        focus:ring-offset-2
+        focus:ring-offset-white
+        dark:focus:ring-offset-gray-800
+        dark:focus:ring-orange-600
+        dark:bg-gray-700
+        dark:border-gray-600
+        dark:checked:bg-orange-600
+        dark:checked:border-orange-600;
+    }
 }
 
 @layer base {
