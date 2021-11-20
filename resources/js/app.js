@@ -49,6 +49,12 @@ router.beforeEach((to, from, next) => {
             authCheck(to)
         }
 
+        // Check dark mode
+        if (localStorage.getItem('darkMode') === 'true') {
+            console.log('Dark Mode: True');
+            document.getElementsByTagName('html').item(0).classList.add('dark');
+        }
+
         // Check if route requires authentication
         function authCheck(to) {
             if (to.matched.some(record => record.meta.requiresAuth)) {
