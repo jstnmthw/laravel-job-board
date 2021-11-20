@@ -20,6 +20,9 @@ export default {
         }
     },
     mounted() {
+        if (localStorage.getItem('darkMode') === 'true') {
+            this.darkMode = true;
+        }
     },
     computed: {
     },
