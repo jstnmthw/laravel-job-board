@@ -10,10 +10,11 @@
             bg-gray-100
             rounded-tl-lg
             rounded-bl-lg
-            placeholder-gray-500
+            placeholder-gray-400
             focus:border-r
-            focus:placeholder-gray-200
+            focus:placeholder-gray-300
             focus:bg-white
+            focus:border-orange-700
             dark:border-gray-700
             dark:bg-gray-900
             dark:focus:border-orange-700
@@ -21,25 +22,28 @@
             dark:focus:placeholder-gray-500
             dark:text-gray-100
             dark:focus:ring-orange-700
+            focus:ring-orange-700
             focus:z-10
             focus:ring-2">
-        <div style="border-right: transparent"
-            class="
+        <div class="
+            location
             pl-6
             w-[185px]
             relative
+            text-gray-300
             border
             border-gray-300
-            text-gray-500
             bg-gray-100
-            focus-within:border-r
+            focus-within:ring-orange-700
+            focus-within:border-orange-700
+            focus-within:bg-white
+            focus-within:ring-2
             focus-within:bg-gray-100
-            focus-within:text-gray-300
+            focus-within:text-gray-400
             dark:bg-gray-900
             dark:border-gray-700
             dark:focus-within:border-orange-700
-            dark:focus-within:ring-orange-700
-            focus-within:ring-2">
+            dark:focus-within:ring-orange-700">
             <svg class="absolute block w-7 h-7 top-[5px] left-[5px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 91 91" fill="currentColor">
                 <path d="M66.9 41.8c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4 0 11.3 20.4 32.4 20.4 32.4s20.4-21.1 20.4-32.4zM37 41.4c0-5.2 4.3-9.5 9.5-9.5s9.5 4.2 9.5 9.5c0 5.2-4.2 9.5-9.5 9.5-5.2 0-9.5-4.3-9.5-9.5z"/>
             </svg>
@@ -49,8 +53,9 @@
                 bg-transparent
                 border-0
                 w-full
-                focus-within:ring-0
                 placeholder-gray-400
+                focus:placeholder-gray-300
+                focus-within:ring-0
                 dark:text-gray-200
                 dark:placeholder-gray-600
                 dark:focus:placeholder-gray-500">
@@ -63,7 +68,7 @@
                     v-on:close-location-results="close"
                 />
             </div>
-            <button tabindex="5" v-show="location.name" @click="clearLocation" class="absolute block p-0 top-[11px] right-2 text-gray-600 hover:text-gray-400 transition">
+            <button tabindex="5" v-show="location.name" @click="clearLocation" class="absolute block p-0 top-[11px] right-2 text-gray-300 hover:text-gray-400 transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -151,3 +156,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    .location {
+        border-right-color: transparent;
+    }
+    .location:focus-within {
+        border-right-color: rgba(255, 45, 32, 1);
+    }
+</style>
