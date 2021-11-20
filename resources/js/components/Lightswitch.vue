@@ -16,7 +16,7 @@ export default {
     name: "Lightswitch",
     data() {
         return {
-            darkMode: 0,
+            darkMode: false,
         }
     },
     mounted() {
