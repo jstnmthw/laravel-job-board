@@ -63,7 +63,6 @@
 <script>
 import Modal from '@/components/modal/Modal'
 import { mapState, mapActions } from "vuex";
-import store from "@/store";
 
 export default {
     data() {
@@ -89,7 +88,7 @@ export default {
         submitLogin(e) {
             e.preventDefault();
             if (!this.authLoading) {
-                store.dispatch('account/login', this.form)
+                this.$store.dispatch('account/login', this.form)
             }
         },
     }
