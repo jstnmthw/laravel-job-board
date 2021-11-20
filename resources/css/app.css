@@ -9,6 +9,9 @@
 }
 
 @layer base {
+    html {
+        height: 100%;
+    }
     option {
         font-family: Arial, sans-serif;
     }
