@@ -1,57 +1,59 @@
 <template>
     <form class="flex" v-on:submit.prevent="onSubmit()">
         <input required tabindex="1" :value="search" @input="searchQuery" type="text" placeholder="Search for job titles, companies or keywords" class="
-                  text-[15px]
-                  w-[350px]
-                  px-4
-                  border
-                  border-r-0
-                  border-gray-300
-                  bg-gray-100
-                  rounded-tl-lg
-                  rounded-bl-lg
-                  placeholder-gray-500
-                  focus:border-r
-                  focus:placeholder-gray-200
-                  focus:bg-white
-                  dark:border-gray-600
-                  dark:bg-gray-900
-                  dark:focus:border-orange-700
-                  dark:placeholder-gray-600
-                  dark:focus:placeholder-gray-500
-                  dark:text-gray-100
-                  dark:focus:ring-orange-700
-                  focus:z-10
-                  focus:ring-2">
-        <div class="
-                pl-6
-                w-[185px]
-                relative
-                border
-                border-gray-300
-                border-r-0
-                text-gray-500
-                bg-gray-100
-                focus-within:border-r
-                focus-within:bg-gray-100
-                focus-within:text-gray-300
-                dark:bg-gray-900
-                dark:border-gray-600
-                dark:focus-within:border-orange-700
-                dark:focus-within:ring-orange-700
-                focus-within:ring-2">
-            <svg class="absolute block w-7 h-7 top-[5px] left-[5px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 91 91" fill="currentColor"><path d="M66.9 41.8c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4 0 11.3 20.4 32.4 20.4 32.4s20.4-21.1 20.4-32.4zM37 41.4c0-5.2 4.3-9.5 9.5-9.5s9.5 4.2 9.5 9.5c0 5.2-4.2 9.5-9.5 9.5-5.2 0-9.5-4.3-9.5-9.5z"/></svg>
+            text-[15px]
+            w-[350px]
+            px-4
+            border
+            border-r-0
+            border-gray-300
+            bg-gray-100
+            rounded-tl-lg
+            rounded-bl-lg
+            placeholder-gray-500
+            focus:border-r
+            focus:placeholder-gray-200
+            focus:bg-white
+            dark:border-gray-700
+            dark:bg-gray-900
+            dark:focus:border-orange-700
+            dark:placeholder-gray-600
+            dark:focus:placeholder-gray-500
+            dark:text-gray-100
+            dark:focus:ring-orange-700
+            focus:z-10
+            focus:ring-2">
+        <div style="border-right: transparent"
+            class="
+            pl-6
+            w-[185px]
+            relative
+            border
+            border-gray-300
+            text-gray-500
+            bg-gray-100
+            focus-within:border-r
+            focus-within:bg-gray-100
+            focus-within:text-gray-300
+            dark:bg-gray-900
+            dark:border-gray-700
+            dark:focus-within:border-orange-700
+            dark:focus-within:ring-orange-700
+            focus-within:ring-2">
+            <svg class="absolute block w-7 h-7 top-[5px] left-[5px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 91 91" fill="currentColor">
+                <path d="M66.9 41.8c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4 0 11.3 20.4 32.4 20.4 32.4s20.4-21.1 20.4-32.4zM37 41.4c0-5.2 4.3-9.5 9.5-9.5s9.5 4.2 9.5 9.5c0 5.2-4.2 9.5-9.5 9.5-5.2 0-9.5-4.3-9.5-9.5z"/>
+            </svg>
             <input required tabindex="2" :value="location.name" @input="searchLocation" type="text" placeholder="Location" class="
-                        text-[15px]
-                        text-gray-800
-                        dark:text-gray-300
-                        bg-transparent
-                        border-0
-                        w-full
-                        focus-within:ring-0
-                        placeholder-gray-400
-                        dark:placeholder-gray-600
-                        dark:focus:placeholder-gray-500">
+                text-[15px]
+                text-gray-800
+                bg-transparent
+                border-0
+                w-full
+                focus-within:ring-0
+                placeholder-gray-400
+                dark:text-gray-200
+                dark:placeholder-gray-600
+                dark:focus:placeholder-gray-500">
             <div v-on-clickaway="close" v-if="showLocationSearchResults" class="absolute left-0 shadow bg-white p-4 z-10 rounded-bl-xl rounded-br-xl min-w-full">
                 <locations
                     tabindex="3"
@@ -61,12 +63,16 @@
                     v-on:close-location-results="close"
                 />
             </div>
-            <button tabindex="5" v-show="location.name" @click="clearLocation" class="absolute block p-0 top-[11px] right-2 text-gray-400">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <button tabindex="5" v-show="location.name" @click="clearLocation" class="absolute block p-0 top-[11px] right-2 text-gray-600 hover:text-gray-400 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
             </button>
         </div>
         <button tabindex="4" type="submit" class="text-[17px] bg-orange-600 text-white p-2 px-3 rounded-tr-lg rounded-br-lg">
-            <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
         </button>
     </form>
 </template>
