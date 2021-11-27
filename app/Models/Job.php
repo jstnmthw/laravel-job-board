@@ -32,6 +32,10 @@ class Job extends Model
 {
     use HasFactory, Searchable;
 
+    /**
+     * ElasticSearch Job Index
+     * @var string
+     */
     protected string $indexConfigurator = JobIndex::class;
 
     /**
@@ -84,16 +88,31 @@ class Job extends Model
         return $this->belongsTo(EducationLevel::class);
     }
 
+    /**
+     * Country where the job is located.
+     *
+     * @return BelongsTo
+     */
     public function country(): BelongsTo
     {
         return $this->belongsTo(Geo::class);
     }
 
+    /**
+     * City where the job is located.
+     *
+     * @return BelongsTo
+     */
     public function city(): BelongsTo
     {
         return $this->belongsTo(Geo::class);
     }
 
+    /**
+     * Province where the job is located.
+     *
+     * @return BelongsTo
+     */
     public function province(): BelongsTo
     {
         return $this->belongsTo(Geo::class);
