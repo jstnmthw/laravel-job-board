@@ -43,8 +43,22 @@ class JobController extends Controller
     public function search(Request $request): JsonResponse
     {
 
-        if (!$request->input('search')) {
-            return response()->json(null, 400);
+        $match = [];
+
+        if ($request->has('loc')) {
+            $match[] = [
+                    'match' => [
+                    'province' => $request->input('loc')
+                ]
+            ];
+        }
+
+        if ($request->has('locId')) {
+            $match[] = [
+                    'term' => [
+                    'province_id' => $request->input('locId')
+                ]
+            ];
         }
 
         $params = [
@@ -53,15 +67,14 @@ class JobController extends Controller
             'body' => [
                 'query' => [
                     'bool' => [
-                        'should' => [
-                            ['match' => ['title' => $request->input('search')]],
-                            ['match' => ['description' => $request->input('search')]],
-                        ]
+                        'should' => $match
                     ]
                 ]
             ]
         ];
+
         $data = $this->elastic->search($params);
+
 
         $total = 0;
         if ($data['hits']['total']['value'] > 0) {

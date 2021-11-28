@@ -15,9 +15,15 @@ const state = {
 const getters = {
     searchParams(state) {
         const urlObj = new URLSearchParams();
-        urlObj.append('search', encodeURI(state.search));
-        urlObj.append('locId', state.location.id);
-        urlObj.append('loc', encodeURI(state.location.name));
+        if(state.search) {
+            urlObj.append('search', encodeURI(state.search));
+        }
+        if(state.location.id) {
+            urlObj.append('locId', state.location.id);
+        }
+        if(state.location.name) {
+            urlObj.append('loc', encodeURI(state.location.name));
+        }
         return '?' + urlObj.toString();
     }
 }

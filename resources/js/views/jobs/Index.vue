@@ -113,10 +113,6 @@ export default {
         }
     },
     computed: {
-        ...mapState('search', [
-            'search',
-            'location',
-        ]),
         ...mapGetters('search', [
             'searchParams'
         ])
@@ -124,15 +120,22 @@ export default {
     mounted() {
         document.body.classList.add('bg-gray-50', 'overflow-y-hidden');
         document.getElementById('app').classList.add('flex', 'flex-col', 'h-full');
-        this.preformSearch();
+        this.setSearchFromHttpQuery().then(() => {
+            this.preformSearch();
+        })
     },
     unmounted() {
         document.body.classList.remove('bg-gray-50', 'overflow-y-hidden');
         document.getElementById('app').classList.remove('flex', 'flex-col', 'h-full');
     },
     watch: {
-        $route() {
-            this.preformSearch();
+        $route(to, from) {
+            if (to.path === '/jobs') {
+                console.log(to);
+                this.setSearchFromHttpQuery().then(() => {
+                    this.preformSearch();
+                })
+            }
         }
     },
     methods: {
@@ -140,6 +143,21 @@ export default {
             await axios.get('api/jobs/search/' + this.searchParams)
             .then((res) => {
                 this.searchResults = res.data;
+            })
+        },
+        setSearchFromHttpQuery() {
+            return new Promise((resolve, reject) => {
+                try {
+                    const { loc, locId, search } = this.$route.query
+                    this.$store.commit('search/SET_LOCATION', {
+                        name: loc ?? null,
+                        id: locId ?? null
+                    })
+                    this.$store.commit('search/SET_SEARCH', search ?? null)
+                    return resolve();
+                } catch (e) {
+                    return reject()
+                }
             })
         }
     },
