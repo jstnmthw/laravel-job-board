@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->command->comment('Seeding Geo data...');
         Artisan::call('geo:seed TH --append');
         Artisan::call('geo:json Thailand');
 

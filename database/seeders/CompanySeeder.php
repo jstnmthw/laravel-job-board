@@ -18,18 +18,22 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
-        $educationLevels = EducationLevel::all();
-        $country = Geo::getCountry('TH');
         Company::query()->truncate();
         Job::query()->truncate();
         User::query()->truncate();
+
+        $educationLevels = EducationLevel::all();
+
+        $country = Geo::query()->find(1605651);
+        $provinces = Geo::query()->where('parent_id', $country->id)->get();
+
         Company::factory()
             ->count(500)
             ->create()
             ->pluck('id')
-            ->each(function($id) use ($educationLevels, $country) {
-                $province = $country->getChildren()->random();
-                $city = $province->getChildren()->random();
+            ->each(function($id) use ($educationLevels, $country, $provinces) {
+                $province = $provinces->random();
+                $city = Geo::query()->where('parent_id', $province->id)->get()->random();
                 $user = User::factory()->count(1)->create([
                     'country_id' => $country->id,
                     'province_id' => $province->id,
