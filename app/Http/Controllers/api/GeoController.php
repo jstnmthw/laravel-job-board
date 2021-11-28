@@ -61,4 +61,22 @@ class GeoController extends \Igaster\LaravelCities\GeoController
         $data = $client->search($params)['hits']['hits'] ?? null;
         return $data ? response()->json($data) : response()->json(null, 404);
     }
+
+    /**
+     * Grab the ADM1 level Geo points of a country which usually is
+     * considered to be the provinces (or states) of a selected country.
+     *
+     * @param Request $request
+     * @param int $parentId
+     * @return JsonResponse
+     */
+    public function getChildren(Request $request, int $parentId): JsonResponse
+    {
+        return response()->json(
+            Geo::query()
+                ->where('parent_id', $parentId)
+                ->orderBy('name')
+                ->get()
+        );
+    }
 }

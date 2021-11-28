@@ -59,6 +59,6 @@ Route::apiResource('jobs', JobController::class);
 Route::group(['prefix' => 'geo'], function() {
     Route::get('locations', [GeoController::class, 'searchElastic']);
     Route::get('countries', [GeoController::class, 'countries']);
-    Route::get('children/{id}', [GeoController::class, 'children']);
+    Route::get('children/{id}', [GeoController::class, 'getChildren']);
     Route::get('{id}', [GeoController::class, 'item']);
 });
