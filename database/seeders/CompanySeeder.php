@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Company;
+use App\Models\EducationLevel;
 use App\Models\Geo;
 use App\Models\Job;
 use App\Models\User;
@@ -17,6 +18,8 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
+        $educationLevels = EducationLevel::all();
+        $country = Geo::getCountry('TH');
         Company::query()->truncate();
         Job::query()->truncate();
         User::query()->truncate();
@@ -24,8 +27,7 @@ class CompanySeeder extends Seeder
             ->count(500)
             ->create()
             ->pluck('id')
-            ->each(function($id) {
-                $country = Geo::getCountry('TH');
+            ->each(function($id) use ($educationLevels, $country) {
                 $province = $country->getChildren()->random();
                 $city = $province->getChildren()->random();
                 $user = User::factory()->count(1)->create([
@@ -40,6 +42,7 @@ class CompanySeeder extends Seeder
                     'city_id' => $city->id
                 ]);
                 Job::factory()->count(5)->create([
+                    'education_level_id' => $educationLevels->random(),
                     'created_by' => $user->id,
                     'company_id' => $id,
                     'country_id' => $country->id,
