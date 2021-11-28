@@ -21,11 +21,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $country = Geo::getCountry('TH');
-
-
         $country = Geo::query()->find(1605651);
-        $provinces = Geo::query()->where('parent_id', $country->id)->get();
+        $provinces = Geo::query()
+            ->where('parent_id', $country->id)
+            ->orderBy('population', 'desc')
+            ->limit(10)
+            ->get();
 
         User::factory()
             ->has(UserExperience::factory()->count(2), 'experience')
@@ -34,7 +35,7 @@ class UserSeeder extends Seeder
             ->has(Review::factory()->count(3), 'reviews')
             ->has(JobApplication::factory()->count(2), 'applications')
             ->has(Image::factory()->count(1), 'avatar')
-            ->count(1500)
+            ->count(300)
             ->create()
             ->pluck('id')
             ->each(function($id) use ($country, $provinces) {

@@ -23,12 +23,15 @@ class CompanySeeder extends Seeder
         User::query()->truncate();
 
         $educationLevels = EducationLevel::all();
-
         $country = Geo::query()->find(1605651);
-        $provinces = Geo::query()->where('parent_id', $country->id)->get();
+        $provinces = Geo::query()
+            ->where('parent_id', $country->id)
+            ->orderBy('population', 'desc')
+            ->limit(5)
+            ->get();
 
         Company::factory()
-            ->count(500)
+            ->count(100)
             ->create()
             ->pluck('id')
             ->each(function($id) use ($educationLevels, $country, $provinces) {
