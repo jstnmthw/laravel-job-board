@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->command->comment('Seeding Geo data...');
         Artisan::call('geo:seed TH --append');
         Artisan::call('geo:json Thailand');
+        $this->command->info('Geo data successfully seeded.');
 
         $this->call([RolesAndPermissionsSeeder::class]);
         $this->call([CategorySeeder::class]);
@@ -55,5 +56,15 @@ class DatabaseSeeder extends Seeder
             $job->employmentTypes()->attach($employmentTypes->random(rand(1, 2))->pluck('id')->toArray());
         });
         $this->command->info('Syncing complete.');
+
+        $this->command->comment('Importing Geo data to ElasticSearch...');
+        Artisan::call("elastic:drop-index App\\\Indexes\\\GeoIndex");
+        Artisan::call('elastic:create-index App\\\Indexes\\\GeoIndex');
+        Artisan::call('scout:import App\\\Models\\\Geo');
+
+        $this->command->comment('Importing Job data to ElasticSearch...');
+        Artisan::call('elastic:drop-index App\\\Indexes\\\JobIndex');
+        Artisan::call('elastic:create-index App\\\Indexes\\\JobIndex');
+        Artisan::call('scout:import App\\\Models\\\Job');
     }
 }
