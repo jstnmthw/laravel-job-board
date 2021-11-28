@@ -129,14 +129,13 @@ export default {
         document.getElementById('app').classList.remove('flex', 'flex-col', 'h-full');
     },
     watch: {
-        $route(to, from) {
-            if (to.path === '/jobs') {
-                console.log(to);
+        '$route': function (val) {
+            if (val.path === '/jobs') {
                 this.setSearchFromHttpQuery().then(() => {
                     this.preformSearch();
                 })
             }
-        }
+        },
     },
     methods: {
         async preformSearch() {
