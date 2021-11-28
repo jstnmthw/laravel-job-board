@@ -290,13 +290,13 @@ export default {
                 this.countries = res.data
             })
         },
-        async getProvinces(parent_id) {
-            await axios.get('/api/geo/children/' + parent_id).then((res) => {
+        async getProvinces(countryId) {
+            await axios.get('/api/geo/children/' + countryId).then((res) => {
                 this.provinces = res.data
             })
         },
-        async getCities(parent_id) {
-            await axios.get('/api/geo/children/' + parent_id).then((res) => {
+        async getCities(provinceId) {
+            await axios.get('/api/geo/children/' + provinceId).then((res) => {
                 this.cities = res.data
             })
         },
