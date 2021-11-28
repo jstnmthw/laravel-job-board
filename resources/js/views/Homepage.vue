@@ -9,7 +9,7 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br> Maecenas at nisi lobortis, consequat purus eget
         </template>
         <template v-slot:link>
-            <router-link to="/jobs?location=Bangkok" class="inline-block text-center rounded-full hover:shadow-xl transition-all bg-orange-600 border border-transparent rounded-md py-3 px-6 font-bold text-white hover:bg-orange-700">
+            <router-link to="/jobs?loc=Bangkok" class="inline-block text-center rounded-full hover:shadow-xl transition-all bg-orange-600 border border-transparent rounded-md py-3 px-6 font-bold text-white hover:bg-orange-700">
                 Search jobs
             </router-link>
         </template>
