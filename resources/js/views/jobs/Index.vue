@@ -3,19 +3,19 @@
     <div>
         <div class="max-w-8xl mx-auto py-5">
             <div class="md:grid md:grid-cols-12 gap-3 md:gap-6 px-10">
-                <select id="" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                <select id="job-type" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
                     <option value="1" selected>All Job Types</option>
                 </select>
-                <select id="" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                <select id="date-range" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
                     <option value="1" selected>Posted Any Time</option>
                 </select>
-                <select id="" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                <select id="salary-range" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
                     <option value="1" selected>Salary Range</option>
                 </select>
-                <select id="" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                <select id="radius" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
                     <option value="1" selected>25 miles</option>
                 </select>
-                <select id="" class="text-sm col-span-1 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+                <select id="extra" class="text-sm col-span-1 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
                     <option value="1" selected>More</option>
                 </select>
             </div>
@@ -24,18 +24,22 @@
     <div class="flex-grow h-full overflow-auto">
         <div class="max-w-8xl mx-auto md:grid md:grid-cols-5 gap-3 md:gap-6 px-10 h-full">
             <div class="col-span-2 overflow-y-scroll pr-2" v-if="searchResults">
+                <!-- Job listings -->
                 <job-card
-                    v-for="job in searchResults.data"
+                    v-for="(job, index) in searchResults.data"
                     :job="job"
-                    :index="job.index"
+                    :index="index"
+                    @setSelected="onSetSelected"
+                    :class="{ 'border-orange-600 ring-1 ring-orange-600 ring-inset shadow-lg' : index === this.selectedIndex }"
                 >
                 </job-card>
             </div>
             <div class="col-span-3 bg-white dark:bg-gray-800 dark:border-gray-700 px-12 py-10 text-sm leading-relaxed border rounded-tl-lg overflow-y-scroll">
+                <!-- Selected job -->
                 <div class="flex justify-between pb-5">
                     <div>
-                        <span class="block text-lg dark:text-gray-400">The Tech Co.</span>
-                        <span class="block font-semibold text-xl mb-3 dark:text-gray-200">Partnership Manager</span>
+                        <span class="block text-lg text-gray-500 mb-2 dark:text-gray-300">{{ selectedResult.company }}</span>
+                        <span class="block font-semibold text-2xl mb-3 dark:text-gray-200">{{ selectedResult.title }}</span>
                         <div class="text-yellow-500">
                             <span class="sr-only">Reviews:</span>
                             <svg class="inline-block w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -75,21 +79,7 @@
                     </div>
                 </div>
                 <div class="text-gray-700 dark:text-gray-300">
-                    <p class="mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sed ex dolor. Aliquam sed maximus enim, sed fringilla lectus. Nulla est augue, imperdiet ac viverra eu, pulvinar id diam. Ut lacinia mi ac dolor vehicula varius. Integer rutrum non dui at blandit. Etiam facilisis orci et libero viverra tincidunt. Duis porttitor purus massa.</p>
-                    <p class="mb-6">Donec eu tellus condimentum, mattis quam eu, pellentesque lacus. Curabitur sagittis sodales hendrerit. Donec pulvinar luctus aliquam. Nunc convallis, nunc quis ornare mattis, sem nulla tristique ex, ac tincidunt felis enim nec elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed varius, purus eu cursus pulvinar, nisl neque maximus orci, posuere bibendum odio magna eu sapien. Donec convallis aliquet pretium. Quisque eget orci velit. Nam elementum lectus sem, ac accumsan nunc tincidunt vel. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-                    <strong class="font-semibold pb-2 block text-gray-900 dark:text-gray-100">Requirements:</strong>
-                    <ul class="list-disc list-inside mb-6">
-                        <li>Donec eu tellus condimentum</li>
-                        <li>Pellentesque lacus</li>
-                        <li>Curabitur sagittis sodales hendrerit.</li>
-                    </ul>
-                    <strong class="font-semibold pb-2 block text-gray-900 dark:text-gray-100">Skills:</strong>
-                    <ul class="list-disc list-inside mb-6">
-                        <li>Donec eu tellus condimentum</li>
-                        <li>Pellentesque lacus</li>
-                        <li>Curabitur sagittis sodales hendrerit.</li>
-                    </ul>
-                    <p>Sed scelerisque non velit a malesuada. Morbi id ligula eget neque bibendum sodales id nec mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras tincidunt urna eu sapien placerat, non luctus diam dapibus. Aenean molestie purus quam, vitae viverra ligula sagittis suscipit. Proin imperdiet scelerisque ornare. Quisque sapien diam, ultrices vitae condimentum sit amet, volutpat at arcu.</p>
+                    {{ selectedResult.description }}
                 </div>
                 <div class="border-t dark:border-gray-700 mt-10 pt-10 text-center">
                     <a href="#" class="text-orange-500 dark:text-orange-700 text-md font-semibold hover:underline">Read more about The Tech Co.</a>
@@ -103,23 +93,26 @@
 import axios from "axios";
 import TopNavbar from "@/components/TopNavbar";
 import JobCard from "@/components/job/Card";
-import {mapGetters, mapState} from "vuex";
+import {mapGetters} from "vuex";
 export default {
     name: "Job Index",
     components: {JobCard, TopNavbar},
     data() {
         return {
             searchResults: null,
+            selectedResult: Object,
+            selectedIndex: 0,
         }
     },
     computed: {
         ...mapGetters('search', [
             'searchParams'
-        ])
+        ]),
     },
     mounted() {
         document.body.classList.add('bg-gray-50', 'overflow-y-hidden');
         document.getElementById('app').classList.add('flex', 'flex-col', 'h-full');
+
         this.setSearchFromHttpQuery().then(() => {
             this.preformSearch();
         })
@@ -142,6 +135,7 @@ export default {
             await axios.get('api/jobs/search/' + this.searchParams)
             .then((res) => {
                 this.searchResults = res.data;
+                this.onSetSelected(0)
             })
         },
         setSearchFromHttpQuery() {
@@ -158,6 +152,10 @@ export default {
                     return reject()
                 }
             })
+        },
+        onSetSelected($jobIndex) {
+            this.selectedIndex = $jobIndex;
+            this.selectedResult = this.searchResults.data[$jobIndex];
         }
     },
 }
