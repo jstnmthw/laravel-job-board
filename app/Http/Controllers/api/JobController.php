@@ -75,7 +75,6 @@ class JobController extends Controller
 
         $data = $this->elastic->search($params);
 
-
         $total = 0;
         if ($data['hits']['total']['value'] > 0) {
            $total = $data['hits']['total']['value'];
@@ -84,8 +83,11 @@ class JobController extends Controller
         }
 
         $items = [];
-        foreach ($data['hits']['hits'] as $doc) {
-            $items[] = $doc['_source'];
+        foreach ($data['hits']['hits'] as $key => $value) {
+            $items[$key] = $value['_source'];
+            // TODO: Should add the mysql id to ElasticSearch instead of
+            //       using ElasticSearch's id.
+            $items[$key]['id'] =  (int) $value['_id'];
         }
 
         $paginate = new LengthAwarePaginator($items, $total, 10, 1);
