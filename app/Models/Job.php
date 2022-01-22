@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use ScoutElastic\Searchable;
 
 /**
+ * @property mixed $id
  * @property mixed $title
  * @property mixed $description
  * @property mixed $salary_from
@@ -126,6 +127,7 @@ class Job extends Model
     public function toSearchableArray(): array
     {
         return [
+            'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
             'salary_from' => $this->salary_from,
