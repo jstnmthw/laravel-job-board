@@ -17,14 +17,13 @@
 <script>
 export default {
     name: "RatingStars",
-    props: [
-        'value',
-        'maxRating',
-        'minRating'
-    ],
+    props: {
+        value: Number,
+        maxRating: Number,
+        minRating: Number,
+    },
     data() {
         return {
-            // rang: Math.floor(this.value),
             completeRange: [...new Array(Math.floor(this.value))],
             halfRange: this.value % 1 === 0 ? null : [...new Array(1)],
             totalRange: [...new Array(this.maxRating - Math.ceil(this.value))]
