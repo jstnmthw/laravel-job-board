@@ -29,7 +29,7 @@
                     v-for="(job, index) in searchResults.data"
                     :job="job"
                     :index="index"
-                    @setSelected="onSetSelected"
+                    @setSelected="setSelect"
                     :class="{ 'border-orange-600 ring-1 ring-orange-600 ring-inset shadow-lg' : index === this.selectedIndex }"
                 >
                 </job-card>
@@ -135,7 +135,7 @@ export default {
             await axios.get('api/jobs/search/' + this.searchParams)
             .then((res) => {
                 this.searchResults = res.data;
-                this.onSetSelected(0)
+                this.setSelect(0)
             })
         },
         setSearchFromHttpQuery() {
@@ -153,7 +153,7 @@ export default {
                 }
             })
         },
-        onSetSelected($jobIndex) {
+        setSelect($jobIndex) {
             this.selectedIndex = $jobIndex;
             this.selectedResult = this.searchResults.data[$jobIndex];
         }
