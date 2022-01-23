@@ -23,7 +23,7 @@
     </div>
     <div class="flex-grow h-full overflow-auto">
         <div class="max-w-8xl mx-auto md:grid md:grid-cols-5 gap-3 md:gap-6 px-10 h-full">
-            <div v-if="searchResults" class="col-span-2 overflow-y-scroll pr-2">
+            <div id="job-listings" v-if="searchResults" class="col-span-2 overflow-y-scroll pr-2">
                 <!-- Job listings -->
                 <job-card
                     v-for="(job, index) in searchResults.data"
@@ -35,7 +35,7 @@
                 </job-card>
                 <!-- Pagination -->
                 <pagination
-                    onPageChange="pageChanged"
+                    @pageChanged="onPageChange"
                     :to="searchResults.to"
                     :from="searchResults.from"
                     :current-page="searchResults.current_page"
@@ -150,8 +150,8 @@ export default {
             this.selectedIndex = $jobIndex;
             this.selectedResult = this.searchResults.data[$jobIndex];
         },
-        pageChanged() {
-            alert('PAge changed')
+        onPageChange() {
+            document.getElementById('job-listings').scrollTop = 0;
         }
     },
 }
