@@ -23,7 +23,7 @@
     </div>
     <div class="flex-grow h-full overflow-auto">
         <div class="max-w-8xl mx-auto md:grid md:grid-cols-5 gap-3 md:gap-6 px-10 h-full">
-            <div class="col-span-2 overflow-y-scroll pr-2" v-if="searchResults">
+            <div v-if="searchResults" class="col-span-2 overflow-y-scroll pr-2">
                 <!-- Job listings -->
                 <job-card
                     v-for="(job, index) in searchResults.data"
@@ -33,6 +33,22 @@
                     :class="{ 'border-orange-600 ring-1 ring-orange-600 ring-inset shadow-lg' : index === this.selectedIndex }"
                 >
                 </job-card>
+                <!-- Pagination -->
+                <pagination
+                    onPageChange="pageChanged"
+                    :to="searchResults.to"
+                    :from="searchResults.from"
+                    :current-page="searchResults.current_page"
+                    :last-page="searchResults.last_page"
+                    :per-page="searchResults.per_page"
+                    :total="searchResults.total"
+                    :links="searchResults.links"
+                    :path="searchResults.path"
+                    :first-page-url="searchResults.first_page_url"
+                    :last-page-url="searchResults.last_page_url"
+                    :next-page-url="searchResults.next_page_url"
+                    :prev-page-url="searchResults.prev_page_url"
+                ></pagination>
             </div>
             <!-- Selected job -->
             <div v-if="selectedResult" class="col-span-3 bg-white dark:bg-gray-800 dark:border-gray-700 px-12 py-10 text-sm leading-relaxed border rounded-tl-lg overflow-y-scroll">
@@ -64,14 +80,15 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
 import axios from "axios";
 import TopNavbar from "@/components/TopNavbar";
 import JobCard from "@/components/job/Card";
-import {mapGetters} from "vuex";
 import RatingStars from "@/components/RatingStars";
+import Pagination from "@/components/Pagination";
 export default {
     name: "JobIndex",
-    components: {RatingStars, JobCard, TopNavbar},
+    components: {Pagination, RatingStars, JobCard, TopNavbar},
     data() {
         return {
             searchResults: null,
@@ -116,12 +133,13 @@ export default {
         setSearchFromHttpQuery() {
             return new Promise((resolve, reject) => {
                 try {
-                    const { loc, locId, search } = this.$route.query
+                    const { loc, locId, search, page } = this.$route.query
                     this.$store.commit('search/SET_LOCATION', {
                         name: loc ?? null,
                         id: locId ?? null
                     })
                     this.$store.commit('search/SET_SEARCH', search ?? null)
+                    this.$store.commit('search/SET_PAGE', page ?? null)
                     return resolve();
                 } catch (e) {
                     return reject()
@@ -131,6 +149,9 @@ export default {
         setSelect($jobIndex) {
             this.selectedIndex = $jobIndex;
             this.selectedResult = this.searchResults.data[$jobIndex];
+        },
+        pageChanged() {
+            alert('PAge changed')
         }
     },
 }
