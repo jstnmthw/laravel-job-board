@@ -8,7 +8,6 @@ use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class JobController extends Controller
@@ -44,6 +43,8 @@ class JobController extends Controller
     {
 
         $match = [];
+        $perPage = 10;
+        $page = $request->input('page', 1);
 
         if ($request->has('loc')) {
             $match[] = [
@@ -64,6 +65,8 @@ class JobController extends Controller
         $params = [
             'index' => 'jobs',
             'track_total_hits' => true,
+            'size' => $perPage,
+            'from' => $perPage * ($page - 1),
             'body' => [
                 'query' => [
                     'bool' => [
@@ -85,12 +88,9 @@ class JobController extends Controller
         $items = [];
         foreach ($data['hits']['hits'] as $key => $value) {
             $items[$key] = $value['_source'];
-            // TODO: Should add the mysql id to ElasticSearch instead of
-            //       using ElasticSearch's id.
-            $items[$key]['id'] =  (int) $value['_id'];
         }
 
-        $paginate = new LengthAwarePaginator($items, $total, 10, 1);
+        $paginate = new LengthAwarePaginator($items, $total, $perPage, $page);
 
         return response()->json($paginate);
     }
