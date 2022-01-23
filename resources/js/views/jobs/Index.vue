@@ -34,39 +34,15 @@
                 >
                 </job-card>
             </div>
-            <div class="col-span-3 bg-white dark:bg-gray-800 dark:border-gray-700 px-12 py-10 text-sm leading-relaxed border rounded-tl-lg overflow-y-scroll">
+            <div v-if="selectedResult" class="col-span-3 bg-white dark:bg-gray-800 dark:border-gray-700 px-12 py-10 text-sm leading-relaxed border rounded-tl-lg overflow-y-scroll">
                 <!-- Selected job -->
                 <div class="flex justify-between pb-5">
                     <div>
                         <span class="block text-lg text-gray-500 mb-2 dark:text-gray-300">{{ selectedResult.company }}</span>
                         <span class="block font-semibold text-2xl mb-3 dark:text-gray-200">{{ selectedResult.title }}</span>
-                        <div class="text-yellow-500">
-                            <span class="sr-only">Reviews:</span>
-                            <svg class="inline-block w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                <g>
-                                    <path fill="none" d="M0 0h24v24H0z"></path>
-                                    <path d="M12 18.26l-7.053 3.948 1.575-7.928L.587 8.792l8.027-.952L12 .5l3.386 7.34 8.027.952-5.935 5.488 1.575 7.928z"></path>
-                                </g>
-                            </svg>
-                            <svg class="inline-block w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                <g>
-                                    <path fill="none" d="M0 0h24v24H0z"></path>
-                                    <path d="M12 18.26l-7.053 3.948 1.575-7.928L.587 8.792l8.027-.952L12 .5l3.386 7.34 8.027.952-5.935 5.488 1.575 7.928z"></path>
-                                </g>
-                            </svg>
-                            <svg class="inline-block w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                <g>
-                                    <path fill="none" d="M0 0h24v24H0z"></path>
-                                    <path d="M12 18.26l-7.053 3.948 1.575-7.928L.587 8.792l8.027-.952L12 .5l3.386 7.34 8.027.952-5.935 5.488 1.575 7.928z"></path>
-                                </g>
-                            </svg>
-                            <svg class="inline-block w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                <g>
-                                    <path fill="none" d="M0 0h24v24H0z"></path>
-                                    <path d="M12 18.26l-7.053 3.948 1.575-7.928L.587 8.792l8.027-.952L12 .5l3.386 7.34 8.027.952-5.935 5.488 1.575 7.928L12 18.26zm0-2.292l4.247 2.377-.949-4.773 3.573-3.305-4.833-.573L12 5.275l-2.038 4.42-4.833.572 3.573 3.305-.949 4.773L12 15.968z"></path>
-                                </g>
-                            </svg>
-                        </div>
+
+                        <!-- Rating -->
+                        <rating-stars :value="selectedResult.company_rating ?? 0" :max-rating="5" :min-rating="0"></rating-stars>
                     </div>
                     <div>
                         <button type="button" class="font-semibold px-3 py-2 border-orange-600 rounded mr-3 border text-orange-600">
@@ -94,13 +70,14 @@ import axios from "axios";
 import TopNavbar from "@/components/TopNavbar";
 import JobCard from "@/components/job/Card";
 import {mapGetters} from "vuex";
+import RatingStars from "@/components/RatingStars";
 export default {
-    name: "Job Index",
-    components: {JobCard, TopNavbar},
+    name: "JobIndex",
+    components: {RatingStars, JobCard, TopNavbar},
     data() {
         return {
             searchResults: null,
-            selectedResult: Object,
+            selectedResult: null,
             selectedIndex: 0,
         }
     },
