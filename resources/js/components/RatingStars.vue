@@ -18,15 +18,19 @@
 export default {
     name: "RatingStars",
     props: {
-        value: Number,
-        maxRating: Number,
-        minRating: Number,
+        value: null,
+        maxRating: null,
+        minRating: null,
     },
-    data() {
-        return {
-            fullStarCount: Math.floor(this.value),
-            halfStarCount: this.value % 1 === 0 ? null : 1,
-            emptyStartCount: this.maxRating - Math.ceil(this.value)
+    computed: {
+        fullStarCount() {
+           return Math.floor(this.value)
+        },
+        halfStarCount() {
+            return this.value % 1 === 0 ? null : 1
+        },
+        emptyStartCount() {
+            return this.maxRating - Math.ceil(this.value)
         }
     },
     created: function () {
