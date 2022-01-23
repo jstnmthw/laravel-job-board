@@ -130,8 +130,8 @@ class Job extends Model
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'salary_from' => $this->salary_from,
-            'salary_to' => $this->salary_to,
+            'salary_from' => (float) $this->salary_from,
+            'salary_to' => (float) $this->salary_to,
             'education_level' => $this->educationLevel->title,
 
             'company_id' => $this->company_id,
@@ -140,6 +140,7 @@ class Job extends Model
             'city_id' => $this->city_id,
 
             'company' => $this->company->name,
+            'company_rating' => (float) $this->company->rating,
             'country' => $this->country->name,
             'province' => $this->province->name,
             'city' => $this->city->name,
@@ -208,6 +209,9 @@ class Job extends Model
                         'type' => 'keyword'
                     ]
                 ]
+            ],
+            'company_rating' => [
+                'type' => 'float',
             ],
             'country' => [
                 'type' => 'text',
