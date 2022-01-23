@@ -10,6 +10,7 @@ const state = {
         name: '',
         id: '',
     },
+    page: '',
 }
 
 const getters = {
@@ -24,6 +25,9 @@ const getters = {
         if(state.location.name) {
             urlObj.append('loc', encodeURI(state.location.name));
         }
+        if(state.page) {
+            urlObj.append('page', state.page)
+        }
         return '?' + urlObj.toString();
     }
 }
@@ -34,6 +38,9 @@ const mutations = {
     },
     SET_LOCATION(state, payload) {
         state.location = payload;
+    },
+    SET_PAGE(state, payload) {
+        state.page = payload
     }
 }
 
