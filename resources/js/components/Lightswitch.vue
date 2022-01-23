@@ -24,8 +24,6 @@ export default {
             this.darkMode = true;
         }
     },
-    computed: {
-    },
     methods: {
         setDarkMode() {
             this.darkMode = !this.darkMode
