@@ -34,14 +34,12 @@
                 >
                 </job-card>
             </div>
+            <!-- Selected job -->
             <div v-if="selectedResult" class="col-span-3 bg-white dark:bg-gray-800 dark:border-gray-700 px-12 py-10 text-sm leading-relaxed border rounded-tl-lg overflow-y-scroll">
-                <!-- Selected job -->
                 <div class="flex justify-between pb-5">
                     <div>
                         <span class="block text-lg text-gray-500 mb-2 dark:text-gray-300">{{ selectedResult.company }}</span>
                         <span class="block font-semibold text-2xl mb-3 dark:text-gray-200">{{ selectedResult.title }}</span>
-
-                        <!-- Rating -->
                         <rating-stars :value="selectedResult.company_rating ?? 0" :max-rating="5" :min-rating="0"></rating-stars>
                     </div>
                     <div>
