@@ -82,7 +82,7 @@
                     {{ selectedResult.description }}
                 </div>
                 <div class="border-t dark:border-gray-700 mt-10 pt-10 text-center">
-                    <a href="#" class="text-orange-500 dark:text-orange-700 text-md font-semibold hover:underline">Read more about The Tech Co.</a>
+                    <a href="#" class="text-orange-500 dark:text-orange-700 text-md font-semibold hover:underline">Read more about {{ selectedResult.company }}.</a>
                 </div>
             </div>
         </div>
