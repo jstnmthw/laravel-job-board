@@ -27,4 +27,12 @@ class Review extends Model
         return $this->hasMany(self::class, 'parent_id');
     }
 
+    /*
+     * Company the review belongs to
+     */
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id');
+    }
+
 }

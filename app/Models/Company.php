@@ -51,4 +51,14 @@ class Company extends Model
     {
         return $this->hasMany(User::class, 'company_id');
     }
+
+    /**
+     * Get rating average from reviews.
+     */
+    public function getRatingAttribute()
+    {
+        return Review::query()
+            ->where('company_id', $this->getKey())
+            ->avg('rating');
+    }
 }
