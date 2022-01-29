@@ -49,7 +49,7 @@
             <svg id="location-icon" class="absolute block w-7 h-7 top-[5px] left-[5px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 91 91" fill="currentColor">
                 <path d="M66.9 41.8c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4 0 11.3 20.4 32.4 20.4 32.4s20.4-21.1 20.4-32.4zM37 41.4c0-5.2 4.3-9.5 9.5-9.5s9.5 4.2 9.5 9.5c0 5.2-4.2 9.5-9.5 9.5-5.2 0-9.5-4.3-9.5-9.5z"/>
             </svg>
-            <input tabindex="2" :value="location.name" @input="searchLocation" type="text" placeholder="Location" class="
+            <input tabindex="2" :value="loc" @input="searchLocation" type="text" placeholder="Location" class="
                 text-[15px]
                 text-gray-800
                 bg-transparent
@@ -70,7 +70,7 @@
                     v-on:close-location-results="close"
                 />
             </div>
-            <button type="button" tabindex="5" v-show="location.name" @click="clearLocation" class="absolute block p-0 top-[11px] right-2 text-gray-300 hover:text-gray-400 dark:text-gray-500 dark:hover:text-gray-400 transition">
+            <button type="button" tabindex="5" v-show="loc" @click="clearLocation" class="absolute block p-0 top-[11px] right-2 text-gray-300 hover:text-gray-400 dark:text-gray-500 dark:hover:text-gray-400 transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -106,7 +106,7 @@ export default {
     },
     computed: {
         ...mapState('search', [
-            'location',
+            'loc',
             'search',
         ]),
         ...mapGetters('search', [
@@ -116,8 +116,11 @@ export default {
     methods: {
         close() {
             this.showLocationSearchResults = false;
-            if (!this.location.id && this.locationSearchResults) {
-                this.$store.commit('search/SET_LOCATION', this.locationSearchResults[0]._source)
+            if (!this.locId && this.locationSearchResults) {
+                this.$store.commit('search/SET_SEARCH_DATA', {
+                    loc: this.locationSearchResults[0]._source.name,
+                    locId: this.locationSearchResults[0]._source.id
+                })
             }
         },
         clearLocation() {
@@ -132,23 +135,14 @@ export default {
         },
         setSearch() {
             const { search, locId, loc } = this.$route.query;
-            if (search) {
-                this.$store.commit('search/SET_SEARCH', decodeURI(search));
-            }
-            if (locId && loc) {
-                this.$store.commit('search/SET_LOCATION', {
-                    id: locId,
-                    name: decodeURI(loc)
-                });
-            }
-            this.$store.commit('search/SET_PAGE', null);
+            this.$store.commit('search/SET_SEARCH_DATA', this.$route.query)
         },
         async searchLocation(e) {
             if (e.target.value.length === 0) {
                 return;
             }
-            this.$store.commit('search/SET_LOCATION', { name: e.target.value });
-            await axios.get('/api/geo/locations?q='+encodeURI(this.location.name).toLowerCase()).then((res) => {
+            this.$store.commit('search/SET_SEARCH_DATA', { loc: e.target.value });
+            await axios.get('/api/geo/locations?q='+encodeURI(this.loc).toLowerCase()).then((res) => {
                 this.locationSearchResults = res.data
                 this.showLocationSearchResults = true;
             }).catch((e) => {

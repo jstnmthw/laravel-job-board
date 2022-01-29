@@ -58,12 +58,12 @@
                         <span class="block font-semibold text-2xl mb-3 dark:text-gray-200">{{ selectedResult.title }}</span>
                         <rating-stars :value="selectedResult.company_rating ?? 0" :max-rating="5" :min-rating="0"></rating-stars>
                     </div>
-                    <div>
-                        <button type="button" class="font-semibold px-3 py-2 border-orange-600 rounded mr-3 border text-orange-600">
+                    <div class="whitespace-nowrap">
+                        <button type="button" class="inline-block font-semibold px-3 py-2 border-orange-600 rounded mr-3 border text-orange-600">
                             <svg class="w-6 h-6 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                             Save
                         </button>
-                        <a href="#" class="relative font-semibold text-white bg-orange-600 rounded border-b-2 border-orange-700 px-4 py-3 active:top-[2px] active:border-0">
+                        <a href="#" class="inline-block relative font-semibold text-white bg-orange-600 rounded border-b-2 border-orange-700 px-4 py-3 active:top-[2px] active:border-0">
                             Apply Now
                         </a>
                     </div>

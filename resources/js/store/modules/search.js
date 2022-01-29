@@ -6,11 +6,6 @@ const state = {
     locId: null,
     loc: null,
     page: null,
-    //..
-    location: {
-        name: '',
-        id: '',
-    },
 }
 
 const getters = {
@@ -19,11 +14,11 @@ const getters = {
         if(state.search) {
             urlObj.append('search', encodeURI(state.search));
         }
-        if(state.location.id) {
-            urlObj.append('locId', state.location.id);
+        if(state.locId) {
+            urlObj.append('locId', state.locId);
         }
-        if(state.location.name) {
-            urlObj.append('loc', encodeURI(state.location.name));
+        if(state.loc) {
+            urlObj.append('loc', encodeURI(state.loc));
         }
         if(state.page) {
             urlObj.append('page', state.page)

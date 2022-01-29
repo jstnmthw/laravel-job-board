@@ -1,6 +1,6 @@
 <template>
     <!--
-        Pagination prop data is from Laravel's LengthAwarePaginator API
+        Pagination prop data matches Laravel's LengthAwarePaginator API
         https://laravel.com/api/master/Illuminate/Pagination/LengthAwarePaginator.html
     -->
     <div>
@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 <li v-for="page in pagesNumber" :key="page.index">
-                    <a :class="{ 'bg-white text-orange-600 border-orange-600 border-2' : page === currentPage, 'text-gray-500 hover:bg-gray-200 hover:text-black': page !== currentPage }" class="inline-block rounded-lg py-2 px-4 mx-1" href="javascript:void(0)" v-on:click.prevent="changePage(page)">
+                    <a :class="{ 'bg-white dark:bg-gray-900 text-orange-600 border-orange-600 border-2' : page === currentPage, 'text-gray-500 hover:bg-gray-200 hover:text-black': page !== currentPage }" class="inline-block rounded-lg py-2 px-4 mx-1" href="javascript:void(0)" v-on:click.prevent="changePage(page)">
                         {{ page }}
                     </a>
                 </li>
