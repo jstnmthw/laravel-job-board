@@ -31,9 +31,6 @@ const mutations = {
     SET_SEARCH(state, payload) {
         state.search = payload;
     },
-    SET_PAGE(state, payload) {
-        state.page = payload;
-    },
     SET_SEARCH_DATA(state, payload) {
         const { search, locId, loc, page } = payload;
         state.search = search ? decodeURI(search) : null;
