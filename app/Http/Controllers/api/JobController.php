@@ -37,7 +37,7 @@ class JobController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function search(Request $request): JsonResponse
+    public function search(Request $request): ?JsonResponse
     {
 
         $should = [];
@@ -87,7 +87,7 @@ class JobController extends Controller
         if ($data['hits']['total']['value'] > 0) {
            $total = $data['hits']['total']['value'];
         } else {
-            abort(404);
+            return null;
         }
 
         $items = [];
