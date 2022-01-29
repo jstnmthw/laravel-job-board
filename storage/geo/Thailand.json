@@ -247,5 +247,94 @@
   {
     "id": 1151253,
     "name": "Phuket"
+  },
+  {
+    "id": 1906689,
+    "name": "Amnat Charoen"
+  },
+  {
+    "id": 1621034,
+    "parent_id":1605651,
+    "name": "Ang Thong"
+  },
+  {
+    "id": 8133594,
+    "parent_id": 1605651,
+    "name": "Bueng Kan"
+  },
+  {
+    "id": 1611452,
+    "parent_id": 1605651,
+    "name": "Buri Ram"
+  },
+  {
+    "id": 1611438,
+    "parent_id": 1605651,
+    "name": "Chachoengsao"
+  },
+  {
+    "id": 1611415,
+    "parent_id": 1605651,
+    "name": "Chai Nat"
+  },
+  {
+    "id": 1611406,
+    "parent_id": 1605651,
+    "name": "Chaiyaphum"
+  },
+  {
+    "id": 1611268,
+    "parent_id": 1605651,
+    "name": "Chanthaburi"
+  },
+  {
+    "id": 1611108,
+    "parent_id": 1605651,
+    "name": "Pattaya"
+  },
+  {
+    "id": 1610468,
+    "parent_id": 1605651,
+    "name": "Kalasin"
+  },
+  {
+    "id": 1609775,
+    "parent_id": 1605651,
+    "name": "Khon Kaen"
+  },
+  {
+    "id": 1609070,
+    "parent_id": 1605651,
+    "name": "Loei"
+  },
+  {
+    "id": 1906690,
+    "parent_id": 1605651,
+    "name": "Nong Bua Lamphu"
+  },
+  {
+    "id": 1906687,
+    "parent_id": 1605651,
+    "name": "Prachin Buri"
+  },
+  {
+    "id": 1906691,
+    "parent_id": 1605651,
+    "name": "Sa Kaeo"
+  },
+  {
+    "id": 1906688,
+    "parent_id": 1605651,
+    "name": "Ubon Ratchathani"
+  },
+  {
+    "id": 1906686,
+    "parent_id": 1605651,
+    "name": "Udon Thani"
+  },
+  {
+    "id": 1906689,
+    "parent_id": 1605651,
+    "name": "Amnat Charoen"
   }
 ]
