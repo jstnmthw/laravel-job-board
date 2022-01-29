@@ -126,7 +126,7 @@ export default {
         async preformSearch() {
             await axios.get('api/jobs/search?' + this.searchParams)
             .then((res) => {
-                if (res.data.length > 0) {
+                if (res.data) {
                     this.searchResults = res.data;
                     this.setSelect(0)
                 }
@@ -138,13 +138,7 @@ export default {
         setSearchFromHttpQuery() {
             return new Promise((resolve, reject) => {
                 try {
-                    const { loc, locId, search, page } = this.$route.query
-                    this.$store.commit('search/SET_LOCATION', {
-                        name: decodeURI(loc) ?? null,
-                        id: locId ?? null
-                    })
-                    this.$store.commit('search/SET_SEARCH', decodeURI(search) ?? null)
-                    this.$store.commit('search/SET_PAGE', page ?? null)
+                    this.$store.commit('search/SET_SEARCH_DATA', this.$route.query)
                     return resolve();
                 } catch (e) {
                     return reject()

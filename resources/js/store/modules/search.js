@@ -2,15 +2,15 @@
  * Search
  */
 const state = {
-    // Setting blank strings instead of null results in the
-    // search query being built like: locId=& instead of locId=null&.
-    // Is a shorter url query string better in this case?
-    search: '',
+    search: null,
+    locId: null,
+    loc: null,
+    page: null,
+    //..
     location: {
         name: '',
         id: '',
     },
-    page: '',
 }
 
 const getters = {
@@ -40,7 +40,14 @@ const mutations = {
         state.location = payload;
     },
     SET_PAGE(state, payload) {
-        state.page = payload
+        state.page = payload;
+    },
+    SET_SEARCH_DATA(state, payload) {
+        const { search, locId, loc, page } = payload;
+        state.search = search ? decodeURI(search) : null;
+        state.locId = locId ?? null;
+        state.loc = loc ? decodeURI(loc) : null;
+        state.page = page ?? null;
     }
 }
 
