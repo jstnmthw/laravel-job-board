@@ -126,7 +126,7 @@ export default {
         },
         clearLocation() {
             this.close()
-            this.$store.commit('search/SET_LOCATION', {})
+            this.$store.commit('search/SET_SEARCH_DATA', { loc: null, locId: null })
         },
         onSubmit() {
             this.$router.push('/jobs?'+this.searchParams)
