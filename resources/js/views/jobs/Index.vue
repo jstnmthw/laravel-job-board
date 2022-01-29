@@ -126,8 +126,10 @@ export default {
         async preformSearch() {
             await axios.get('api/jobs/search?' + this.searchParams)
             .then((res) => {
-                this.searchResults = res.data;
-                this.setSelect(0)
+                if (res.data.length > 0) {
+                    this.searchResults = res.data;
+                    this.setSelect(0)
+                }
             })
             .catch((e) => {
                 console.log(e)
@@ -138,10 +140,10 @@ export default {
                 try {
                     const { loc, locId, search, page } = this.$route.query
                     this.$store.commit('search/SET_LOCATION', {
-                        name: loc ?? null,
+                        name: decodeURI(loc) ?? null,
                         id: locId ?? null
                     })
-                    this.$store.commit('search/SET_SEARCH', search ?? null)
+                    this.$store.commit('search/SET_SEARCH', decodeURI(search) ?? null)
                     this.$store.commit('search/SET_PAGE', page ?? null)
                     return resolve();
                 } catch (e) {
