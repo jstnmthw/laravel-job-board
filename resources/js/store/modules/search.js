@@ -31,9 +31,6 @@ const mutations = {
     SET_SEARCH(state, payload) {
         state.search = payload;
     },
-    SET_LOCATION(state, payload) {
-        state.location = payload;
-    },
     SET_PAGE(state, payload) {
         state.page = payload;
     },
