@@ -124,10 +124,13 @@ export default {
     },
     methods: {
         async preformSearch() {
-            await axios.get('api/jobs/search/' + this.searchParams)
+            await axios.get('api/jobs/search?' + this.searchParams)
             .then((res) => {
                 this.searchResults = res.data;
                 this.setSelect(0)
+            })
+            .catch((e) => {
+                console.log(e)
             })
         },
         setSearchFromHttpQuery() {

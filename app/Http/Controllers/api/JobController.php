@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Company;
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
 use Illuminate\Http\JsonResponse;
@@ -29,12 +28,11 @@ class JobController extends Controller
      */
     public function index(): JsonResponse
     {
-        Company::query()->find(1)->toArray();
         return response()->json($this->elastic->search(['index' => 'jobs']));
     }
 
     /**
-     * Search via ElasticSearch
+     * Search jobs via ElasticSearch
      *
      * @param Request $request
      * @return JsonResponse
@@ -42,22 +40,28 @@ class JobController extends Controller
     public function search(Request $request): JsonResponse
     {
 
-        $match = [];
+        $should = [];
+        $must = [];
         $perPage = 10;
         $page = $request->input('page', 1);
 
-        if ($request->has('loc')) {
-            $match[] = [
-                    'match' => [
-                    'province' => $request->input('loc')
+        if ($request->has('locId')) {
+            $must[] = [
+                    'term' => [
+                    'province_id' => $request->input('locId')
                 ]
             ];
         }
 
-        if ($request->has('locId')) {
-            $match[] = [
-                    'term' => [
-                    'province_id' => $request->input('locId')
+        if ($request->has('search')) {
+            $must[] =  [
+                'match' => [
+                    'title' => $request->input('search')
+                ]
+            ];
+            $should[] = [
+                'match' => [
+                    'description' => $request->input('search')
                 ]
             ];
         }
@@ -70,7 +74,8 @@ class JobController extends Controller
             'body' => [
                 'query' => [
                     'bool' => [
-                        'should' => $match
+                        'should' => $should,
+                        'must' => $must
                     ]
                 ]
             ]
