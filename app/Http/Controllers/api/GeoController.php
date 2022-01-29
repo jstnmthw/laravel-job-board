@@ -46,7 +46,7 @@ class GeoController extends \Igaster\LaravelCities\GeoController
                             ],
                             [
                                 'match' => [
-                                    'level' => 'ADM2'
+                                    'level' => 'ADM1'
                                 ],
                             ]
                         ]
