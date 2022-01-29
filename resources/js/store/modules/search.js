@@ -28,7 +28,7 @@ const getters = {
         if(state.page) {
             urlObj.append('page', state.page)
         }
-        return '?' + urlObj.toString();
+        return urlObj.toString();
     }
 }
 
