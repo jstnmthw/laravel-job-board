@@ -107,6 +107,7 @@ export default {
     computed: {
         ...mapState('search', [
             'loc',
+            'locId',
             'search',
         ]),
         ...mapGetters('search', [
@@ -134,7 +135,6 @@ export default {
             this.$store.commit('search/SET_SEARCH', e.target.value)
         },
         setSearch() {
-            const { search, locId, loc } = this.$route.query;
             this.$store.commit('search/SET_SEARCH_DATA', this.$route.query)
         },
         async searchLocation(e) {

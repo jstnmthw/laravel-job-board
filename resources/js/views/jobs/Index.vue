@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <div class="flex-grow h-full overflow-auto">
+    <div v-if="searchResults" class="flex-grow h-full overflow-auto">
         <div class="max-w-8xl mx-auto md:grid md:grid-cols-5 gap-3 md:gap-6 px-10 h-full">
             <div id="job-listings" v-if="searchResults" class="col-span-2 overflow-y-scroll pr-2">
                 <!-- Job listings -->
@@ -77,6 +77,10 @@
             </div>
         </div>
     </div>
+    <div v-else class="flex-grow h-full overflow-auto text-center m-10">
+        <span class="text-9xl font-bold dark:text-gray-700 mb-10 block">;(</span>
+        <h1 class="text-2xl dark:text-gray-700 font-bold">Oops, looks like there's no results...</h1>
+    </div>
 </template>
 
 <script>
@@ -126,13 +130,12 @@ export default {
         async preformSearch() {
             await axios.get('api/jobs/search?' + this.searchParams)
             .then((res) => {
-                if (res.data) {
+                if (res.data.data.length > 0) {
                     this.searchResults = res.data;
                     this.setSelect(0)
+                } else {
+                    this.searchResults = null;
                 }
-            })
-            .catch((e) => {
-                console.log(e)
             })
         },
         setSearchFromHttpQuery() {

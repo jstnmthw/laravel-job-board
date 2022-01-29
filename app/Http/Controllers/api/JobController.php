@@ -86,8 +86,6 @@ class JobController extends Controller
         $total = 0;
         if ($data['hits']['total']['value'] > 0) {
            $total = $data['hits']['total']['value'];
-        } else {
-            return null;
         }
 
         $items = [];
