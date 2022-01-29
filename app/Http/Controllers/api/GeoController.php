@@ -45,20 +45,9 @@ class GeoController extends \Igaster\LaravelCities\GeoController
                                 ],
                             ],
                             [
-                                'bool' => [
-                                    'should' => [
-                                        [
-                                            'match' => [
-                                                'level' => 'ADM1'
-                                            ],
-                                        ],
-                                        [
-                                            'match' => [
-                                                'level' => 'ADM2'
-                                            ]
-                                        ]
-                                    ]
-                                ]
+                                'match' => [
+                                    'level' => 'ADM2'
+                                ],
                             ]
                         ]
                     ]
