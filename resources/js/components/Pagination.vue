@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 <li v-for="page in pagesNumber" :key="page.index">
-                    <a :class="{ 'bg-orange-600 text-white' : page === currentPage, 'text-gray-500 hover:bg-gray-200 hover:text-black': page !== currentPage }" class="inline-block rounded-lg py-2 px-4 mx-1" href="javascript:void(0)" v-on:click.prevent="changePage(page)">
+                    <a :class="{ 'bg-white text-orange-600 border-orange-600 border-2' : page === currentPage, 'text-gray-500 hover:bg-gray-200 hover:text-black': page !== currentPage }" class="inline-block rounded-lg py-2 px-4 mx-1" href="javascript:void(0)" v-on:click.prevent="changePage(page)">
                         {{ page }}
                     </a>
                 </li>
@@ -57,7 +57,7 @@
                 </li>
             </ul>
         </div>
-        <p class="text-center mb-4 text-gray-400">Page {{ currentPage }} of {{ total }}</p>
+        <p class="text-center text-[14px] mb-4 text-gray-400">Page {{ currentPage }} of {{ lastPage }}</p>
     </div>
 </template>
 
