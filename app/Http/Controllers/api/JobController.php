@@ -54,7 +54,7 @@ class JobController extends Controller
         }
 
         if ($request->has('search')) {
-            $must[] =  [
+            $should[] =  [
                 'match' => [
                     'title' => $request->input('search')
                 ]
