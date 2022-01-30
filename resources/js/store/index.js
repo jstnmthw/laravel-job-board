@@ -21,7 +21,6 @@ const store = createStore({
     },
     mutations: {
         ACTIVATE_LOADING(state) {
-            console.log('activated loading')
             state.loading++
         },
         DEACTIVATE_LOADING(state) {

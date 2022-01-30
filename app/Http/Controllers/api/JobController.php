@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmploymentType;
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class JobController extends Controller
 {
@@ -96,5 +98,49 @@ class JobController extends Controller
         $paginate = new LengthAwarePaginator($items, $total, $perPage, $page);
 
         return response()->json($paginate);
+    }
+
+    public function getFilters(): JsonResponse
+    {
+        $data = Collection::make();
+
+        $types = EmploymentType::query()
+            ->select(['title'])
+            ->get()
+            ->pluck('title')
+            ->toArray();
+
+        array_splice($types, 0, 0, ['All Job Types']);
+
+        // Employment Types
+        $data->put('employmentTypes', $types);
+
+        // Date Range
+        $data->put('dateRange', [
+            'Posted Any Day',
+            'Last Day',
+            'Last 3 days',
+            'Last Week',
+            'Last 2 Weeks',
+            'Last Month'
+        ]);
+
+        // Salary Range
+        $data->put('salaryRange', [
+            'Any Salary',
+            '10k - 30k',
+            '40k - 60k',
+            '70k - 90k',
+            '100k+',
+        ]);
+
+        // Radius
+        $data->put('radius', [
+            '25 miles',
+            '50 miles',
+            '100 miles',
+        ]);
+
+        return response()->json($data);
     }
 }

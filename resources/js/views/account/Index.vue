@@ -27,7 +27,7 @@
             </li>
         </ul>
     </div>
-    <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8 mb-24">
+    <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-10 mb-24">
         <div class="md:grid md:grid-cols-4 md:gap-8 items-start relative">
             <!-- Sidebar -->
             <aside class="sticky top-[100px] md:col-span-1 shadow rounded-2xl bg-white dark:bg-gray-800 text-center">

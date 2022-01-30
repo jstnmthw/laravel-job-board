@@ -1,24 +1,13 @@
 <template>
     <top-navbar></top-navbar>
-    <div>
-        <div class="max-w-8xl mx-auto py-5">
-            <div class="md:grid md:grid-cols-12 gap-3 md:gap-6 px-10">
-                <select id="job-type" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                    <option value="1" selected>All Job Types</option>
-                </select>
-                <select id="date-range" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                    <option value="1" selected>Posted Any Time</option>
-                </select>
-                <select id="salary-range" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                    <option value="1" selected>Salary Range</option>
-                </select>
-                <select id="radius" class="text-sm col-span-2 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                    <option value="1" selected>25 miles</option>
-                </select>
-                <select id="extra" class="text-sm col-span-1 block w-full p-2 border border-gray-300 bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500">
-                    <option value="1" selected>More</option>
-                </select>
-            </div>
+    <div v-if="searchFilters">
+        <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-10 flex space-x-6 my-4">
+            <job-filter
+                v-for="filter in searchFilters"
+                :key="filter.id"
+                :data="filter"
+            >
+            </job-filter>
         </div>
     </div>
     <div v-if="searchResults" class="flex-grow h-full overflow-auto">
@@ -85,32 +74,30 @@
 
 <script>
 import {mapGetters, mapState} from "vuex";
+
 import axios from "axios";
 import TopNavbar from "@/components/TopNavbar";
+import JobFilter from "@/components/job/Filter";
 import JobCard from "@/components/job/Card";
 import RatingStars from "@/components/RatingStars";
 import Pagination from "@/components/Pagination";
+
 export default {
     name: "JobIndex",
-    components: {Pagination, RatingStars, JobCard, TopNavbar},
+    components: {JobFilter, Pagination, RatingStars, JobCard, TopNavbar},
     data() {
         return {
             searchResults: null,
+            searchFilters: null,
             selectedResult: null,
             selectedIndex: 0,
         }
     },
-    computed: {
-        ...mapState(['loading']),
-        ...mapGetters('search', [
-            'searchParams'
-        ]),
-    },
     mounted() {
         document.body.classList.add('bg-gray-50', 'overflow-y-hidden');
         document.getElementById('app').classList.add('flex', 'flex-col', 'h-full');
-
         this.setSearchFromHttpQuery().then(() => {
+            this.getFilters();
             this.preformSearch();
         })
     },
@@ -118,10 +105,17 @@ export default {
         document.body.classList.remove('bg-gray-50', 'overflow-y-hidden');
         document.getElementById('app').classList.remove('flex', 'flex-col', 'h-full');
     },
+    computed: {
+        ...mapState(['loading']),
+        ...mapGetters('search', [
+            'searchParams'
+        ]),
+    },
     watch: {
         '$route': function (val) {
             if (val.path === '/jobs') {
                 this.setSearchFromHttpQuery().then(() => {
+                    this.getFilters();
                     this.preformSearch();
                 })
             }
@@ -140,6 +134,12 @@ export default {
                 }
             })
             this.$store.commit('DEACTIVATE_LOADING');
+        },
+        async getFilters() {
+          await axios.get('api/jobs/filters')
+          .then((res) => {
+              this.searchFilters = res.data;
+          })
         },
         setSearchFromHttpQuery() {
             return new Promise((resolve, reject) => {

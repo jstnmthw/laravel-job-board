@@ -24,7 +24,7 @@ use App\Http\Controllers\api\auth\LoginController;
 /**
  * Protected API
  */
-Route::group(['middleware' => ['auth:sanctum', 'throttle:60,1']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'throttle:120,1']], function () {
 
     /** Return currently logged-in user */
     Route::prefix('user')->group(function () {
@@ -53,6 +53,7 @@ Route::resource('categories', CategoryController::class);
 
 /** Job Resource */
 Route::get('jobs/search', [JobController::class, 'search']);
+Route::get('jobs/filters', [JobController::class, 'getFilters']);
 Route::apiResource('jobs', JobController::class);
 
 /** Geo API */

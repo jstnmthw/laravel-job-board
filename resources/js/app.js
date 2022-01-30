@@ -51,7 +51,7 @@ router.beforeEach((to, from, next) => {
 
         // Check dark mode
         if (localStorage.getItem('darkMode') === 'true') {
-            console.log('Dark Mode: True');
+            console.log('Dark Mode: Enabled');
             document.getElementsByTagName('html').item(0).classList.add('dark');
         }
 

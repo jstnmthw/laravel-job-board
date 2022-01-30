@@ -1,6 +1,6 @@
 <template>
     <top-navbar :sticky="true" />
-    <div class="h-full max-w-8xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="h-full max-w-8xl mx-auto px-2 sm:px-6 lg:px-10">
         <div class="lg:flex">
             <aside class="fixed inset-0 flex-none h-full w-full lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:w-60 xl:w-72 lg:block hidden">
                 <div class="sticky h-[calc(100vh-82px)] top-[82px]">
