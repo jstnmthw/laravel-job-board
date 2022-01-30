@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapGetters, mapState} from "vuex";
 import axios from "axios";
 import TopNavbar from "@/components/TopNavbar";
 import JobCard from "@/components/job/Card";
@@ -101,6 +101,7 @@ export default {
         }
     },
     computed: {
+        ...mapState(['loading']),
         ...mapGetters('search', [
             'searchParams'
         ]),
@@ -128,6 +129,7 @@ export default {
     },
     methods: {
         async preformSearch() {
+            this.$store.commit('ACTIVATE_LOADING');
             await axios.get('api/jobs/search?' + this.searchParams)
             .then((res) => {
                 if (res.data.data.length > 0) {
@@ -137,6 +139,7 @@ export default {
                     this.searchResults = null;
                 }
             })
+            this.$store.commit('DEACTIVATE_LOADING');
         },
         setSearchFromHttpQuery() {
             return new Promise((resolve, reject) => {

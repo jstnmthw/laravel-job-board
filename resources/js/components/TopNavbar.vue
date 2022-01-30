@@ -45,6 +45,12 @@
                 </div>
                 <search-bar></search-bar>
                 <div v-if="isAuthenticated" class="absolute inset-y-0 right-0 flex items-center text-sm pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <!-- Loading Tester -->
+                    <button @click="setLoading" type="button" class="mr-2 p-1 bg-orange-600 text-white rounded">
+                        <svg v-if="loading" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clip-rule="evenodd"></path></svg>
+                        <svg v-else class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    </button>
+                    <!-- End Loading Tester -->
                     <lightswitch></lightswitch>
                     <button class="p-1 rounded-full text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400 font-bold transition-colors mr-2">
                         <span class="sr-only">Notifications</span>
@@ -131,7 +137,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapState } from 'vuex';
 import { mixin as clickaway } from 'vue-clickaway';
 import SignInModal from "@/layout/SignInModal";
 import SearchBar from "@/components/SearchBar";
@@ -139,7 +145,7 @@ import Lightswitch from "@/components/Lightswitch";
 
 export default {
     name: "TopNavbar",
-    components: {Lightswitch, SearchBar, SignInModal },
+    components: { Lightswitch, SearchBar, SignInModal },
     mixins: [ clickaway ],
     props: ['sticky'],
     computed: {
@@ -147,7 +153,8 @@ export default {
             'isAuthenticated',
             'authLoading',
             'user'
-        ])
+        ]),
+        ...mapState(['loading'])
     },
     data() {
       return {
@@ -161,6 +168,13 @@ export default {
         ]),
         closeAccountDropdown() {
             return this.showAccountDropdown = false;
+        },
+        setLoading() {
+            if (this.loading) {
+                this.$store.commit('DEACTIVATE_LOADING')
+            } else {
+                this.$store.commit('ACTIVATE_LOADING')
+            }
         }
     },
     mounted() {
