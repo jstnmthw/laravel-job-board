@@ -32,9 +32,6 @@ export default {
             dropDownClosed: true,
         }
     },
-    mounted() {
-        console.log([this.name, this.data[this.selectedOption]])
-    },
     methods: {
         clickedAway: function() {
             this.dropDownClosed = true;
