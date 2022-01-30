@@ -3,9 +3,10 @@
     <div v-if="searchFilters">
         <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-10 flex space-x-6 my-4">
             <job-filter
-                v-for="filter in searchFilters"
+                v-for="(filter, index) in searchFilters"
                 :key="filter.id"
                 :data="filter"
+                :name="index"
             >
             </job-filter>
         </div>

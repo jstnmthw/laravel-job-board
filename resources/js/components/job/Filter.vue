@@ -24,13 +24,16 @@ import { mixin as clickaway } from 'vue-clickaway';
 
 export default {
     name: "Filter",
-    props: ['data'],
+    props: ['data', 'name'],
     mixins: [ clickaway ],
     data() {
         return {
             selectedOption: 0,
             dropDownClosed: true,
         }
+    },
+    mounted() {
+        console.log([this.name, this.data[this.selectedOption]])
     },
     methods: {
         clickedAway: function() {
@@ -39,11 +42,13 @@ export default {
         setSelected(index) {
             this.selectedOption = index;
             this.dropDownClosed = true;
-        }
-    },
-    computed: {
-        active() {
-            this.selectedOption == data
+            this.$router.push({
+                query: {
+                        ...this.$route.query,
+                        ...{ [this.name]: this.selectedOption
+                    }
+                }
+            })
         }
     }
 }
