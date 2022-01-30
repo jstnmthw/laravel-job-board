@@ -29,14 +29,11 @@ const getters = {
 
 const mutations = {
     SET_SEARCH(state, payload) {
-        state.search = payload;
-    },
-    SET_SEARCH_DATA(state, payload) {
         const { search, locId, loc, page } = payload;
-        state.search = search ? decodeURI(search) : null;
-        state.locId = locId ?? null;
-        state.loc = loc ? decodeURI(loc) : null;
-        state.page = page ?? null;
+        state.search = search ? decodeURI(search) : state.search;
+        state.locId = locId ?? state.locId;
+        state.loc = loc ? decodeURI(loc) : state.loc;
+        state.page = page ?? state.page;
     }
 }
 

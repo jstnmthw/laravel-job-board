@@ -144,7 +144,7 @@ export default {
         setSearchFromHttpQuery() {
             return new Promise((resolve, reject) => {
                 try {
-                    this.$store.commit('search/SET_SEARCH_DATA', this.$route.query)
+                    this.$store.commit('search/SET_SEARCH', this.$route.query)
                     return resolve();
                 } catch (e) {
                     return reject()
